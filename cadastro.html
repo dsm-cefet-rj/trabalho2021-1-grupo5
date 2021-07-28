@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Brechó Virtual</title>
+    <link rel="sortcut icon" href="logo.jpeg" type="image/x-icon" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <!-- Boostrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ccb5f7;">
+    <a class="navbar-brand" href="index.html">
+      <img src="logo2.png" width="90" height="50" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+	<div>
+		<img src="avatar.png" alt="" class="rounded-circle" width="40" height="40">
+	 </div>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Entrar
+          </a>
+          <div class="dropdown-menu pull-left" style="right: 0; left: auto;" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Perfil</a>
+            <a class="dropdown-item" href="#">Lista de Desejos</a>
+            <a class="dropdown-item" href="#">Lista de Reservas</a>
+            <a class="dropdown-item" href="#">Sair</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <div class="jumbotron jumbotron-fluid bg-transparent">
+    <div class="container">
+      <h1 class="display-6" style="color:purple">Criar anúncio</h1>
+      <p class="lead"></p>
+    </div>
+  </div>
+
+
+
+  <div class="container justify-content-md-center">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <img class="d-block w-100" src="jeans.jpeg" width="200" height="200" alt="Primeiro Slide">
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-md-6 custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Escolher arquivo</label>
+          </div>
+        </div>  
+      </div>
+      <div class="col">
+        <form class="needs-validation" novalidate>
+
+          <div class="form-row">
+            <div class="col-md-7 mb-3">
+              <label for="validationTooltip01">Título</label>
+              <input type="text" class="form-control" id="validationTooltip01" placeholder="Título do anúncio" value="" required>
+              <div class="valid-tooltip">
+                Tudo certo!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-3 mb-3">
+              <label for="validationTooltipUsername">Preço</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="validationTooltipUsernamePrepend">R$</span>
+                </div>
+                <input type="text" class="form-control" id="validationTooltipUsername" placeholder=""  required>
+                <div class="invalid-tooltip">
+                  BRL
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Categoria</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Escolher...</option>
+                  <option>Camisa</option>
+                  <option>Casaco</option>
+                  <option>Calça</option>
+                  <option>Chapéu</option>
+                  <option>Calçado</option>
+                  <option>Cachecol</option>
+                  <option>Vestido</option>
+                  <option>Macacão</option>
+                  <option>Óculos</option>
+                  <option>Meia</option>
+                  <option>Saia</option>
+                  <option>Outros</option>
+                </select>
+              </div>
+              <div class="invalid-tooltip">
+                Por favor, selecione uma categoria.
+              </div>
+            </div>
+          </div>
+
+            <div class="form-row">
+              <div class="col-md-7 mb-3">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Descrição do anúncio</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="invalid-tooltip">
+                  Por favor, informe a descrição do anúncio.
+                </div>
+              </div>
+
+            </div>
+          
+        </form>
+        
+  </div>
+</div>
+</div>
+
+
+  <div class="row justify-content-md-center">  
+    <button class="btn" style="background-color: rgb(165, 94, 165)" type="submit">Publicar</button>
+  </div>
+          
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+  
+  <footer style="background-color: #ccb5f7;">
+    <div class="text-center">
+      <h6>Brechó Virtual - Rio de Janeiro   (21) 2555-6875</h6>
+      &copy; 2021
+  </div>
+  </footer>
+
+</html>
