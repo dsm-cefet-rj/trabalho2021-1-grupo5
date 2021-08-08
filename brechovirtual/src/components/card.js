@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import heart from '../../public/static/images/heart.png'
 
 
-export default function card(props) {
+export default function Card(props) {
     return(
         <>
         <div className="col-sm-4 d-flex justify-content-center">

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default function carrousel(props){
+export default function Carrousel(props){
     return(
         <>
             <div id="carouselExampleControls" className="carousel slide" data-ride="false">
