@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function jumbotron(props) {
+export default function Jumbotron(props) {
   return(
     <>
       <div className="jumbotron jumbotron-fluid bg-transparent">

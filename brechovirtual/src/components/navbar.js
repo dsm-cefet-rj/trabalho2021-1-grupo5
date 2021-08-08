@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import logo from '../../public/static/images/logo2.png'
 
-export default function navbar(){
+export default function Navbar(){
     return(
         <>
             <nav className="navbar navbar-expand-lg navbar-light" style="background-color: #ccb5f7;">
