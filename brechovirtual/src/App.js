@@ -6,31 +6,36 @@ import casaco from './images/casaco.jpg';
 import './App.css';
 
 
-const products = {
-  "1" : {
+const products = [
+   {
     "name": "Calça Jeans",
-    "images": "",
+    "images": [],
     "description":"This is a pretty new black jean without any real damage",
     "price": 56.99,
     "category": "Calças"
   },
-  "2" : {
+   {
     "name": "Casaco",
-    "images": "",
+    "images": [],
     "description":"This is a pretty new black jean without any real damage",
     "price": 99.63,
     "category": "Casaco"
   },
-  "3" : {
+  {
     "name": "Tênis",
-    "images": "",
+    "images": [],
     "description":"This is a pretty new black jean without any real damage",
     "price": 51.00,
     "category": "Tênis"
-  }
-}
+  },
+]
 
 export default function App() {
+  const renderProdcuct = (product) =>{
+    return(
+      <Card product={product}/>
+    )
+  }
   return (
     <>
       <Navbar/>
@@ -45,9 +50,7 @@ export default function App() {
         </div>
       </div>
       <div class="container">
-        <div class="row ">
-        
-        </div>
+        <div class="row ">{products.map(renderProdcuct)}</div>
       </div> 
     </>
   );
