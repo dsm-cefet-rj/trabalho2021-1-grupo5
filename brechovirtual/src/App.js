@@ -1,27 +1,29 @@
-import {Navbar, Card, Dropdown} from '/components'
-import logo from '/images/logo2.png';
-import { casaco, casaco2, jeans, jeans2, tenis, tenis2 } from '/images';
+import Navbar from './components/navbar';
+import Dropdown from './components/dropdown';
+import Card from './components/card';
+import logo from './images/logo2.png';
+import casaco from './images/casaco.jpg';
 import './App.css';
 
 
 const products = {
   "1" : {
     "name": "Calça Jeans",
-    "images": [jeans, jeans2],
+    "images": "",
     "description":"This is a pretty new black jean without any real damage",
     "price": 56.99,
     "category": "Calças"
   },
   "2" : {
     "name": "Casaco",
-    "images": [casaco, casaco2],
+    "images": "",
     "description":"This is a pretty new black jean without any real damage",
     "price": 99.63,
     "category": "Casaco"
   },
   "3" : {
     "name": "Tênis",
-    "images": [tenis, tenis2],
+    "images": "",
     "description":"This is a pretty new black jean without any real damage",
     "price": 51.00,
     "category": "Tênis"
@@ -31,7 +33,7 @@ const products = {
 export default function App() {
   return (
     <>
-      <Navbar><Dropdown/></Navbar>
+      <Navbar/>
       <div class="jumbotron jumbotron-fluid bg-transparent" >
         <div class="container">
           <div class="row justify-content-center">
@@ -44,11 +46,7 @@ export default function App() {
       </div>
       <div class="container">
         <div class="row ">
-            {products.map((prod)=>{
-              return (
-                <Card product={prod}/>
-              )
-            })}
+        
         </div>
       </div> 
     </>

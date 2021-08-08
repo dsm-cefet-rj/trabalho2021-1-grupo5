@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import heart from '../../public/static/images/heart.png'
+import heart from '../images/heart.png'
 import Carrousel from '../components/carrousel'
 
 
