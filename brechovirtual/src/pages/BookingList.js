@@ -2,8 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron'
+import BookingBar from '../components/bookingBar';
 
-export default function BookkingList() {
+export default function BookingList() {
+    const reservas = [
+        {
+            "name" : "Calça Jeans",
+            "seller" : 'Marcelo peireira',
+            "price" : "59.99",
+            "date": Date(),
+            "location": "Tijuca",
+            "status": "em andamento",
+        },
+    ]
     return(
         <>
             <Navbar/>
@@ -11,7 +22,13 @@ export default function BookkingList() {
             <div class="container">
                  <div class="col">
                      {
-                         
+                        reservas.map((reserva)=>{
+                            return(
+                                <>
+                                    <BookingBar booking ={reserva}/>
+                                </>
+                            )
+                        })
                      }
                  </div>
             </div>
