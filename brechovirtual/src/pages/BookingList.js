@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron'
 import BookingBar from '../components/bookingBar';
+import Calca from '../images/jeans.jpeg'
 
 export default function BookingList() {
     const reservas = [
@@ -13,6 +14,7 @@ export default function BookingList() {
             "date": Date(),
             "location": "Tijuca",
             "status": "em andamento",
+            "image": Calca,
         },
     ]
     return(

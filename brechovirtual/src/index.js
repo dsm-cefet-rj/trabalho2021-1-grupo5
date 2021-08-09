@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import Booking from './pages/Booking';
 import reportWebVitals from './reportWebVitals';
+import BookingList from './pages/BookingList';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Booking />
+    <BookingList />
   </React.StrictMode>,
   document.getElementById('root')
 );

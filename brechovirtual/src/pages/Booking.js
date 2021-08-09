@@ -86,9 +86,9 @@ export default function Booking(){
                         </div>
                     </div>
                      <div className="form-row">
-                         <div className="col-md-7 mb-3">
-                            <Button style={{backgroundColor: "#ccb5f7"}} title={"Concluir Reserva"}/> 
-                            <Button style={{backgroundColor: "#ccb5f7"}} title={"Cancelar Reserva"}/>
+                         <div className="col-md-7  mb-3">
+                            <Button color="green" title={"Concluir Reserva"}/> 
+                            <Button color="red" title={"Cancelar Reserva"}/>
                         </div>
                       </div>
                 </div>
@@ -113,7 +113,7 @@ export default function Booking(){
                         </div>
                         &nbsp;
                         <div className="row justify-content-center">  
-                            <Button style={{backgroundColor: "#ccb5f7"}} title={"Responder"}/> 
+                            <Button color="gray" title={"Responder"}/> 
                         </div>
 
         </>

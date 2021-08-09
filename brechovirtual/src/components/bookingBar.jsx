@@ -5,7 +5,7 @@ export default function BookingBar(props) {
         <>
            <div class="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-start">
                 <h4>
-                    <img src="tenis2.jpeg" width="40" height="40"  alt=""/> 
+                    <img src={props.booking.image} width="40" height="40"  alt=""/> 
                     <a href="Reserva.html"> <span>{props.booking.name}</span>- R$<span>{props.booking.price}</span></a>               
 		            &nbsp;         
 		            <p style={{fontSize:15 +'px'}}>
@@ -13,7 +13,7 @@ export default function BookingBar(props) {
                          <span>{props.booking.seller}</span> - <span>{props.booking.location}</span>
                     </p>
 		            <p style={{fontSize:15+'px'}}>
-                        <span>Reservado em </span>
+                        <span><b>Data de Reserva:</b></span>
                         <span>{props.booking.date}</span> - <span>
                             <b>Status: </b></span><span>{props.booking.status}</span>
                     </p>
