@@ -113,7 +113,7 @@ export default function Booking(){
                         </div>
                         &nbsp;
                         <div className="row justify-content-center">  
-                            <Button color="gray" title={"Responder"}/> 
+                            <Button color="purple" title={"Responder"}/> 
                         </div>
 
         </>

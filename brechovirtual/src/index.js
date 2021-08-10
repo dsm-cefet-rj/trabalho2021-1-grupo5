@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Booking from './pages/Booking';
+import Product from './pages/Product';
+import ProductRegister from './pages/ProductRegister';
 import reportWebVitals from './reportWebVitals';
 import BookingList from './pages/BookingList';
 
 ReactDOM.render(
   <React.StrictMode>
+    <App />
+    <Booking />
     <BookingList />
+    <Product />
+    <ProductRegister />
   </React.StrictMode>,
   document.getElementById('root')
 );

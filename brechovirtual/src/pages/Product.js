@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Carrousel from '../components/carrousel'
+import Jumbotron from '../components/jumbotron'
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
@@ -25,7 +26,7 @@ export default function Product(){
     return(
         <>
             <Navbar/>
-            <Jumbotron title={product.name} text={"Anunciante: "+product.name}/>
+            <Jumbotron title={product.name} text={"Anunciante: "+product.seller}/>
             <div class="container">
             <div class="row d-flex justify-content-center">
 
@@ -53,7 +54,7 @@ export default function Product(){
                     <div class="col-sm-6">
                     <div class="form-group">
                         <label><b>Categoria</b></label>
-                        <p>{product.catehory}</p>
+                        <p>{product.category}</p>
                     </div>
                     </div>
                 </div>
@@ -74,7 +75,7 @@ export default function Product(){
                             </a>
                     </div>
                     <div class="col">
-                        <Button style={{backgroundColor: "#ccb5f7"}} title={"Reservar"}/> 
+                        <Button color={'green'} title={"Reservar"}/> 
                     </div>
                 </div>
                 </form>

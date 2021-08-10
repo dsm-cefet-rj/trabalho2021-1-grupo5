@@ -20,7 +20,7 @@ export default function BookingList() {
     return(
         <>
             <Navbar/>
-            <Jumbotron title={"EmLista de Reservas"} text={"Aqui estão suas Reservas"}/>
+            <Jumbotron title={"Lista de Reservas"} text={"Aqui estão suas Reservas"}/>
             <div class="container">
                  <div class="col">
                      {
