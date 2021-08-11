@@ -7,6 +7,7 @@ import Product from './pages/Product';
 import ProductRegister from './pages/ProductRegister';
 import reportWebVitals from './reportWebVitals';
 import BookingList from './pages/BookingList';
+import WishList from './pages/WishList';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
     <BookingList />
     <Product />
     <ProductRegister />
+    <WishList />
   </React.StrictMode>,
   document.getElementById('root')
 );

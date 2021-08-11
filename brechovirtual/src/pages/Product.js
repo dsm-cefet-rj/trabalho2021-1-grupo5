@@ -75,7 +75,7 @@ export default function Product(){
                             </a>
                     </div>
                     <div class="col">
-                        <Button color={'green'} title={"Reservar"}/> 
+                        <Button color={'LightGreen'} title={"Reservar"}/> 
                     </div>
                 </div>
                 </form>

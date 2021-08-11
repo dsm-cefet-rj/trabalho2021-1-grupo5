@@ -87,7 +87,7 @@ export default function Booking(){
                     </div>
                      <div className="form-row">
                          <div className="col-md-7  mb-3">
-                            <Button color="green" title={"Concluir Reserva"}/> 
+                            <Button color="LightGreen" title={"Concluir Reserva"}/> 
                             <Button color="red" title={"Cancelar Reserva"}/>
                         </div>
                       </div>
