@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron';
 import Button from '../components/button';
-import Carrousel from '../components/carrousel';
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import casaco from '../images/casaco.jpg';
 import casaco2 from '../images/casaco2.jpg';
 import tenis from '../images/tenis.jpeg';
 import tenis2 from '../images/tenis2.jpeg';
+import excluir from '../images/excluir.png';
 
 const WishList = () => {
   const wishItems = [
@@ -43,8 +43,8 @@ const WishList = () => {
                       <h4>
                           <img src={elem.img[0]} className="img-fluid" width="40" height="40" /> 
                           <a className="btn btn-link"> {elem.name} - R$ {elem.price}</a>
-                          <Button color={'LightGreen'} title={"Reservar"} />{"                    "}
-                          <Button color={'Red'} title={"Remover"} />
+                          <Button color={'LightGreen'} title={"Reservar"} />  &nbsp;&nbsp;
+                          <a> <img src= { excluir } width="20" height="20" title="Remover" /> </a>
                       </h4>
                   </div>
                 </div>
@@ -57,34 +57,3 @@ const WishList = () => {
 };
 
 export default WishList;
-                /*
-                <div className="card">
-                  <div className="row g-0">
-                    <div className=" container row justify-content-center">
-                        <div className="justify-content-center">
-                            <Carrousel images={elem.img} id={idx}/>
-                        </div>
-                    </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h5 className="card-title">{elem.name}</h5>
-                            <p className="col card-text">{elem.price}</p>
-                            <div className="row">
-                                <Button color={'LightGreen'} title={"Reservar"} />
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <br />
-                </div>
-                */
-
-                {/*
-                <div class="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-start">
-                    <h4>
-                        <Carrousel images={elem.img} id={idx}/>
-                        <a href="Reserva.html" className="mr-4"> <span>{elem.name}</span> - R$<span>{elem.price}</span></a>               
-                        <Button color={'LightGreen'} title={"Reservar"} />    
-                    </h4>  
-                </div>
-                */}
