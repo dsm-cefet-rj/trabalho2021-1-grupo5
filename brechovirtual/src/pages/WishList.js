@@ -36,24 +36,23 @@ const WishList = () => {
         <Jumbotron title={"Lista de Desejos"} text={"Aqui estão seus itens da lista de desejos"}/>
         <div className="container">
           {
-            wishItems.map((elem, idx) => {
-              return (
-                <div className="col">
+            wishItems.map((elem) =>
+                <div className="col" key={elem.name}>
                   <div className="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-start">
                       <h4>
-                          <img src={elem.img[0]} className="img-fluid" width="40" height="40" /> 
-                          <a className="btn btn-link"> {elem.name} - R$ {elem.price}</a>
+                          <img src={elem.img[0]} className="img-fluid" width="40" height="40" alt="" /> 
+                          <a className="btn btn-link" href> {elem.name} - R$ {elem.price}</a>
                           <Button color={'LightGreen'} title={"Reservar"} />  &nbsp;&nbsp;
-                          <a> <img src= { excluir } width="20" height="20" title="Remover" /> </a>
+                          <a href> <img src= { excluir } width="20" height="20" title="Remover" alt="" /> </a>
                       </h4>
                   </div>
                 </div>
-              )
-            })
+            )
           }
         </div>
       </React.Fragment>
   );
 };
-
+//#TODO #1 : check out the href atttibutes
+//#TODO #2 review all the key attributes
 export default WishList;

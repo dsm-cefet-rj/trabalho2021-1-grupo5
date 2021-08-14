@@ -27,7 +27,7 @@ export default function BookingList() {
                         reservas.map((reserva)=>{
                             return(
                                 <>
-                                    <BookingBar booking ={reserva}/>
+                                    <BookingBar key={reserva.name} booking ={reserva}/>
                                 </>
                             )
                         })
