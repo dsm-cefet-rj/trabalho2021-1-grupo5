@@ -2,21 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Booking from './pages/Booking';
-import Product from './pages/Product';
-import ProductRegister from './pages/ProductRegister';
 import reportWebVitals from './reportWebVitals';
-import BookingList from './pages/BookingList';
-import WishList from './pages/WishList';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Booking />
-    <BookingList />
-    <Product />
-    <ProductRegister />
-    <WishList />
   </React.StrictMode>,
   document.getElementById('root')
 );
