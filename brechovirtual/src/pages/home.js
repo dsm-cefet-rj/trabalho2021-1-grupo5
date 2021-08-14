@@ -9,35 +9,8 @@ import casaco2 from '../images/casaco2.jpg';
 import tenis from '../images/tenis.jpeg';
 import tenis2 from '../images/tenis2.jpeg'
 
-
-const products = [
-    {
-     "id": 1,
-     "name": "Calça Jeans",
-     "images": [jeans, jeans2],
-     "description":"This is a pretty new black jean without any real damage",
-     "price": 56.99,
-     "category": "Calças"
-   },
-    {
-     "id": 2,
-     "name": "Casaco",
-     "images": [casaco, casaco2],
-     "description":"This is a pretty new black jean without any real damage",
-     "price": 99.63,
-     "category": "Casaco"
-   },
-   {
-     "id": 3,
-     "name": "Tênis",
-     "images": [tenis, tenis2],
-     "description":"This is a pretty new black jean without any real damage",
-     "price": 51.00,
-     "category": "Tênis"
-   },
- ]
  
- export default function Home() {
+ export default function Home(props) {
    const renderProdcuct = (product) =>{
      return(
        <Card product={product}/>
@@ -57,7 +30,7 @@ const products = [
          </div>
        </div>
        <div class="container">
-         <div class="row ">{products.map(renderProdcuct)}</div>
+         <div class="row ">{props.products.map(renderProdcuct)}</div>
        </div> 
      </>
    );

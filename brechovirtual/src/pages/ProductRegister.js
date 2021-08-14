@@ -4,7 +4,33 @@ import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron';
 import Button from '../components/button';
 
-export default function ProductRegister(){
+
+export default function ProductRegister(props){
+    function handleInputChange(event){
+        const target = event.target
+        const name = event.target.name;
+    switch (name) {
+        case "name":
+            setNewProduct({ [name]: event.target.value})
+            break;
+        case "description":
+            setNewProduct
+        default:
+            break;
+    }
+    }
+    const [newProduct, setNewProduct] = useState({
+        "name" : "",
+        "images": null,
+        "description": "",
+        "price": 0,
+        "category": "Escolher..."
+    });
+    
+    function createProduct(e){
+        e.preventDefault();
+        props.setProduct({...props.product, newProduct});  
+    }
     return(
         <>
             <Navbar/>
@@ -33,7 +59,7 @@ export default function ProductRegister(){
                             <div class="row">
                                 <div class="col-sm">
                                 <label for="validationTooltip01"><b>Título</b></label>
-                                <input type="text" class="form-control" id="validationTooltip01" placeholder="Título do anúncio" required/>
+                                <input type="text" class="form-control" id="validationTooltip01" placeholder="Título do anúncio" value={newProduct.name} onChange={} required/>
                                 <div class="valid-tooltip">
                                     Tudo certo!
                                 </div>
@@ -47,7 +73,7 @@ export default function ProductRegister(){
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="validationTooltipUsernamePrepend">R$</span>
                                         </div>
-                                            <input type="number" step="0.01" min="0.01"class="form-control" id="validationTooltipUsername" placeholder=""  required/>
+                                            <input type="number" step="0.01" min="0.01"class="form-control" id="validationTooltipUsername" value={newProduct.price} required/>
                                         <div class="invalid-tooltip">
                                             BRL
                                         </div>
@@ -56,7 +82,7 @@ export default function ProductRegister(){
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1"><b>Categoria</b></label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <select class="form-control" id="exampleFormControlSelect1" value={newProduct.category}>
                                         <option>Escolher...</option>
                                         <option>Camisa</option>
                                         <option>Casaco</option>
@@ -82,7 +108,7 @@ export default function ProductRegister(){
                                 <div class="col-sm">
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1"><b>Descrição do anúncio</b></label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={newProduct.description}></textarea>
                                     </div>
                                     <div class="invalid-tooltip">
                                     Por favor, informe a descrição do anúncio.
@@ -97,7 +123,7 @@ export default function ProductRegister(){
            
             <div class="row">  
                 <div class="col-4 d-flex justify-content-end">
-                    <Button color={'purple'} title={"Publicar"}/> 
+                    <Button color={'purple'} title={"Publicar"} onClick={()=>createProduct()}/> 
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                     <Button color={'gray'} title={"Cancelar"}/> 

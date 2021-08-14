@@ -9,6 +9,9 @@ import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 
 export default function Booking(){
+
+    
+
     const product = {
     "id": 1,
     "name": "Calça Jeans",
