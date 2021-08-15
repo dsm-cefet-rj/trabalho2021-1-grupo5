@@ -13,7 +13,7 @@ import tenis2 from '../images/tenis2.jpeg'
  export default function Home(props) {
    const renderProdcuct = (product) =>{
      return(
-       <Card product={product}/>
+       <Card product={product} key={product.name}/>
      )
    }
    return (
