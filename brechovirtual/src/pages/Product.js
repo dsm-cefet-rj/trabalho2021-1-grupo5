@@ -7,22 +7,31 @@ import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
 import Button from '../components/button';
+import { Link,useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 
-const product = {
-     "id": 1,
-     "name": "Calça Jeans",
-     "images": [jeans, jeans2],
-     "description":"This is a pretty new black jean without any real damage",
-     "price": 56.99,
-     "category": "Calças",
-     "seller": "Marcelo",
-     "branch": "Barra da Tijuca",
-    "telephone": "21 999999999",
-    "email": "marceloper@gmail.com"
-   }
 
-export default function Product(){
+
+export default function Product(props){
+    const history =useHistory()
+    const product = props.products[1]
+    //props.products.filter((product)=>product.id === props.id)
+
+    function handleReserve(event){
+        const booking =  {
+          "name" : product.name,
+          "seller" : product.seller,
+          "price" : product.price,
+          "date": Date(),
+          "location": product.location,
+          "status": "em andamento",
+          "image":[jeans],
+      }
+      props.setBooking([...props.bookings,booking])
+      event.preventDefault()
+      alert("Produto adicionado à lista de reserva.")
+    }
     return(
         <>
             <Navbar/>
@@ -70,12 +79,12 @@ export default function Product(){
 
                 <div class="row">
                     <div class="col">
-                            <a  href="#" > 
+                            <Link to={"/WishList"}> 
                                 <img src={heart} width="30" height="30" class="d-inline-block " alt="" title='Lista de Desejos'/>
-                            </a>
+                            </Link>
                     </div>
                     <div class="col">
-                        <Button color={'LightGreen'} title={"Reservar"}/> 
+                        <Button color={'LightGreen'} title={"Reservar"} onClick={handleReserve}/> 
                     </div>
                 </div>
                 </form>
@@ -104,3 +113,4 @@ export default function Product(){
         </>
     );
 }
+//TODO resolve Redirect

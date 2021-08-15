@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar';
 import Jumbotron from '../components/jumbotron';
@@ -8,42 +8,24 @@ import Button from '../components/button';
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 
-export default function Booking(){
-
+export default function Booking(props){
+     const [message, setMessage] = useState("")
     
+    function handleInputChange(event){
+        setMessage(event.target.value)
+    }
+    const product = props.bookings[1];
+    function handleClick(event){
+        product.messages.concat({
+            "userType":"vendedor",
+            "userName":"Pietro",
+            "date": Date(),
+            "message": message
 
-    const product = {
-    "id": 1,
-    "name": "Calça Jeans",
-    "images": [jeans, jeans2],
-    "description":"This is a pretty new black jean without any real damage",
-    "price": 56.99,
-    "category": "Calças",
-    "seller": "Marcelo",
-    "telephone": "21 999999999",
-    "email": "marceloper@gmail.com",
-    "buyer": "Raphael",
-    "messages": [
-        {
-            "date": "13/07/2021",
-            "userType": "Vendedor",
-            "userName": "Marcelo" ,
-            "message": "Como podemos marcar a retirada do produto?"  
-        }, 
-        {
-            "date": "14/07/2021",
-            "userType": "Comprador",
-            "userName": "Raphael" ,
-            "message": "Podemos marcar quarta pela tarde?"   
-        }, 
-        {
-            "date": "15/07/2021",
-            "userType": "Vendedor",
-            "userName": "Marcelo" ,
-            "message": "Tudo bem!!!"
-        }]
-}
-
+        })
+        alert("rodando")
+        props.setBooking([...product.message,message])
+    }
     return(
         <>
              <Navbar/>
@@ -53,7 +35,7 @@ export default function Booking(){
                 <div className="col justify-content-center ">
                     <div className="row justify-content-center">
                         <div className="justify-content-center">
-                            <Carrousel images={product.images} id={product.id}/>
+                            <Carrousel images={product.image} id={product.id}/>
                           </div>
                     </div>
                     <div className="row justify-content-md-center">
@@ -110,13 +92,13 @@ export default function Booking(){
                              <div className="col"> 
                                 <Chat messages={product.messages} date={product.messages.date} userType={product.messages.userType} userName={product.messages.userName} message={product.messages.message}/>  
                              <div>
-                                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea className="form-control" id="exampleFormControlTextarea1" onChange={handleInputChange} value={message} rows="3"></textarea>
                             </div>
                             </div>
                         </div>
                         &nbsp;
                         <div className="row justify-content-center">  
-                            <Button color="purple" title={"Responder"}/> 
+                            <Button color="purple" onClick={handleClick} title={"Responder"}/> 
                         </div>
 
         </>
