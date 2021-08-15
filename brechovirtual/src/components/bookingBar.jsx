@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function BookingBar(props) {
     return(
@@ -6,7 +7,7 @@ export default function BookingBar(props) {
            <div class="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-start">
                 <h4>
                     <img src={props.booking.image} width="40" height="40"  alt=""/> 
-                    <a href="Reserva.html"> <span>{props.booking.name}</span>- R$<span>{props.booking.price}</span></a>               
+                    <Link to={"/Product"}> <span>{props.booking.name}</span>- R$<span>{props.booking.price}</span></Link>               
 		            &nbsp;         
 		            <p style={{fontSize:15 +'px'}}>
                          <span><b>Vendedor: </b></span>

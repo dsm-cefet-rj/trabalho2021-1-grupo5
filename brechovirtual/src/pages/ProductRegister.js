@@ -21,7 +21,8 @@ export default function ProductRegister(props){
     
     function createProduct(e){
         e.preventDefault();
-        props.setProducts(props.products.concat(newProduct));  
+        props.setProducts(props.products.concat(newProduct)); 
+        alert("Produto criado com sucesso!") 
         history.push("/");
     }
 

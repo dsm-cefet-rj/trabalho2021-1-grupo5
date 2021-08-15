@@ -35,3 +35,4 @@ import tenis2 from '../images/tenis2.jpeg'
      </>
    );
  }
+ 

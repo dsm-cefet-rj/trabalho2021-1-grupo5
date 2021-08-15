@@ -16,6 +16,24 @@ export default function BookingList() {
             "status": "em andamento",
             "image": Calca,
         },
+        {
+            "name" : " Jeans",
+            "seller" : ' peireira',
+            "price" : "69.99",
+            "date": Date(),
+            "location": "Tijuca",
+            "status": "em andamento",
+            "image": Calca,
+        },
+        {
+            "name" : "Calça Jeans",
+            "seller" : 'Marcelo Joao ',
+            "price" : "100.99",
+            "date": "01/08/2021 ",
+            "location": "Centro",
+            "status": "fechado",
+            "image": Calca,
+        },
     ]
     return(
         <>
@@ -38,3 +56,4 @@ export default function BookingList() {
         </>
     )
 }
+//TODO ? formatar o date()
