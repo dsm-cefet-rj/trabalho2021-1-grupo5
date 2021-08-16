@@ -26,6 +26,7 @@ export default function Booking({ bookings, setBookings }){
 
         const newMessagesArray = product.messages.push(newMessage);
         setBookings({ ...product, messages: newMessagesArray });
+        setMessage("")
     }
     return(
         <>
