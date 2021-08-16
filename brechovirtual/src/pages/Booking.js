@@ -8,27 +8,28 @@ import Button from '../components/button';
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 
-export default function Booking(props){
+export default function Booking({ bookings, setBookings }){
      const [message, setMessage] = useState("")
     
     function handleInputChange(event){
         setMessage(event.target.value)
     }
-    const product = props.bookings[1];
-    function handleClick(event){
-        product.messages.concat({
-            "userType":"vendedor",
-            "userName":"Pietro",
-            "date": Date(),
-            "message": message
 
-        })
-        alert("rodando")
-        props.setBooking([...product.message,message])
+    const [product, setProduct] = useState(bookings[1]);
+    function handleClick() {
+        const newMessage = {
+            userType: "vendedor",
+            userName: "Pietro",
+            date: Date(),
+            message: message
+        };
+
+        const newMessagesArray = product.messages.push(newMessage);
+        setBookings({ ...product, messages: newMessagesArray });
     }
     return(
         <>
-             <Navbar/>
+            <Navbar/>
             <Jumbotron title={"Reserva nº 9857 - Em andamento"} text={" "}/>
             <div className="container justify-content-md-center">
                 <div className="row justify-content-center ">
@@ -90,7 +91,9 @@ export default function Booking(props){
                         </div>
                         <div className="container">
                              <div className="col"> 
-                                <Chat messages={product.messages} date={product.messages.date} userType={product.messages.userType} userName={product.messages.userName} message={product.messages.message}/>  
+                                <Chat
+                                    messages={product.messages}
+                                />  
                              <div>
                                 <textarea className="form-control" id="exampleFormControlTextarea1" onChange={handleInputChange} value={message} rows="3"></textarea>
                             </div>
