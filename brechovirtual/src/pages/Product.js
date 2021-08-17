@@ -7,7 +7,7 @@ import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
 import Button from '../components/button';
-import { Link,useHistory } from 'react-router-dom';
+import { Link,useHistory , useParams} from 'react-router-dom';
 import { Redirect } from 'react-router';
 
 
@@ -15,7 +15,8 @@ import { Redirect } from 'react-router';
 
 export default function Product(props){
     const history =useHistory()
-    const product = props.products[1]
+    let { id} = useParams()
+    const product = props.products[id]
     //props.products.filter((product)=>product.id === props.id)
 
     function handleReserve(event){
@@ -31,6 +32,13 @@ export default function Product(props){
       props.setBooking([...props.bookings,booking])
       event.preventDefault()
       alert("Produto adicionado à lista de reserva.")
+    }
+    function handleDelete(event){
+        props.products.splice(props.products.indexOf(id),1)
+        props.setProduct([...props.products])
+        event.preventDefault()
+        alert("Produto excluido")
+        history.push("/")
     }
     return(
         <>
@@ -85,6 +93,7 @@ export default function Product(props){
                     </div>
                     <div class="col">
                         <Button color={'LightGreen'} title={"Reservar"} onClick={handleReserve}/> 
+                        <Button color={'Red'} title={"Excluir"} onClick={handleDelete}/>
                     </div>
                 </div>
                 </form>

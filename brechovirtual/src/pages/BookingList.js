@@ -15,7 +15,7 @@ export default function BookingList(props) {
                         props.bookings.map((booking)=>{
                             return(
                                 <>
-                                    <BookingBar key={booking.name} booking ={booking}/>
+                                    <BookingBar key={booking.id} booking ={booking}/>
                                 </>
                             )
                         })

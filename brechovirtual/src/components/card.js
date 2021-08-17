@@ -14,7 +14,7 @@ export default function Card(props) {
                     <Carrousel images={props.product.images} id={props.product.id} />
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title"><Link to={"/Product"}  >{props.product.name}</Link> <span className="text-right">R${props.product.price}</span></h5>
+                    <h5 className="card-title"><Link to={`/product/${props.product.id}`}  >{props.product.name}</Link> <span className="text-right">R${props.product.price}</span></h5>
                     <p className="card-text">{props.product.description}</p>
                     <div className="text-left">
                         <h6><b>{props.product.category}</b></h6>

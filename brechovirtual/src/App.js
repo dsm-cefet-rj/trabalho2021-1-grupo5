@@ -18,7 +18,7 @@ export default function App() {
   const [products, setProducts] = useState(
     [
       {
-        id: 1,
+        id: 0,
         name: "Calça Jeans",
         images: [jeans, jeans2],
         description: "This is a pretty new black jean without any real damage",
@@ -28,7 +28,7 @@ export default function App() {
         location: "Tijuca",
       },
       {
-        id: 2,
+        id: 1,
         name: "Casaco",
         images: [casaco, casaco2],
         description: "This is a pretty new black jean without any real damage",
@@ -38,7 +38,7 @@ export default function App() {
         location: "Tijuca",
       },
       {
-        id: 3,
+        id: 2,
         name: "Tênis",
         images: [tenis, tenis2],
         description: "This is a pretty new black jean without any real damage",
@@ -51,6 +51,7 @@ export default function App() {
   );
   const [bookings, setBookings] = useState([
     {
+      id:0,
       name: "Calça Jeans",
       seller: "Marcelo peireira",
       price: "59.99",
@@ -80,6 +81,7 @@ export default function App() {
       ],
     },
     {
+      id: 1,
       name: " Jeans",
       seller: " peireira",
       price: "69.99",
@@ -109,6 +111,7 @@ export default function App() {
       ],
     },
     {
+      id:2,
       name: "Calça Jeans",
       seller: "Marcelo Joao ",
       price: "100.99",
@@ -146,13 +149,13 @@ export default function App() {
           <Route path="/" exact>
             <Home products={products} />
           </Route>
-          <Route path='/product'>
-            <Product products={products} bookings={bookings} setBooking={setBookings} id={2}/>
+          <Route exact path='/product/:id'>
+            <Product products={products} bookings={bookings} setBooking={setBookings} setProduct={setProducts}/>
           </Route>
           <Route path="/products/new">
             <ProductRegister products={products} setProducts={setProducts} />
           </Route>
-          <Route path="/booking">
+          <Route path="/booking/:id">
             <Booking bookings={bookings} setBookings={setBookings} />
           </Route>
           <Route path="/bookingList">
