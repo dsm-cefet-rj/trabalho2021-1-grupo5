@@ -33,7 +33,7 @@ const WishList = () => {
   return(
       <React.Fragment>
         <Navbar />
-        <Jumbotron title={"Lista de Desejos"} text={"Aqui estão seus itens da lista de desejos"}/>
+        <Jumbotron title={"Lista de Desejos"} text={"Sua lista de desejos está vazia."}/>
         <div className="container">
           {
             wishItems.map((elem) =>

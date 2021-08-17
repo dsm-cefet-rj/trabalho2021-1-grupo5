@@ -15,18 +15,30 @@ export default function Booking({ bookings, setBookings }){
         setMessage(event.target.value)
     }
 
+    function dataAtualFormatada(){
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+        let data = new Date(),
+            dia  = data.getDate().toString().padStart(2, '0'),
+            mes  = (data.getMonth()+1).toString().padStart(2, '0'),
+            ano  = data.getFullYear(),
+            hora = [data.getHours(), data.getMinutes()].map(pad).join(':');
+        return `${dia}/${mes}/${ano} ${hora} - `;
+    }
+
     const [product, setProduct] = useState(bookings[1]);
     function handleClick() {
         const newMessage = {
-            userType: "vendedor",
-            userName: "Pietro",
-            date: Date(),
+            userType: "Vendedor",
+            userName: "Marcelo",
+            date: dataAtualFormatada(),
             message: message
         };
 
         const newMessagesArray = product.messages.push(newMessage);
         setBookings({ ...product, messages: newMessagesArray });
-        setMessage("/")
+        setMessage("")
     }
     return(
         <>
