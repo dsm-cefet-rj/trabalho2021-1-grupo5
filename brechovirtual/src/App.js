@@ -13,6 +13,8 @@ import casaco from "./images/casaco.jpg";
 import casaco2 from "./images/casaco2.jpg";
 import tenis from "./images/tenis.jpeg";
 import tenis2 from "./images/tenis2.jpeg";
+import vestido from "./images/vestido-rosa2.jpg";
+import vestido2 from "./images/vestido-rosa.jpg";
 
 export default function App() {
   const [products, setProducts] = useState(
@@ -23,6 +25,7 @@ export default function App() {
         images: [jeans, jeans2],
         description: "This is a pretty new black jean without any real damage",
         price: 56.99,
+        status: "aberto",
         category: "Calças",
         seller: "Marcelo peireira",
         location: "Tijuca",
@@ -33,6 +36,7 @@ export default function App() {
         images: [casaco, casaco2],
         description: "This is a pretty new black jean without any real damage",
         price: 99.63,
+        status: "aberto",
         category: "Casaco",
         seller: "Marcelo peireira",
         location: "Tijuca",
@@ -43,7 +47,19 @@ export default function App() {
         images: [tenis, tenis2],
         description: "This is a pretty new black jean without any real damage",
         price: 51.0,
+        status: "reservado",
         category: "Tênis",
+        seller: "Marcelo peireira",
+        location: "Tijuca",
+      },
+      {
+        id: 3,
+        name: "Vestido rosa",
+        images: [vestido, vestido2],
+        description: "This is a pretty new black jean without any real damage",
+        price: 89.95,
+        status: "aberto",
+        category: "Vestido",
         seller: "Marcelo peireira",
         location: "Tijuca",
       },
