@@ -21,20 +21,23 @@ export default function Product(props){
 
     function handleReserve(event){
         const booking =  {
+            "id":props.bookings.length,
           "name" : product.name,
           "seller" : product.seller,
           "price" : product.price,
           "date": Date(),
           "location": product.location,
           "status": "em andamento",
-          "image":[jeans],
+          "image":product.images[0],
+          "messages":[],
       }
       props.setBooking([...props.bookings,booking])
       event.preventDefault()
       alert("Produto adicionado à lista de reserva.")
+      history.push("/bookingList")
     }
     function handleDelete(event){
-        props.products.splice(props.products.indexOf(id),1)
+        props.products.splice(product.id,1)
         props.setProduct([...props.products])
         event.preventDefault()
         alert("Produto excluido")

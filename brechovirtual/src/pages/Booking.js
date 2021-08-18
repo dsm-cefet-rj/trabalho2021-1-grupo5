@@ -31,7 +31,7 @@ export default function Booking({ bookings, setBookings }){
 
     const [product, setProduct] = useState(bookings[id]);
     function handleDelete(event){
-        bookings.splice(bookings.indexOf(id),1)
+        bookings.splice(product.id,1)
         setProduct([...bookings])
         event.preventDefault()
         alert("Reserva excluida")

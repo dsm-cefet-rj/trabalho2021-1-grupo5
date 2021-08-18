@@ -10,6 +10,7 @@ export default function ProductRegister(props){
     
     const [newProduct, setNewProduct] = useState({
         "images":[casaco], 
+        "id" :props.products.length,
     });
 
     
