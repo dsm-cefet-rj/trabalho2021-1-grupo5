@@ -1,4 +1,4 @@
-const productReducer = (state = {},action)=>{
+const productReducer = (state = [],action)=>{
     return state;
 }
 export default productReducer;
