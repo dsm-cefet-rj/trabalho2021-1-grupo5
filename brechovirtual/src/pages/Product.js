@@ -9,6 +9,8 @@ import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link,useHistory , useParams} from 'react-router-dom';
 import { Redirect } from 'react-router';
+import {deleteProduct} from '../actions'
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -16,9 +18,10 @@ import { Redirect } from 'react-router';
 export default function Product(props){
     const history =useHistory()
     let { id} = useParams()
-    const product = props.products[id]
+    const product = useSelector(state=>state.product.filter(product=>product.id === id)) //props.products[id]
+    console.log(product)
     //props.products.filter((product)=>product.id === props.id)
-
+    const dispatch = useDispatch()
     function handleReserve(event){
         const booking =  {
             "id":props.bookings.length,
@@ -37,8 +40,9 @@ export default function Product(props){
       history.push("/bookingList")
     }
     function handleDelete(event){
-        props.products.splice(product.id,1)
-        props.setProduct([...props.products])
+        //props.products.splice(product.id,1)
+        //props.setProduct([...props.products])
+        dispatch(deleteProduct(product.id))
         event.preventDefault()
         alert("Produto excluido")
         history.push("/")

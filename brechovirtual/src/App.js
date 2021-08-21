@@ -163,10 +163,10 @@ export default function App() {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Home products={products} />
+            <Home />
           </Route>
           <Route exact path='/product/:id'>
-            <Product products={products} bookings={bookings} setBooking={setBookings} setProduct={setProducts}/>
+            <Product bookings={bookings} setBooking={setBookings} setProduct={setProducts}/>
           </Route>
           <Route path="/products/new">
             <ProductRegister products={products} setProducts={setProducts} />

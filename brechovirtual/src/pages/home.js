@@ -2,8 +2,10 @@ import React from "react";
 import Card from "../components/card";
 import Navbar from "../components/navbar";
 import logo from "../images/logo2.png";
+import { useSelector } from "react-redux";
 
 export default function Home(props) {
+  const reduxproduct = useSelector(state=>state.product)
   const renderProdcuct = (product) => {
     return (
       <React.Fragment>
@@ -35,7 +37,7 @@ export default function Home(props) {
         </div>
       </div>
       <div class="container">
-        <div className="row">{props.products.map(renderProdcuct)}</div>
+        <div className="row">{reduxproduct.map(renderProdcuct)}</div>
       </div>
     </>
   );

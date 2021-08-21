@@ -4,4 +4,9 @@ export function addProduct(novoProduto){
       payload:novoProduto,
   })  
 }
-export function deleteProduct()
+export function deleteProduct(id){
+    return({
+        type:"DELETEPRODUCT",
+        payload:id,
+    })
+}

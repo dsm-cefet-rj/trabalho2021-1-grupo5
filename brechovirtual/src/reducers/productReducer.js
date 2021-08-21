@@ -2,7 +2,8 @@ import jeans from "../images/jeans.jpeg";
 import jeans2 from "../images/jeans2.jpeg";
 import casaco from "../images/casaco.jpg";
 import casaco2 from "../images/casaco2.jpg";
-const productReducer = (state = [{
+const productReducer = (state = [
+    {
         id: 0,
         name: "Calça Jeans",
         images: [jeans, jeans2],
@@ -29,9 +30,10 @@ const productReducer = (state = [{
         return(state.concat(action.payload))
     }
     else if(action.type ==="DELETEPRODUCT"){
-        return state.filter((state)=>state.id !== action.payload.id)
+        console.log("Delete product called")
+        return state.filter((state)=>state.id !== action.payload)
+    
     }
     return state;
 }
-export default productReducer;
-// baixar redux devTools
+export default productReducer; 
