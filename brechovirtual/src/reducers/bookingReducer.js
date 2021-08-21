@@ -1,4 +1,4 @@
 const bookingReducer = (state=[],action)=>{
     return state;
 }
-export default bookingReducer;
+export default bookingReducer; 
