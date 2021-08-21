@@ -10,7 +10,7 @@ export default function Home(props) {
     return (
       <React.Fragment>
         {product.status !== "reservado" && (
-          <Card product={product} key={product.name} />
+          <Card product={product} key={product.id} />
         )}
       </React.Fragment>
     );

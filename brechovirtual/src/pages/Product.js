@@ -8,7 +8,6 @@ import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link,useHistory , useParams} from 'react-router-dom';
-import { Redirect } from 'react-router';
 import {deleteProduct} from '../actions'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function Product(props){
     const history =useHistory()
     let { id} = useParams()
-    const product = useSelector(state=>state.product.filter(product=>product.id === id)) //props.products[id]
+    const product = useSelector(state=>state.product[id]) //props.products[id]
     console.log(product)
     //props.products.filter((product)=>product.id === props.id)
     const dispatch = useDispatch()
