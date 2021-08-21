@@ -7,21 +7,28 @@ import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
 import Button from '../components/button';
-import { Link,useHistory , useParams} from 'react-router-dom';
+import { Link, useHistory , useParams} from 'react-router-dom';
 import { Redirect } from 'react-router';
+import {useSelector, useDispatch} from 'react-redux'
+import { deleteProduct } from '../ProductsSlice';
+import { addBooking } from '../BookingsSlice';
 
 
 
 
 export default function Product(props){
-    const history =useHistory()
-    let { id} = useParams()
-    const product = props.products[id]
-    //props.products.filter((product)=>product.id === props.id)
+    const history = useHistory()
+    let { id } = useParams()
+    id = parseInt(id)
+    //const product = props.products[id]
+   
+     const product = useSelector(state => state.products)
+     const bookings = useSelector(state => state.bookings)
+     const dispatch = useDispatch();
 
-    function handleReserve(event){
-        const booking =  {
-            "id":props.bookings.length,
+    function handleReserve(e){
+      /*  const booking =  {
+          "id":props.bookings.length,
           "name" : product.name,
           "seller" : product.seller,
           "price" : product.price,
@@ -30,19 +37,20 @@ export default function Product(props){
           "status": "em andamento",
           "image":product.images[0],
           "messages":[],
-      }
-      props.setBooking([...props.bookings,booking])
-      event.preventDefault()
+      }*/
+      dispatch(addBooking(bookings));
+      e.preventDefault()
       alert("Produto adicionado à lista de reserva.")
       history.push("/bookingList")
     }
-    function handleDelete(event){
-        props.products.splice(product.id,1)
-        props.setProduct([...props.products])
-        event.preventDefault()
-        alert("Produto excluido")
+
+    function handleDelete(e){
+        e.preventDefault()
+        dispatch(deleteProduct(id));
+        alert("Produto excluido!")
         history.push("/")
     }
+
     return(
         <>
             <Navbar/>
@@ -58,6 +66,12 @@ export default function Product(props){
             
             <div class="col-sm-6">
                 <form class="needs-validation" novalidate>
+
+                <div class="row">
+                    <div class="col-sm">
+                    <Link to={`/productForm/${product.id}`}><p>Editar</p></Link> 
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm">
@@ -90,7 +104,7 @@ export default function Product(props){
 
                 <div class="row">
                     <div class="col">
-                            <Link to={"/WishList"}> 
+                            <Link to={"/wishList"}> 
                                 <img src={heart} width="30" height="30" class="d-inline-block " alt="" title='Lista de Desejos'/>
                             </Link>
                     </div>

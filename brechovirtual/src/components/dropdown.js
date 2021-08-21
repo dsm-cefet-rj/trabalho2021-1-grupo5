@@ -25,9 +25,9 @@ export default function Dropdown(props){
                     </a>
                     <div className="dropdown-menu pull-left" style={{right: "0", left: "auto"}} aria-labelledby="navbarDropdownMenuLink">
                             <a className="dropdown-item"><Link to='/'>Perfil</Link></a>
-                            <a className="dropdown-item" ><Link to='/products/new'>Criar anúncio</Link></a>
-                            <a className="dropdown-item" ><Link to='/wishList'>Lista de Desejos</Link></a>
+                            <a className="dropdown-item" ><Link to='/productForm/novo'>Criar anúncio</Link></a>
                             <a className="dropdown-item" ><Link to='/bookingList'>Lista de Reservas</Link></a>
+                            <a className="dropdown-item" ><Link to='/wishList'>Lista de Desejos</Link></a>
                             <a className="dropdown-item" ><Link to='/'>Sair</Link></a>
                     </div>
                     </li>

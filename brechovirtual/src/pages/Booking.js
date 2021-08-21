@@ -8,13 +8,17 @@ import Button from '../components/button';
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import { useParams, useHistory } from 'react-router';
+import {deleteBooking} from '../BookingsSlice';
 
 export default function Booking({ bookings, setBookings }){
+
      const [message, setMessage] = useState("")
      const history = useHistory()
      let { id } = useParams()
-    function handleInputChange(event){
-        setMessage(event.target.value)
+     id = parseInt(id)
+
+    function handleInputChange(e){
+        setMessage(e.target.value)
     }
 
     function dataAtualFormatada(){
@@ -30,13 +34,16 @@ export default function Booking({ bookings, setBookings }){
     }
 
     const [product, setProduct] = useState(bookings[id]);
-    function handleDelete(event){
-        bookings.splice(product.id,1)
-        setProduct([...bookings])
-        event.preventDefault()
-        alert("Reserva excluida")
+
+    function handleDelete(e){
+        //bookings.splice(product.id,1)
+        //setProduct([...bookings])
+        dispatchEvent(deleteBooking(id));
+        e.preventDefault()
+        alert("Reserva excluida.")
         history.push("/bookingList")
     }
+
     function handleClick() {
         const newMessage = {
             userType: "Vendedor",
@@ -44,11 +51,11 @@ export default function Booking({ bookings, setBookings }){
             date: dataAtualFormatada(),
             message: message
         };
-
         const newMessagesArray = product.messages.push(newMessage);
         setBookings({ ...product, messages: newMessagesArray });
         setMessage("")
     }
+
     return(
         <>
             <Navbar/>

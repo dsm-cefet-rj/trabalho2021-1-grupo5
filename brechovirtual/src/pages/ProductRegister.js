@@ -4,30 +4,54 @@ import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron';
 import Button from '../components/button';
 import casaco from '../images/casaco.jpg'
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux'
+import { addProduct, updateProduct } from '../ProductsSlice';
+import Product from './Product';
 
 export default function ProductRegister(props){
+
+    //const products = useSelector(state => state.products)
     
-    const [newProduct, setNewProduct] = useState({
-        "images":[casaco], 
-        "id" :props.products.length,
+    const [newProduct, ] = useState({
+       "images":[casaco], 
+        "id" :props.products.length
     });
 
-    
-    let history = useHistory()
+    let { id } = useParams();
+    id = parseInt(id);
+
+    const [products, setNewProduct] = useState(
+        id ? products.filter((product) => product.id === id)[0] ?? {} : {}
+    );
+
+    const [actionType, ] = useState(
+        id ?
+            products.filter((product) => product.id === id)[0]
+            ? 'productForm/updateProduct'
+            : 'productForm/addProduct'
+            : 'productForm/addProduct' 
+    );
+
+    //const products = useSelector(state => state.products)
+    const dispatch = useDispatch();
+    const history = useHistory()
+
     function handleInputChange(e){
        setNewProduct({...newProduct, [e.target.name]: e.target.value})
     }
     
-    
     function createProduct(e){
         e.preventDefault();
-        props.setProducts(props.products.concat(newProduct)); 
-        alert("Produto criado com sucesso!") 
+        if(actionType === 'productForm/addProduct'){
+            dispatch(addProduct(newProduct));
+        }else{
+            dispatch(updateProduct(newProduct.id));
+        }
+        
+        alert("Produto cadastrado com sucesso!") 
         history.push("/");
     }
-
-    
 
     return(
         <>
