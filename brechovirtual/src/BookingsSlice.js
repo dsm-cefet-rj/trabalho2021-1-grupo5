@@ -1,8 +1,10 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import jeans from "./images/jeans.jpeg";
 import jeans2 from "./images/jeans2.jpeg";
 
-const initialBookings =[
+
+const initialBookings =[]
+/*const initialBookings =[
     {
       id:1,
       name: "Calça Jeans",
@@ -94,7 +96,7 @@ const initialBookings =[
       ],
     }
   ];
-
+*/
 
 
   function addBookingReducer(bookings, booking){
@@ -112,6 +114,16 @@ const initialBookings =[
     return bookings;
   }
 
+  export const fetchBookins = createAsyncThunk('products/fetchBookings',
+    async () => {
+        return await (await fetch ('http://localhost:3004/bookins')).json();
+    }
+  );
+
+  function fullfillBookingsReducer(productsState, bookingsFetched){
+    return bookingsFetched;
+}
+
   export const bookingsSlice = createSlice({
         name: 'bookings',
         initialState: initialBookings,
@@ -119,7 +131,10 @@ const initialBookings =[
            addBooking: (state, action) => addBookingReducer(state, action.payload),
            updateBooking: (state, action) => updateBookingReducer(state, action.payload),
            deleteBooking: (state, action) => deleteBookingReducer(state, action.payload)
-        }
+        },
+        extraReducers: {
+         [fetchBookings.fulfilled]: (state, action) => fullfillBookingsReducer(state = action.payload),
+    }
     })
 
 export const { addBooking, updateBooking, deleteBooking } = bookingsSlice.actions

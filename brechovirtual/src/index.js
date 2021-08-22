@@ -5,8 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import {store} from './store'
+import { fetchProducts } from './ProductsSlice';
+import { fetchBookins } from './BookingsSlice';
 
-
+store.dispatch(fetchProducts());
+store.dispatch(fetchBookins());
 
 ReactDOM.render(
   <Provider store={store}>

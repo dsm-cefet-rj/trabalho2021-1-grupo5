@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import jeans from "./images/jeans.jpeg";
 import jeans2 from "./images/jeans2.jpeg";
 import casaco from "./images/casaco.jpg";
@@ -8,7 +8,9 @@ import tenis2 from "./images/tenis2.jpeg";
 import vestido from "./images/vestido-rosa2.jpg";
 import vestido2 from "./images/vestido-rosa.jpg";
 
-const initialProducts = [
+
+const initialProducts = []
+/*const initialProducts = [
       {
         id: 1,
         name: "Calça Jeans",
@@ -55,7 +57,7 @@ const initialProducts = [
       },
     ]
   ;
-
+*/
   function addProductReducer(products, product){
     let proxId = 1 + products.map(product => product.id).reduce((x, y) => Math.max(x,y));
     return products.concat([{...product, id: proxId}]);
@@ -71,6 +73,16 @@ const initialProducts = [
     return products;
   }
 
+  export const fetchProducts = createAsyncThunk('products/fetchProducts',
+    async () => {
+        return await (await fetch ('http://localhost:3004/products')).json();
+    }
+  );
+
+  function fullfillProductsReducer(productsState, productsFetched){
+      return productsFetched;
+  }
+
   export const productsSlice = createSlice({
         name: 'products',
         initialState: initialProducts,
@@ -78,7 +90,10 @@ const initialProducts = [
            addProduct: (state, action) => addProductReducer(state, action.payload),
            updateProduct: (state, action) => updateProductReducer(state, action.payload),
            deleteProduct: (state, action) => deleteProductReducer(state, action.payload)
-        }
+        },
+        extraReducers: {
+             [fetchProducts.fulfilled]: (state, action) => fullfillProductsReducer(state = action.payload),
+        }
     })
 
 export const { addProduct, updateProduct, deleteProduct } = productsSlice.actions

@@ -9,10 +9,10 @@ export default function BookingList() {
     return(
         <>
             <Navbar/>
-            <Jumbotron title={"Lista de Reservas"} text={"Aqui estão suas Reservas"}/>
+            <Jumbotron title={"Lista de Reservas"} text={"Reservas em andamento"}/>
             <div className="container">
                  <div className="col">
-                     {
+                     { //FILTRAR PELO STATUS DA RESERVA
                         bookings.map((booking)=>{
                             return(
                                 <>
@@ -23,7 +23,20 @@ export default function BookingList() {
                      }
                  </div>
             </div>
-
+            <Jumbotron title={""} text={"Reservas concluídas"}/>
+            <div className="container">
+                 <div className="col">
+                     { //FILTRAR PELO STATUS DA RESERVA
+                        bookings.map((booking)=>{
+                            return(
+                                <>
+                                    <BookingBar key={booking.id} booking ={booking}/>
+                                </>
+                            )
+                        })
+                     }
+                 </div>
+            </div>           
         </>
     )
 }

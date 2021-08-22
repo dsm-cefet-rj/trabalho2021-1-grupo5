@@ -1,0 +1,46 @@
+[
+{
+    "id": 1,
+    "name": "Calça Jeans",
+    "images": [],
+    "description": "This is a pretty new black jean without any real damage",
+    "price": 56.99,
+    "status": "aberto",
+    "category": "Calça",
+    "seller": "Marcelo peireira",
+    "location": "Tijuca"
+  },
+  {
+    "id": 2,
+    "name": "Casaco",
+    "images": [],
+    "description": "This is a pretty new black jean without any real damage",
+    "price": 99.63,
+    "status": "aberto",
+    "category": "Casaco",
+    "seller": "Marcelo peireira",
+    "location": "Tijuca"
+  },
+  {
+    "id": 3,
+    "name": "Tênis",
+    "images": [],
+    "description": "This is a pretty new black Tenis without any real damage",
+    "price": 51.0,
+    "status": "reservado",
+    "category": "Tênis",
+    "seller": "Marcelo peireira",
+    "location": "Tijuca"
+  },
+  {
+    "id": 4,
+    "name": "Vestido rosa",
+    "images": [],
+    "description": "This is a pretty new pink dress from switzerland",
+    "price": 89.95,
+    "status": "aberto",
+    "category": "Vestido",
+    "seller": "Marcelo peireira",
+    "location": "Tijuca"
+  }
+]
