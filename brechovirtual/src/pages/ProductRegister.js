@@ -8,7 +8,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
 import { addProduct, updateProduct } from '../ProductsSlice';
 
-export default function ProductRegister(){
+export default function ProductRegister(props){
 
     const products = useSelector(state => state.products)
     
@@ -55,7 +55,7 @@ export default function ProductRegister(){
     return(
         <>
             <Navbar/>
-            <Jumbotron title={"Cadastrar Produto"} text={" "}/>
+            <Jumbotron title={props.title} text={" "}/>
             
             <div class="container">
                 <div class="row">
