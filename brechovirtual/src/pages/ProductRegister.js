@@ -43,6 +43,7 @@ export default function ProductRegister(props){
     function createProduct(e){
         e.preventDefault();
         if(actionType === 'productForm/addProduct'){
+            newProduct.images=[casaco];
             dispatch(addProduct(newProduct));
         }else{
             dispatch(updateProduct(newProduct));
@@ -51,6 +52,13 @@ export default function ProductRegister(props){
         alert("Produto cadastrado com sucesso!") 
         history.push("/");
     }
+
+    function cancelButton(e){
+        e.preventDefault(); 
+        history.push("/");
+    }
+
+   
 
     return(
         <>
@@ -61,14 +69,14 @@ export default function ProductRegister(props){
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row d-flex justify-content-center">
-                           <img id="preview" class="border border-dark" src={casaco} width="200" height="200" alt="Arquivo de Imagem"/>
+                           <img id="preview" class="border border-dark"  width="300" height="300" alt="Arquivo de Imagem - Em construção"/>
                         </div>
                     &nbsp;
                         <p>
                             <div class="row justify-content-md-center">
                                 <div class="col-md-6 custom-file">
-                                <input id="img-input" type="file" class="custom-file-input" name="images"  />
-                                <label class="custom-file-label" for="customFile">Escolher arquivo</label>
+                                <input id="img-input" type="file" class="custom-file-input" name="images" />
+                                <label class="custom-file-label" for="customFile" >Escolher arquivo</label>
                                 </div>
                             </div>
                         </p>
@@ -147,7 +155,7 @@ export default function ProductRegister(props){
                     <Button color={'purple'} title={"Publicar"} onClick={(e)=>createProduct(e)}/> 
                 </div>
                 <div class="col-4 d-flex justify-content-end">
-                    <Button color={'gray'} title={"Cancelar"}/> 
+                    <Button color={'gray'} title={"Cancelar"} onClick={(e)=>cancelButton(e)}/> 
                 </div>
             </div>
             &nbsp;
