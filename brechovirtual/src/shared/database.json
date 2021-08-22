@@ -1,145 +1,155 @@
 {
-  "products":
-    [
+  "products": [
     {
-        "id": 1,
-        "name": "Calça Jeans",
-        "images": ["https://damyller.vteximg.com.br/arquivos/ids/589479-980-1470/Calca-Jeans-Slouchy-Cropped-Cintura-Alta-Detalhe-Still--.jpg?v=637430211171230000",
-          "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"],
-        "description": "This is a pretty new black jean without any real damage",
-        "price": 56.99,
-        "status": "aberto",
-        "category": "Calça",
-        "seller": "Marcelo peireira",
-        "location": "Tijuca"
-      },
-      {
-        "id": 2,
-        "name": "Casaco",
-        "images": ["https://astryd.com.br/wp-content/uploads/2020/09/casaco-viculo-basic-de-moletom-preto-frente.jpg",
-          "https://i.shafacdn.net/images/134819-65-auto-auto-vFmZPycc1hU.jpg"],
-        "description": "This is a pretty new black jean without any real damage",
-        "price": 99.63,
-        "status": "aberto",
-        "category": "Casaco",
-        "seller": "Marcelo peireira",
-        "location": "Tijuca"
-      },
-      {
-        "id": 3,
-        "name": "Tênis",
-        "images": [],
-        "description": "This is a pretty new black Tenis without any real damage",
-        "price": 51.0,
-        "status": "reservado",
-        "category": "Tênis",
-        "seller": "Marcelo peireira",
-        "location": "Tijuca"
-      },
-      {
-        "id": 4,
-        "name": "Vestido rosa",
-        "images": ["https://assets2.repassa.com.br/fit-in/480x0/filters:sharpen(0.5,0.5,true)/spree/products/418422/original/IMG_2300.JPG",
-           "https://photos.enjoei.com.br/lindo-vestido-rosa-seco/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjY1OTAvMzgzODJlMjdjNTZkODJlNDQ4ZWZkYzc1Njc3MDljZTQuanBn"],
-        "description": "This is a pretty new pink dress from switzerland",
-        "price": 89.95,
-        "status": "aberto",
-        "category": "Vestido",
-        "seller": "Marcelo peireira",
-        "location": "Tijuca"
-      }
-    ],
-    "bookings":
-    [
-      {
-          "id":1,
-          "name": "Calça Jeans",
-          "seller": "Marcelo peireira",
-          "price": "59.99",
-          "date": "20/07/2021",
-          "location": "Tijuca",
-          "status": "em andamento",
-          "image": ["https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"],
-          "messages": [
-            {
-              "date": "13/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Como podemos marcar a retirada do produto?"
-            },
-            {
-              "date": "14/07/2021",
-              "userType": "Comprador",
-              "userName": "Raphael",
-              "message": "Podemos marcar quarta pela tarde?"
-            },
-            {
-              "date": "15/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Tudo bem!!!"
-            }
-          ]
+      "id": 1,
+      "name": "Calça Jeans",
+      "images": [
+        "https://damyller.vteximg.com.br/arquivos/ids/589479-980-1470/Calca-Jeans-Slouchy-Cropped-Cintura-Alta-Detalhe-Still--.jpg?v=637430211171230000",
+        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+      ],
+      "description": "This is a pretty new black jean without any real damage",
+      "price": 56.99,
+      "status": "aberto",
+      "category": "Calça",
+      "seller": "Marcelo peireira",
+      "location": "Tijuca"
+    },
+    {
+      "id": 2,
+      "name": "Casaco",
+      "images": [
+        "https://astryd.com.br/wp-content/uploads/2020/09/casaco-viculo-basic-de-moletom-preto-frente.jpg",
+        "https://i.shafacdn.net/images/134819-65-auto-auto-vFmZPycc1hU.jpg"
+      ],
+      "description": "This is a pretty new black jean without any real damage",
+      "price": 99.63,
+      "status": "aberto",
+      "category": "Casaco",
+      "seller": "Marcelo peireira",
+      "location": "Tijuca"
+    },
+    {
+      "id": 3,
+      "name": "Tênis",
+      "images": [],
+      "description": "This is a pretty new black Tenis without any real damage",
+      "price": 51.0,
+      "status": "reservado",
+      "category": "Tênis",
+      "seller": "Marcelo peireira",
+      "location": "Tijuca"
+    },
+    {
+      "id": 4,
+      "name": "Vestido rosa",
+      "images": [
+        "https://assets2.repassa.com.br/fit-in/480x0/filters:sharpen(0.5,0.5,true)/spree/products/418422/original/IMG_2300.JPG",
+        "https://photos.enjoei.com.br/lindo-vestido-rosa-seco/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjY1OTAvMzgzODJlMjdjNTZkODJlNDQ4ZWZkYzc1Njc3MDljZTQuanBn"
+      ],
+      "description": "This is a pretty new pink dress from switzerland",
+      "price": 89.95,
+      "status": "aberto",
+      "category": "Vestido",
+      "seller": "Marcelo peireira",
+      "location": "Tijuca"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "name": "Calça Jeans",
+      "seller": "Marcelo peireira",
+      "price": "59.99",
+      "date": "20/07/2021",
+      "location": "Tijuca",
+      "status": "em andamento",
+      "image": [
+        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+      ],
+      "messages": [
+        {
+          "date": "13/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Como podemos marcar a retirada do produto?"
         },
         {
-          "id": 2,
-          "name": " Jeans",
-          "seller": " peireira",
-          "price": "69.99",
-          "date": "20/07/2021",
-          "location": "Tijuca",
-          "status": "em andamento",
-          "image": ["https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"],
-          "messages": [
-            {
-              "date": "13/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Como podemos marcar a retirada do produto?"
-            },
-            {
-              "date": "14/07/2021",
-              "userType": "Comprador",
-              "userName": "Raphael",
-              "message": "Podemos marcar quarta pela tarde?"
-            },
-            {
-              "date": "15/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Tudo bem!!!"
-            }
-          ]
+          "date": "14/07/2021",
+          "userType": "Comprador",
+          "userName": "Raphael",
+          "message": "Podemos marcar quarta pela tarde?"
         },
         {
-          "id":3,
-          "name": "Calça Jeans",
-          "seller": "Marcelo Joao ",
-          "price": "100.99",
-          "date": "01/08/2021 ",
-          "location": "Centro",
-          "status": "fechado",
-          "image": ["https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"],
-          "messages": [
-            {
-              "date": "13/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Como podemos marcar a retirada do produto?"
-            },
-            {
-              "date": "14/07/2021",
-              "userType": "Comprador",
-              "userName": "Raphael",
-              "message": "Podemos marcar quarta pela tarde?"
-            },
-            {
-              "date": "15/07/2021",
-              "userType": "Vendedor",
-              "userName": "Marcelo",
-              "message": "Tudo bem!!!"
-            }
-          ]
+          "date": "15/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Tudo bem!!!"
         }
       ]
+    },
+    {
+      "id": 2,
+      "name": " Jeans",
+      "seller": " peireira",
+      "price": "69.99",
+      "date": "20/07/2021",
+      "location": "Tijuca",
+      "status": "em andamento",
+      "image": [
+        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+      ],
+      "messages": [
+        {
+          "date": "13/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Como podemos marcar a retirada do produto?"
+        },
+        {
+          "date": "14/07/2021",
+          "userType": "Comprador",
+          "userName": "Raphael",
+          "message": "Podemos marcar quarta pela tarde?"
+        },
+        {
+          "date": "15/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Tudo bem!!!"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Calça Jeans",
+      "seller": "Marcelo Joao ",
+      "price": "100.99",
+      "date": "01/08/2021 ",
+      "location": "Centro",
+      "status": "fechado",
+      "image": [
+        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+      ],
+      "messages": [
+        {
+          "date": "13/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Como podemos marcar a retirada do produto?"
+        },
+        {
+          "date": "14/07/2021",
+          "userType": "Comprador",
+          "userName": "Raphael",
+          "message": "Podemos marcar quarta pela tarde?"
+        },
+        {
+          "date": "15/07/2021",
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "message": "Tudo bem!!!"
+        }
+      ]
+    }
+  ]
 }

@@ -55,9 +55,8 @@ const initialProducts = []
         seller: "Marcelo peireira",
         location: "Tijuca",
       },
-    ]
-  ;
-*/
+    ];*/
+    
   function addProductReducer(products, product){
     let proxId = 1 + products.map(product => product.id).reduce((x, y) => Math.max(x,y));
     return products.concat([{...product, id: proxId}]);

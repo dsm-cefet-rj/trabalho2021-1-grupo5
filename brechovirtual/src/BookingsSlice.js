@@ -95,9 +95,7 @@ const initialBookings =[]
         },
       ],
     }
-  ];
-*/
-
+  ];*/
 
   function addBookingReducer(bookings, booking){
     let proxId = 1 + bookings.map(booking => booking.id).reduce((x, y) => Math.max(x,y));
