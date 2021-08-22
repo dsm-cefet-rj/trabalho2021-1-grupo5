@@ -41,8 +41,8 @@ export default function Booking(){
     function handleDelete(e){
         //bookings.splice(product.id,1)
         //setProduct([...bookings])
-        dispatchEvent(deleteBooking(product.id));
         e.preventDefault()
+        dispatch(deleteBooking(id));
         alert("Reserva excluida.")
         history.push("/bookingList")
     }
