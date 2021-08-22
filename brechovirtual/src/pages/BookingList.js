@@ -2,9 +2,10 @@ import React from 'react';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron'
 import BookingBar from '../components/bookingBar';
+import { useSelector } from 'react-redux';
 
-export default function BookingList(props) {
-    
+export default function BookingList() {
+    const bookings = useSelector(state=>state.bookings)
     return(
         <>
             <Navbar/>
@@ -12,7 +13,7 @@ export default function BookingList(props) {
             <div className="container">
                  <div className="col">
                      {
-                        props.bookings.map((booking)=>{
+                        bookings.map((booking)=>{
                             return(
                                 <>
                                     <BookingBar key={booking.id} booking ={booking}/>

@@ -4,7 +4,7 @@ import jeans2 from "./images/jeans2.jpeg";
 
 const initialBookings =[
     {
-      id:0,
+      id:1,
       name: "Calça Jeans",
       seller: "Marcelo peireira",
       price: "59.99",
@@ -34,7 +34,7 @@ const initialBookings =[
       ],
     },
     {
-      id: 1,
+      id: 2,
       name: " Jeans",
       seller: " peireira",
       price: "69.99",
@@ -64,7 +64,7 @@ const initialBookings =[
       ],
     },
     {
-      id:2,
+      id:3,
       name: "Calça Jeans",
       seller: "Marcelo Joao ",
       price: "100.99",

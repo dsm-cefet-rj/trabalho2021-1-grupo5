@@ -7,21 +7,20 @@ import casaco from '../images/casaco.jpg'
 import {useHistory, useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
 import { addProduct, updateProduct } from '../ProductsSlice';
-import Product from './Product';
 
-export default function ProductRegister(props){
+export default function ProductRegister(){
 
-    //const products = useSelector(state => state.products)
+    const products = useSelector(state => state.products)
     
-    const [newProduct, ] = useState({
+   /* const [newProduct, ] = useState({
        "images":[casaco], 
         "id" :props.products.length
-    });
+    });*/
 
     let { id } = useParams();
     id = parseInt(id);
 
-    const [products, setNewProduct] = useState(
+    const [newProduct, setNewProduct] = useState(
         id ? products.filter((product) => product.id === id)[0] ?? {} : {}
     );
 
@@ -46,7 +45,7 @@ export default function ProductRegister(props){
         if(actionType === 'productForm/addProduct'){
             dispatch(addProduct(newProduct));
         }else{
-            dispatch(updateProduct(newProduct.id));
+            dispatch(updateProduct(newProduct));
         }
         
         alert("Produto cadastrado com sucesso!") 
@@ -68,7 +67,7 @@ export default function ProductRegister(props){
                         <p>
                             <div class="row justify-content-md-center">
                                 <div class="col-md-6 custom-file">
-                                <input id="img-input" type="file" class="custom-file-input" id="customFile" name="images"  />
+                                <input id="img-input" type="file" class="custom-file-input" name="images"  />
                                 <label class="custom-file-label" for="customFile">Escolher arquivo</label>
                                 </div>
                             </div>

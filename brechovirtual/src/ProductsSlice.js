@@ -10,18 +10,18 @@ import vestido2 from "./images/vestido-rosa.jpg";
 
 const initialProducts = [
       {
-        id: 0,
+        id: 1,
         name: "Calça Jeans",
         images: [jeans, jeans2],
         description: "This is a pretty new black jean without any real damage",
         price: 56.99,
         status: "aberto",
-        category: "Calças",
+        category: "Calça",
         seller: "Marcelo peireira",
         location: "Tijuca",
       },
       {
-        id: 1,
+        id: 2,
         name: "Casaco",
         images: [casaco, casaco2],
         description: "This is a pretty new black jean without any real damage",
@@ -32,10 +32,10 @@ const initialProducts = [
         location: "Tijuca",
       },
       {
-        id: 2,
+        id: 3,
         name: "Tênis",
         images: [tenis, tenis2],
-        description: "This is a pretty new black jean without any real damage",
+        description: "This is a pretty new black Tenis without any real damage",
         price: 51.0,
         status: "reservado",
         category: "Tênis",
@@ -43,10 +43,10 @@ const initialProducts = [
         location: "Tijuca",
       },
       {
-        id: 3,
+        id: 4,
         name: "Vestido rosa",
         images: [vestido, vestido2],
-        description: "This is a pretty new black jean without any real damage",
+        description: "This is a pretty new pink dress from switzerland",
         price: 89.95,
         status: "aberto",
         category: "Vestido",

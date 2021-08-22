@@ -8,14 +8,17 @@ import Button from '../components/button';
 import jeans from '../images/jeans.jpeg';
 import jeans2 from '../images/jeans2.jpeg';
 import { useParams, useHistory } from 'react-router';
-import {deleteBooking} from '../BookingsSlice';
+import {deleteBooking, updateBooking} from '../BookingsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function Booking({ bookings, setBookings }){
-
-     const [message, setMessage] = useState("")
-     const history = useHistory()
-     let { id } = useParams()
-     id = parseInt(id)
+export default function Booking(){
+    const bookings = useSelector(state=>state.bookings)
+    const [message, setMessage] = useState("")
+    const history = useHistory()
+    let { id } = useParams()
+    id = parseInt(id)
+    const dispatch = useDispatch()
+    var booking = bookings.filter(booking=>booking.id === id)[0]
 
     function handleInputChange(e){
         setMessage(e.target.value)
@@ -33,12 +36,12 @@ export default function Booking({ bookings, setBookings }){
         return `${dia}/${mes}/${ano} ${hora} - `;
     }
 
-    const [product, setProduct] = useState(bookings[id]);
+    var product= booking
 
     function handleDelete(e){
         //bookings.splice(product.id,1)
         //setProduct([...bookings])
-        dispatchEvent(deleteBooking(id));
+        dispatchEvent(deleteBooking(product.id));
         e.preventDefault()
         alert("Reserva excluida.")
         history.push("/bookingList")
@@ -51,8 +54,8 @@ export default function Booking({ bookings, setBookings }){
             date: dataAtualFormatada(),
             message: message
         };
-        const newMessagesArray = product.messages.push(newMessage);
-        setBookings({ ...product, messages: newMessagesArray });
+        var newMessagesArray = product.messages.concat([{...newMessage}]);
+        dispatch(updateBooking({...product, messages:newMessagesArray}));
         setMessage("")
     }
 

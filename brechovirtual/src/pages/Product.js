@@ -1,14 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Carrousel from '../components/carrousel'
 import Jumbotron from '../components/jumbotron'
-import jeans from '../images/jeans.jpeg';
-import jeans2 from '../images/jeans2.jpeg';
 import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
-import { Redirect } from 'react-router';
 import {useSelector, useDispatch} from 'react-redux'
 import { deleteProduct } from '../ProductsSlice';
 import { addBooking } from '../BookingsSlice';
@@ -16,29 +12,30 @@ import { addBooking } from '../BookingsSlice';
 
 
 
-export default function Product(props){
+export default function Product(){
     const history = useHistory()
     let { id } = useParams()
     id = parseInt(id)
     //const product = props.products[id]
    
-     const product = useSelector(state => state.products)
+     const products = useSelector(state => state.products)
+     const product = products.filter(product=>product.id === id)[0]
      const bookings = useSelector(state => state.bookings)
      const dispatch = useDispatch();
 
     function handleReserve(e){
-      /*  const booking =  {
-          "id":props.bookings.length,
+        const booking =  {
+          "id":bookings.length,
           "name" : product.name,
           "seller" : product.seller,
           "price" : product.price,
           "date": Date(),
           "location": product.location,
           "status": "em andamento",
-          "image":product.images[0],
+          "image":product.images,
           "messages":[],
-      }*/
-      dispatch(addBooking(bookings));
+      }
+      dispatch(addBooking(booking));
       e.preventDefault()
       alert("Produto adicionado à lista de reserva.")
       history.push("/bookingList")
