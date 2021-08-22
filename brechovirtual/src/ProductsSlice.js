@@ -73,7 +73,7 @@ const initialProducts = []
     return products;
   }
 
-  export const fetchProducts = createAsyncThunk('products/fetchProducts',
+  export const fetchProducts = createAsyncThunk('database/fetchProducts',
     async () => {
         return await (await fetch ('http://localhost:3004/products')).json();
     }
@@ -84,7 +84,7 @@ const initialProducts = []
   }
 
   export const productsSlice = createSlice({
-        name: 'products',
+        name: "products",
         initialState: initialProducts,
         reducers: {
            addProduct: (state, action) => addProductReducer(state, action.payload),
@@ -92,7 +92,7 @@ const initialProducts = []
            deleteProduct: (state, action) => deleteProductReducer(state, action.payload)
         },
         extraReducers: {
-             [fetchProducts.fulfilled]: (state, action) => fullfillProductsReducer(state = action.payload),
+             [fetchProducts.fulfilled]: (state, action) => fullfillProductsReducer(state, action.payload),
         }
     })
 

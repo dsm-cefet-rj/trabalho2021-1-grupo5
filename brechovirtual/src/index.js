@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import {store} from './store'
 import { fetchProducts } from './ProductsSlice';
-import { fetchBookins } from './BookingsSlice';
+import { fetchBookings } from './BookingsSlice';
 
 store.dispatch(fetchProducts());
-store.dispatch(fetchBookins());
+store.dispatch(fetchBookings());
 
 ReactDOM.render(
   <Provider store={store}>

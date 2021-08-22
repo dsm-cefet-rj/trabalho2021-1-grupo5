@@ -114,9 +114,9 @@ const initialBookings =[]
     return bookings;
   }
 
-  export const fetchBookins = createAsyncThunk('products/fetchBookings',
+  export const fetchBookings = createAsyncThunk('database/fetchBookings',
     async () => {
-        return await (await fetch ('http://localhost:3004/bookins')).json();
+        return await (await fetch ('http://localhost:3004/bookings')).json();
     }
   );
 
@@ -125,7 +125,7 @@ const initialBookings =[]
 }
 
   export const bookingsSlice = createSlice({
-        name: 'bookings',
+        name: "bookings",
         initialState: initialBookings,
         reducers: {
            addBooking: (state, action) => addBookingReducer(state, action.payload),
@@ -133,7 +133,7 @@ const initialBookings =[]
            deleteBooking: (state, action) => deleteBookingReducer(state, action.payload)
         },
         extraReducers: {
-         [fetchBookings.fulfilled]: (state, action) => fullfillBookingsReducer(state = action.payload),
+         [fetchBookings.fulfilled]: (state, action) => fullfillBookingsReducer(state, action.payload),
     }
     })
 
