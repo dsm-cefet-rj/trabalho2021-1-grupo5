@@ -45,11 +45,13 @@ export default function ProductRegister(props){
         if(actionType === 'productForm/addProduct'){
             newProduct.images=[casaco];
             dispatch(addProduct(newProduct));
+            alert("Produto cadastrado com sucesso!") 
         }else{
             dispatch(updateProduct(newProduct));
+            alert("Produto atualizado com sucesso!") 
         }
         
-        alert("Produto cadastrado com sucesso!") 
+        
         history.push("/");
     }
 
