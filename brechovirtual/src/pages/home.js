@@ -1,12 +1,18 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/card";
 import Navbar from "../components/navbar";
 import logo from "../images/logo2.png";
+import { fetchProducts, selectAllProducts } from "../ProductsSlice";
 
 export default function Home(props) {
-  const products =useSelector(state=>state.products)
-  const renderProdcuct = (product) => {
+  //const products = useSelector(state=>state.products)
+  const products = useSelector(selectAllProducts)
+  const status = useSelector(state => state.products.status)
+  const error = useSelector(state => state.products.error)
+  const dispatch = useDispatch();
+
+  const renderProduct = (product) => {
     return (
       <React.Fragment>
         {product.status !== "reservado" && (
@@ -15,6 +21,26 @@ export default function Home(props) {
       </React.Fragment>
     );
   };
+
+  useEffect(() => {
+    if(status === 'not loaded'){
+      dispatch(fetchProducts())
+    }else if(status === 'not loaded'){
+      setTimeout(() => dispatch(fetchProducts()), 5000)
+    }
+  }, [status, dispatch])
+
+  let productList = '';
+  if(status === 'loaded' || status === 'saved' || status === 'deleted'){
+    productList = products.map(renderProduct);
+  }else if (status === 'loading'){
+    productList = <div>Carregando lista de produtos...</div>;
+  }else if (status === 'failed'){
+    productList = <div>Error: {error}</div>;
+  }
+
+  
+
   return (
     <>
       <Navbar />
@@ -37,7 +63,7 @@ export default function Home(props) {
         </div>
       </div>
       <div class="container">
-        <div className="row">{products.map(renderProdcuct)}</div>
+        <div className="row">{productList}</div>
       </div>
     </>
   );

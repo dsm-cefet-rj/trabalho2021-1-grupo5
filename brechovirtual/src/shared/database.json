@@ -15,25 +15,11 @@
       "location": "Tijuca"
     },
     {
-      "id": 2,
-      "name": "Casaco",
-      "images": [
-        "https://astryd.com.br/wp-content/uploads/2020/09/casaco-viculo-basic-de-moletom-preto-frente.jpg",
-        "https://i.shafacdn.net/images/134819-65-auto-auto-vFmZPycc1hU.jpg"
-      ],
-      "description": "This is a pretty new black jean without any real damage",
-      "price": 99.63,
-      "status": "aberto",
-      "category": "Casaco",
-      "seller": "Marcelo peireira",
-      "location": "Tijuca"
-    },
-    {
       "id": 3,
       "name": "Tênis",
       "images": [],
       "description": "This is a pretty new black Tenis without any real damage",
-      "price": 51.0,
+      "price": 51,
       "status": "reservado",
       "category": "Tênis",
       "seller": "Marcelo peireira",
@@ -52,6 +38,16 @@
       "category": "Vestido",
       "seller": "Marcelo peireira",
       "location": "Tijuca"
+    },
+    {
+      "name": "faasdasda",
+      "price": "333",
+      "category": "Óculos",
+      "description": "dasdada",
+      "images": [
+        "/static/media/casaco.34608ee8.jpg"
+      ],
+      "id": 5
     }
   ],
   "bookings": [

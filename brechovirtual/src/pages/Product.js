@@ -6,7 +6,7 @@ import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
-import { deleteProduct } from '../ProductsSlice';
+import { deleteProductsServer, selectAllProducts } from '../ProductsSlice';
 import { addBooking } from '../BookingsSlice';
 
 
@@ -16,12 +16,26 @@ export default function Product(){
     const history = useHistory()
     let { id } = useParams()
     id = parseInt(id)
-    //const product = props.products[id]
-   
-     const products = useSelector(state => state.products)
+
+     const products = useSelector(selectAllProducts)
+     const status = useSelector(state => state.products.status);
+     const error = useSelector(state => state.products.error);
+
      const product = products.filter(product=>product.id === id)[0]
      const bookings = useSelector(state => state.bookings)
      const dispatch = useDispatch();
+
+     function dataAtualFormatada(){
+        function pad(s) {
+            return (s < 10) ? '0' + s : s;
+        }
+        let data = new Date(),
+            dia  = data.getDate().toString().padStart(2, '0'),
+            mes  = (data.getMonth()+1).toString().padStart(2, '0'),
+            ano  = data.getFullYear(),
+            hora = [data.getHours(), data.getMinutes()].map(pad).join(':');
+        return `${dia}/${mes}/${ano} ${hora} - `;
+    }
 
     function handleReserve(e){
         const booking =  {
@@ -29,7 +43,7 @@ export default function Product(){
           "name" : product.name,
           "seller" : product.seller,
           "price" : product.price,
-          "date": Date(),
+          "date": dataAtualFormatada(),
           "location": product.location,
           "status": "em andamento",
           "image":product.images,
@@ -43,7 +57,7 @@ export default function Product(){
 
     function handleDelete(e){
         e.preventDefault()
-        dispatch(deleteProduct(id));
+        dispatch(deleteProductsServer(id));
         alert("Produto excluido!")
         history.push("/")
     }

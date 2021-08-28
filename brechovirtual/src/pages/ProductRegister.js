@@ -6,27 +6,23 @@ import Button from '../components/button';
 import casaco from '../images/casaco.jpg'
 import {useHistory, useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
-import { addProduct, updateProduct } from '../ProductsSlice';
+import { addProductsServer, updateProductsServer, selectProductsById } from '../ProductsSlice';
 
 export default function ProductRegister(props){
 
-    const products = useSelector(state => state.products)
     
-   /* const [newProduct, ] = useState({
-       "images":[casaco], 
-        "id" :props.products.length
-    });*/
-
     let { id } = useParams();
     id = parseInt(id);
 
+    const productFound = useSelector(state => selectProductsById(state,id))
+
     const [newProduct, setNewProduct] = useState(
-        id ? products.filter((product) => product.id === id)[0] ?? {} : {}
+        id ? productFound ?? {} : {}
     );
 
     const [actionType, ] = useState(
         id ?
-            products.filter((product) => product.id === id)[0]
+            productFound
             ? 'productForm/updateProduct'
             : 'productForm/addProduct'
             : 'productForm/addProduct' 
@@ -44,10 +40,10 @@ export default function ProductRegister(props){
         e.preventDefault();
         if(actionType === 'productForm/addProduct'){
             newProduct.images=[casaco];
-            dispatch(addProduct(newProduct));
+            dispatch(addProductsServer(newProduct));
             alert("Produto cadastrado com sucesso!") 
         }else{
-            dispatch(updateProduct(newProduct));
+            dispatch(updateProductsServer(newProduct));
             alert("Produto atualizado com sucesso!") 
         }
         
