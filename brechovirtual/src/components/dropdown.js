@@ -1,13 +1,6 @@
 import {React} from 'react';
-import {Link, Route, useRouteMatch} from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Switch} from 'react-router-dom'
-import Home from '../pages/home'
-import Product from '../pages/Product';
-import ProductRegister from '../pages/ProductRegister';
-import WishList from '../pages/WishList';
-import Booking from '../pages/Booking';
-import BookingList from '../pages/BookingList';
+import {Link, useRouteMatch} from 'react-router-dom';
+
 
 export default function Dropdown(props){
     let { path, url } = useRouteMatch();

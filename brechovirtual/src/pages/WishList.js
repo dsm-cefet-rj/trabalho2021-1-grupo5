@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron';
 import Button from '../components/button';
@@ -53,6 +52,5 @@ const WishList = () => {
       </React.Fragment>
   );
 };
-//#TODO #1 : check out the href atttibutes
-//#TODO #2 review all the key attributes
+
 export default WishList;

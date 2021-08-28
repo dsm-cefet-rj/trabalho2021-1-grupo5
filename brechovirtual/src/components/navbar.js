@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import logo from '../images/logo2.png'
 import Dropdown from './dropdown';
 import Avatar from '../images/avatar.png'

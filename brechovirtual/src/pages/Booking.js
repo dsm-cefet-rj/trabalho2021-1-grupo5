@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar';
 import Jumbotron from '../components/jumbotron';
 import Carrousel from '../components/carrousel';
 import Chat from '../components/chat';
 import Button from '../components/button';
-import jeans from '../images/jeans.jpeg';
-import jeans2 from '../images/jeans2.jpeg';
 import { useParams, useHistory } from 'react-router';
 import {deleteBooking, updateBooking} from '../BookingsSlice';
 import { useDispatch, useSelector } from 'react-redux';

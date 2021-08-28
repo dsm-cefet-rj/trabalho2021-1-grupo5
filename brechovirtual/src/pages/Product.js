@@ -18,8 +18,7 @@ export default function Product(){
     id = parseInt(id)
 
      const products = useSelector(selectAllProducts)
-     const status = useSelector(state => state.products.status);
-     const error = useSelector(state => state.products.error);
+     
 
      const product = products.filter(product=>product.id === id)[0]
      const bookings = useSelector(state => state.bookings)

@@ -1,5 +1,4 @@
 import {React, useState} from 'react';
-import ReactDOM from 'react-dom';
 import Navbar from '../components/navbar'
 import Jumbotron from '../components/jumbotron';
 import Button from '../components/button';
