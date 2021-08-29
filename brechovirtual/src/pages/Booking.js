@@ -36,6 +36,17 @@ export default function Booking(){
         return `${dia}/${mes}/${ano} ${hora} - `;
     }
 
+    let buttonConclude = ''
+    let buttonCancel = ''
+    let buttonAnswer = ''
+    let inputTextArea = ''
+    if(booking.status !== 'fechado'){
+        buttonConclude = <Button color="LightGreen" title={"Concluir Reserva"} onClick={handleConclude} />
+        buttonCancel = <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} />
+        buttonAnswer = <Button color="purple" onClick={handleClick} title={"Responder"}/>
+        inputTextArea = <textarea className="form-control" id="exampleFormControlTextarea1" onChange={handleInputChange} value={message} rows="3"></textarea>
+    }
+
     function handleDelete(e){
         //bookings.splice(product.id,1)
         //setProduct([...bookings])
@@ -50,7 +61,7 @@ export default function Booking(){
         dispatch(updateBookingServer({...booking,status:'fechado'}))
         alert("Reserva concluida. ")
         history.push("/bookingList")
-        
+        //desabilitar botões disabled
     }
 
     function handleClick() {
@@ -111,8 +122,8 @@ export default function Booking(){
                     </div>
                      <div className="form-row">
                          <div className="col-md-7  mb-3">
-                            <Button color="LightGreen" title={"Concluir Reserva"} onClick={handleConclude}/> 
-                            <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete}/>
+                            {buttonConclude} 
+                            {buttonCancel}
                         </div>
                       </div>
                 </div>
@@ -133,13 +144,13 @@ export default function Booking(){
                                     messages={booking.messages}
                                 />  
                              <div>
-                                <textarea className="form-control" id="exampleFormControlTextarea1" onChange={handleInputChange} value={message} rows="3"></textarea>
+                                {inputTextArea}
                             </div>
                             </div>
                         </div>
                         &nbsp;
                         <div className="row justify-content-center">  
-                            <Button color="purple" onClick={handleClick} title={"Responder"}/> 
+                            {buttonAnswer} 
                         </div>
 
         </>

@@ -33,10 +33,13 @@ export default function Home(props) {
   let productList = '';
   if(status === 'loaded' || status === 'saved' || status==='deleted'){
     productList = products.map(renderProduct);
+    if(productList === '' ||  (products.filter((product) => product.status === 'reservado')).length === products.length){
+      productList = <p className="h6 text-center">Sem produtos na lista.</p>;
+    }
   }else if (status === 'loading'){
-    productList = <div>Carregando lista de produtos...</div>;
+    productList = <p className="h6 text-center">Carregando lista de produtos...</p>;
   }else if (status === 'failed'){
-    productList = <div>Error: {error}</div>;
+    productList = <p className="h6 text-center">Error: {error}</p>;
   }
 
   

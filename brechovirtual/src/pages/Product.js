@@ -105,7 +105,9 @@ export default function Product(){
                     <div class="col-sm">
                     <div class="form-group">
                         <label><b>Descrição do anúncio</b></label>
-                        <p>{product.description}</p>
+                        <p style={{"word-wrap": "break-word"}}>
+                            {product.description}
+                        </p>
                     </div>
                     </div>
                 </div>
@@ -113,7 +115,7 @@ export default function Product(){
                 <div class="row">
                     <div class="col">
                             <Link to={"/wishList"}> 
-                                <img src={heart} width="30" height="30" class="d-inline-block " alt="" title='Lista de Desejos'/>
+                                <img src={heart} width="25" height="25" class="d-inline-block " alt="" title='Lista de Desejos'/>
                             </Link>
                     </div>
                     <div class="col">

@@ -10,13 +10,13 @@ export default function Carrousel(props){
                     if(index === 0){
                       return (
                             <div className="carousel-item active">
-                                <img className="d-block w-100" src={image} width="200" height="200" alt="Primeiro Slide"/>
+                                <img className="d-block w-100" src={image} width="350" height="350" alt="Primeiro Slide"/>
                             </div>)
                   }
                   else{
                     return (
                       <div className="carousel-item">
-                          <img className="d-block w-100" src={image} width="200" height="200" alt="Primeiro Slide"/>
+                          <img className="d-block w-100" src={image} width="350" height="350" alt="Primeiro Slide"/>
                       </div>)
                   }
                 })}
