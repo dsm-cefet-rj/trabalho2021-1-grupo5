@@ -6,8 +6,8 @@ import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
-import { deleteProductsServer, selectAllProducts } from '../ProductsSlice';
-import { addBooking } from '../BookingsSlice';
+import {  deleteProductsServer, selectProductsById, updateProductsServer } from '../ProductsSlice';
+import {addBookingServer, selectALLBookings } from '../BookingsSlice';
 
 
 
@@ -16,12 +16,9 @@ export default function Product(){
     const history = useHistory()
     let { id } = useParams()
     id = parseInt(id)
-
-     const products = useSelector(selectAllProducts)
      
-
-     const product = products.filter(product=>product.id === id)[0]
-     const bookings = useSelector(state => state.bookings)
+     const product = useSelector(state=>selectProductsById(state,id))
+     const bookings = useSelector(selectALLBookings)
      const dispatch = useDispatch();
 
      function dataAtualFormatada(){
@@ -38,7 +35,7 @@ export default function Product(){
 
     function handleReserve(e){
         const booking =  {
-          "id":bookings.length,
+          "id":bookings.length +1,
           "name" : product.name,
           "seller" : product.seller,
           "price" : product.price,
@@ -48,7 +45,8 @@ export default function Product(){
           "image":product.images,
           "messages":[],
       }
-      dispatch(addBooking(booking));
+      dispatch(addBookingServer(booking));
+      dispatch(updateProductsServer({...product,status:'reservado'}))
       e.preventDefault()
       alert("Produto adicionado à lista de reserva.")
       history.push("/bookingList")

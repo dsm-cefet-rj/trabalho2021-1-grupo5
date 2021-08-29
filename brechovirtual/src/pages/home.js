@@ -24,14 +24,14 @@ export default function Home(props) {
 
   useEffect(() => {
     if(status === 'not loaded'){
-      dispatch(fetchProducts())
-    }else if(status === 'not loaded'){
+      dispatch(fetchProducts());
+    }/*else if(status === 'not loaded'){
       setTimeout(() => dispatch(fetchProducts()), 5000)
-    }
+    }*/
   }, [status, dispatch])
 
   let productList = '';
-  if(status === 'loaded' || status === 'saved' || status === 'deleted'){
+  if(status === 'loaded' || status === 'saved' || status==='deleted'){
     productList = products.map(renderProduct);
   }else if (status === 'loading'){
     productList = <div>Carregando lista de produtos...</div>;

@@ -23,7 +23,7 @@ export const addProductsServer = createAsyncThunk('database/addProductsServer', 
    return await httpPost(`${baseUrl}/products`, product);
 })
 
-export const updateProductsServer = createAsyncThunk('database/deleteProductsServer', async (product) => {
+export const updateProductsServer = createAsyncThunk('database/updateProductsServer', async (product) => {
   return await httpPut(`${baseUrl}/products/${product.id}`, product);
 })
 
@@ -39,9 +39,9 @@ export const updateProductsServer = createAsyncThunk('database/deleteProductsSer
              [deleteProductsServer.pending]: (state, action) => {state.status = "loading"},
              [addProductsServer.pending]: (state, action) => {state.status = "loading"},
              [updateProductsServer.pending]: (state, action) => {state.status = "loading"},
-             [deleteProductsServer.fulfilled]: (state, action) => {state.status = "deleted"; productsAdapter.removeOne(state, action.payload);},
+             [deleteProductsServer.fulfilled]: (state,{payload:id}) => {state.status = "deleted"; productsAdapter.removeOne(state, id);},
              [addProductsServer.fulfilled]: (state, action) => {state.status = "saved"; productsAdapter.addOne(state, action.payload);},
-             [updateProductsServer.fulfilled]: (state, action) => {state.status = "saved"; productsAdapter.upsertOne(state, action.payload);},
+            [updateProductsServer.fulfilled]: (state, action) => {state.status = "saved"; productsAdapter.upsertOne(state, action.payload);},
         }
     })
 
