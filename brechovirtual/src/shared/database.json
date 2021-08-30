@@ -4,10 +4,10 @@
       "id": 1,
       "name": "Calça Jeans",
       "images": [
-        "https://damyller.vteximg.com.br/arquivos/ids/589479-980-1470/Calca-Jeans-Slouchy-Cropped-Cintura-Alta-Detalhe-Still--.jpg?v=637430211171230000",
-        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+        "https://www.havan.com.br/media/catalog/product/cache/73a52df140c4d19dbec2b6c485ea6a50/c/a/calca-jeans-feminina-com-used-contatho_323244_1.jpg",
+        "https://www.havan.com.br/media/catalog/product/cache/73a52df140c4d19dbec2b6c485ea6a50/c/a/calca-jeans-feminina-com-used-contatho_323245_1.jpg"
       ],
-      "description": "This is a pretty new black jean without any real damage",
+      "description": "É uma calça jeans feminina seminova para eventos casuais.",
       "price": 56.99,
       "status": "aberto",
       "category": "Calça",
@@ -30,7 +30,7 @@
       "name": "Vestido rosa",
       "images": [
         "https://assets2.repassa.com.br/fit-in/480x0/filters:sharpen(0.5,0.5,true)/spree/products/418422/original/IMG_2300.JPG",
-        "https://photos.enjoei.com.br/lindo-vestido-rosa-seco/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNjY1OTAvMzgzODJlMjdjNTZkODJlNDQ4ZWZkYzc1Njc3MDljZTQuanBn"
+        "https://assets2.repassa.com.br/fit-in/1024x0/spree/products/418423/original/IMG_2301.JPG"
       ],
       "description": "This is a pretty new pink dress from switzerland",
       "price": 89.95,
@@ -80,6 +80,12 @@
           "userType": "Vendedor",
           "userName": "Marcelo",
           "message": "Tudo bem!!!"
+        },
+        {
+          "userType": "Vendedor",
+          "userName": "Marcelo",
+          "date": "30/08/2021 00:09 - ",
+          "message": ""
         }
       ]
     },
