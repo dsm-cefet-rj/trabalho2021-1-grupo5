@@ -115,14 +115,14 @@ export default function ProductRegister(props) {
                     required
                   />
                   <div class="valid-tooltip">Tudo certo!</div>
-                  {isTitleEmpty && <div color="danger">{error}</div>}
+                  {isTitleEmpty && <div style={{ color: "red" }}>{error}</div>}
                   {nameMin && (
-                    <span className="formField__error">
+                    <span style={{ color: "red" }}>
                       Título muito curto, escreva mais
                     </span>
                   )}
                   {nameMax && (
-                    <span className="formField__error">
+                    <span style={{ color: "red" }}>
                       Título muito longo, máximo de 60 caracteres
                     </span>
                   )}
@@ -155,10 +155,11 @@ export default function ProductRegister(props) {
                       required
                     />
                     <div class="invalid-tooltip">BRL</div>
-                    {isPriceEmpty && (
-                      <span className="formField__error">{error}</span>
-                    )}
+                    <div class="valid-tooltip">Tudo certo!</div>
                   </div>
+                  {isPriceEmpty && (
+                    <span style={{ color: "red" }}>{error}</span>
+                  )}
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -187,7 +188,7 @@ export default function ProductRegister(props) {
                       <option>Outros</option>
                     </select>
                     {isCategoryEmpty && (
-                      <span className="formField__error">{error}</span>
+                      <span style={{ color: "red" }}>{error}</span>
                     )}
                   </div>
                 </div>
@@ -209,15 +210,15 @@ export default function ProductRegister(props) {
                       onChange={(evt) => handleInputChange(evt)}
                     ></textarea>
                     {isDescriptionEmpty && (
-                      <span className="formField__error">{error}</span>
+                      <span style={{ color: "red" }}>{error}</span>
                     )}
                     {descriptionMin && (
-                      <span className="formField__error">
+                      <span style={{ color: "red" }}>
                         Descrição muito curta, escreva mais
                       </span>
                     )}
                     {descriptionMax && (
-                      <span className="formField__error">
+                      <span style={{ color: "red" }}>
                         Descrição muito longa, máximo de 150 caracteres
                       </span>
                     )}
@@ -260,7 +261,7 @@ export default function ProductRegister(props) {
                 setIsDescriptionEmpty(true);
               } else {
                 setIsDescriptionEmpty(false);
-                if (newProduct.description.length < 30) {
+                if (newProduct.description.length < 20) {
                   setDescriptionMin(true);
                 } else {
                   setDescriptionMin(false);
@@ -279,8 +280,10 @@ export default function ProductRegister(props) {
               if (
                 newProduct.price &&
                 newProduct.category &&
-                newProduct.name &&
-                newProduct.description
+                newProduct.name.length >= 5 &&
+                newProduct.name.length <= 60 &&
+                newProduct.description.length >= 20 &&
+                newProduct.description.length <= 150
               ) {
                 createProduct(e);
               }

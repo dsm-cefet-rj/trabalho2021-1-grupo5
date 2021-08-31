@@ -40,14 +40,15 @@
       "location": "Tijuca"
     },
     {
-      "name": "faasdasda",
-      "price": "333",
-      "category": "Óculos",
-      "description": "dasdada",
+      "id": 5,
+      "name": "Casaco preto",
+      "price": "133.45",
+      "category": "Casaco",
+      "description": "This is a pretty new black jacket without any real damage",
       "images": [
-        "/static/media/casaco.34608ee8.jpg"
-      ],
-      "id": 5
+        "/static/media/casaco.34608ee8.jpg",
+        "https://astryd.com.br/wp-content/uploads/2020/09/casaco-viculo-basic-de-moletom-preto-costas.jpg"
+      ]
     }
   ],
   "bookings": [
@@ -80,12 +81,6 @@
           "userType": "Vendedor",
           "userName": "Marcelo",
           "message": "Tudo bem!!!"
-        },
-        {
-          "userType": "Vendedor",
-          "userName": "Marcelo",
-          "date": "30/08/2021 00:09 - ",
-          "message": ""
         }
       ]
     },
