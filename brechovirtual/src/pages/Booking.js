@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Jumbotron from "../components/jumbotron";
 import Carrousel from "../components/carrousel";
@@ -7,6 +7,7 @@ import Button from "../components/button";
 import { useParams, useHistory } from "react-router";
 import {
   deleteBookingServer,
+  fetchBookings,
   selectBookingById,
   updateBookingServer,
 } from "../BookingsSlice";
@@ -23,10 +24,19 @@ export default function Booking() {
   let { id } = useParams();
   id = parseInt(id);
   const dispatch = useDispatch();
-  var booking = useSelector((state) => selectBookingById(state, id)); // bookings.filter(booking=>booking.id === id)[0]
+  var booking = useSelector((state) => selectBookingById(state, id));
+  const status = useSelector((state)=>state.bookings.status)
+  const error = useSelector((state)=>state.bookings.error)
+  const status2 = useSelector((state)=>state.products.status)
+  const error2 = useSelector((state)=>state.products.error)
   var products = useSelector(selectAllProducts);
+  if (status === 'loading'|| status2 === 'loading'){
+    return (<p className="h6 text-center">Carregando a reserva...</p>)
+  }else if (status === 'failed' || status2 === 'failed'){
+    return(<p className="h6 text-center">Error: {error} Error2 : {error2}</p>)
+  }
   var product = products.filter((product) => product.name === booking.name)[0];
-
+ 
   function handleInputChange(e) {
     setMessage(e.target.value);
   }
@@ -41,6 +51,10 @@ export default function Booking() {
       ano = data.getFullYear(),
       hora = [data.getHours(), data.getMinutes()].map(pad).join(":");
     return `${dia}/${mes}/${ano} ${hora} - `;
+  }
+  let carregando = '';
+  if(status === 'loading2'){
+    carregando = <p>enviando a mensagem...</p>
   }
 
   let buttonConclude = "";
@@ -166,7 +180,7 @@ export default function Booking() {
                 <label>
                   <b>Preço: </b>
                 </label>
-                <label>R${booking.price}</label>
+                <label> R${product.price}</label>
               </div>
             </div>
             <div className="form-row">
@@ -174,7 +188,7 @@ export default function Booking() {
                 <label>
                   <b>Categoria: </b>
                 </label>
-                <label>{booking.category}</label>
+                <label>{product.category}</label>
               </div>
             </div>
             <div className="form-row">
@@ -182,7 +196,7 @@ export default function Booking() {
                 <label>
                   <b>Descrição: </b>
                 </label>
-                <label>{booking.description}</label>
+                <label>{product.description}</label>
               </div>
             </div>
             <div className="form-row">
@@ -215,7 +229,7 @@ export default function Booking() {
       <div className="container">
         <div className="col">
           <Chat messages={booking.messages} />
-          <div>{inputTextArea}</div>
+          <div>{carregando}{inputTextArea}</div>
           {msgMin && (
             <span style={{ color: "red" }}>
               Mensagem muito curta, escreva mais

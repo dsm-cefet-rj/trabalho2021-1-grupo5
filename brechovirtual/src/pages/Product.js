@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/navbar'
 import Carrousel from '../components/carrousel'
 import Jumbotron from '../components/jumbotron'
@@ -6,7 +6,7 @@ import heart from '../images/heart.png';
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
-import {  deleteProductsServer, selectProductsById, updateProductsServer } from '../ProductsSlice';
+import {  deleteProductsServer, fetchProducts, selectProductsById, updateProductsServer } from '../ProductsSlice';
 import {addBookingServer, selectALLBookings } from '../BookingsSlice';
 
 
@@ -17,9 +17,20 @@ export default function Product(){
     let { id } = useParams()
     id = parseInt(id)
      
-     const product = useSelector(state=>selectProductsById(state,id))
+    const product = useSelector(state=>selectProductsById(state,id))
+     const status = useSelector(state=>state.products.status)
+     const error = useSelector(state=>state.products.error)
      const bookings = useSelector(selectALLBookings)
      const dispatch = useDispatch();
+   if (status === 'loading'){
+    return (<p className="h6 text-center">Carregando o produto...</p>)
+  }else if (status === 'failed'){
+    return(<p className="h6 text-center">Error: {error}</p>)
+  }
+
+
+
+
 
      function dataAtualFormatada(){
         function pad(s) {
@@ -32,6 +43,8 @@ export default function Product(){
             hora = [data.getHours(), data.getMinutes()].map(pad).join(':');
         return `${dia}/${mes}/${ano} ${hora} - `;
     }
+
+
 
     function handleReserve(e){
         const booking =  {
