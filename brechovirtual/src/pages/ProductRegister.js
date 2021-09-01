@@ -10,6 +10,9 @@ import {
   updateProductsServer,
   selectProductsById,
 } from "../ProductsSlice";
+import { productSchema } from "./ProductSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 export default function ProductRegister(props) {
   const error = "Este campo é obrigatório!";
@@ -17,17 +20,16 @@ export default function ProductRegister(props) {
   id = parseInt(id);
 
   const productFound = useSelector((state) => selectProductsById(state, id));
-
-  const [newProduct, setNewProduct] = useState(id ? productFound ?? {} : {});
-  const [descriptionMin, setDescriptionMin] = useState(false);
-  const [descriptionMax, setDescriptionMax] = useState(false);
-  const [nameMin, setNameMin] = useState(false);
-  const [nameMax, setNameMax] = useState(false);
-  const [isTitleEmpty, setIsTitleEmpty] = useState(false);
-  const [isPriceEmpty, setIsPriceEmpty] = useState(false);
-  const [isCategoryEmpty, setIsCategoryEmpty] = useState(false);
-  const [isDescriptionEmpty, setIsDescriptionEmpty] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(productSchema),
+  });
+  const [productOnLoad] = useState(
+    id ? productFound ?? productSchema.cast({}) : productSchema.cast({})
+  );
   const [actionType] = useState(
     id
       ? productFound
@@ -40,19 +42,14 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function handleInputChange(e) {
-    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
-  }
-
-  function createProduct(e) {
-    e.preventDefault();
-    // validateValues(newProduct);
+  function onSubmit(newProduct) {
+    console.log(newProduct);
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
       dispatch(addProductsServer(newProduct));
       alert("Produto cadastrado com sucesso!");
     } else {
-      dispatch(updateProductsServer(newProduct));
+      dispatch(updateProductsServer({ ...newProduct, id: productFound.id }));
       alert("Produto atualizado com sucesso!");
     }
     history.push("/");
@@ -98,7 +95,7 @@ export default function ProductRegister(props) {
           </div>
 
           <div class="col-sm-6">
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" onSubmit={handleSubmit(onSubmit)}>
               <div class="row">
                 <div class="col-sm">
                   <label for="validationTooltip01">
@@ -110,22 +107,11 @@ export default function ProductRegister(props) {
                     id="validationTooltip01"
                     placeholder="Título do anúncio"
                     name="name"
-                    value={newProduct.name}
-                    onChange={(evt) => handleInputChange(evt)}
-                    required
+                    defaultValue={productOnLoad.name}
+                    {...register("name")}
                   />
+                  <p style={{ color: "red" }}>{errors.name?.message}</p>
                   <div class="valid-tooltip">Tudo certo!</div>
-                  {isTitleEmpty && <div style={{ color: "red" }}>{error}</div>}
-                  {nameMin && (
-                    <span style={{ color: "red" }}>
-                      Título muito curto, escreva mais
-                    </span>
-                  )}
-                  {nameMax && (
-                    <span style={{ color: "red" }}>
-                      Título muito longo, máximo de 60 caracteres
-                    </span>
-                  )}
                 </div>
               </div>
 
@@ -150,16 +136,13 @@ export default function ProductRegister(props) {
                       class="form-control"
                       id="validationTooltipUsername"
                       name="price"
-                      value={newProduct.price}
-                      onChange={(evt) => handleInputChange(evt)}
-                      required
+                      defaultValue={productOnLoad.price}
+                      {...register("price")}
                     />
+                    <p style={{ color: "red" }}>{errors.price?.message}</p>
                     <div class="invalid-tooltip">BRL</div>
                     <div class="valid-tooltip">Tudo certo!</div>
                   </div>
-                  {isPriceEmpty && (
-                    <span style={{ color: "red" }}>{error}</span>
-                  )}
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -170,8 +153,8 @@ export default function ProductRegister(props) {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       name="category"
-                      value={newProduct.category}
-                      onChange={(evt) => handleInputChange(evt)}
+                      defaultValue={productOnLoad.category}
+                      {...register("category")}
                     >
                       <option>Escolher...</option>
                       <option>Camisa</option>
@@ -187,9 +170,6 @@ export default function ProductRegister(props) {
                       <option>Saia</option>
                       <option>Outros</option>
                     </select>
-                    {isCategoryEmpty && (
-                      <span style={{ color: "red" }}>{error}</span>
-                    )}
                   </div>
                 </div>
               </div>
@@ -206,24 +186,16 @@ export default function ProductRegister(props) {
                       id="exampleFormControlTextarea1"
                       rows="3"
                       name="description"
-                      value={newProduct.description}
-                      onChange={(evt) => handleInputChange(evt)}
+                      defaultValue={productOnLoad.description}
+                      {...register("description")}
                     ></textarea>
-                    {isDescriptionEmpty && (
-                      <span style={{ color: "red" }}>{error}</span>
-                    )}
-                    {descriptionMin && (
-                      <span style={{ color: "red" }}>
-                        Descrição muito curta, escreva mais
-                      </span>
-                    )}
-                    {descriptionMax && (
-                      <span style={{ color: "red" }}>
-                        Descrição muito longa, máximo de 150 caracteres
-                      </span>
-                    )}
+                    <p style={{ color: "red" }}>{errors.description?.message}</p>
                   </div>
                 </div>
+              </div>
+              <br />
+              <div class="d-flex justify-content-end">
+                <Button color={"purple"} title={"Publicar"} type="submit" />
               </div>
             </form>
           </div>
@@ -231,65 +203,6 @@ export default function ProductRegister(props) {
       </div>
       &nbsp;
       <div class="row">
-        <div class="col-4 d-flex justify-content-end">
-          <Button
-            color={"purple"}
-            title={"Publicar"}
-            onClick={(e) => {
-              /* Validações */
-              if (!newProduct.name) {
-                setIsTitleEmpty(true);
-              } else {
-                setIsTitleEmpty(false);
-                if (newProduct.name.length < 5) {
-                  setNameMin(true);
-                } else {
-                  setNameMin(false);
-                  if (newProduct.name.length > 60) {
-                    setNameMax(true);
-                  } else {
-                    setNameMax(false);
-                  }
-                }
-              }
-              if (!newProduct.price) {
-                setIsPriceEmpty(true);
-              } else {
-                setIsPriceEmpty(false);
-              }
-              if (!newProduct.description) {
-                setIsDescriptionEmpty(true);
-              } else {
-                setIsDescriptionEmpty(false);
-                if (newProduct.description.length < 20) {
-                  setDescriptionMin(true);
-                } else {
-                  setDescriptionMin(false);
-                  if (newProduct.description.length > 150) {
-                    setDescriptionMax(true);
-                  } else {
-                    setDescriptionMax(false);
-                  }
-                }
-              }
-              if (!newProduct.category) {
-                setIsCategoryEmpty(true);
-              } else {
-                setIsCategoryEmpty(false);
-              }
-              if (
-                newProduct.price &&
-                newProduct.category &&
-                newProduct.name.length >= 5 &&
-                newProduct.name.length <= 60 &&
-                newProduct.description.length >= 20 &&
-                newProduct.description.length <= 150
-              ) {
-                createProduct(e);
-              }
-            }}
-          />
-        </div>
         <div class="col-4 d-flex justify-content-end">
           <Button
             color={"gray"}
