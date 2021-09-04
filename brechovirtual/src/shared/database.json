@@ -11,8 +11,7 @@
       "price": 56.99,
       "status": "aberto",
       "category": "Calça",
-      "seller": "Marcelo peireira",
-      "location": "Tijuca"
+      "idSeller": 1 
     },
     {
       "id": 3,
@@ -22,8 +21,7 @@
       "price": 51,
       "status": "reservado",
       "category": "Tênis",
-      "seller": "Marcelo peireira",
-      "location": "Tijuca"
+      "idSeller": 1
     },
     {
       "id": 4,
@@ -36,8 +34,7 @@
       "price": 89.95,
       "status": "aberto",
       "category": "Vestido",
-      "seller": "Marcelo peireira",
-      "location": "Tijuca"
+      "idSeller": 1
     },
     {
       "id": 5,
@@ -48,7 +45,8 @@
       "images": [
         "/static/media/casaco.34608ee8.jpg",
         "https://astryd.com.br/wp-content/uploads/2020/09/casaco-viculo-basic-de-moletom-preto-costas.jpg"
-      ]
+      ],
+      "idSeller": 1
     },
     {
       "name": "CAsads",
@@ -59,20 +57,19 @@
         "/static/media/casaco.34608ee8.jpg"
       ],
       "id": 6,
-      "status": "reservado"
+      "status": "reservado",
+      "idSeller": 1
     }
   ],
   "bookings": [
     {
       "id": 1,
-      "name": "Calça Jeans",
-      "seller": "Marcelo peireira",
-      "price": "59.99",
+      "idProduct": 1,
+      "idBuyer":1,
       "date": "20/07/2021",
-      "location": "Tijuca",
       "status": "em andamento",
       "image": [
-        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+        
       ],
       "messages": [
         {
@@ -97,14 +94,12 @@
     },
     {
       "id": 2,
-      "name": " Jeans",
-      "seller": " peireira",
-      "price": "69.99",
+      "idProduct": 2,
+      "idBuyer":1,
       "date": "20/07/2021",
-      "location": "Tijuca",
       "status": "em andamento",
       "image": [
-        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+        
       ],
       "messages": [
         {
@@ -129,14 +124,12 @@
     },
     {
       "id": 3,
-      "name": "Calça Jeans",
-      "seller": "Marcelo Joao ",
-      "price": "100.99",
+      "idProduct": 4,
+      "idBuyer":1,
       "date": "01/08/2021 ",
-      "location": "Centro",
       "status": "fechado",
       "image": [
-        "https://static.hering.com.br//sys_master/images/h0f/h86/9634609004574.jpg?name=H1MN-1ASN-D1"
+        
       ],
       "messages": [
         {
@@ -161,8 +154,8 @@
     },
     {
       "id": 4,
-      "name": "CAsads",
-      "price": "100",
+      "idProduct": 5,
+      "idBuyer":1,
       "date": "31/08/2021 22:20 - ",
       "status": "fechado",
       "image": [
@@ -194,6 +187,32 @@
           "message": "hello"
         }
       ]
+    }
+  ],
+  "sellers": [
+    {
+      "id": 1,
+      "name": "Marcos Pereira Almeida",
+      "address": "Rua General Canabarro, 500",
+      "branch": "Maracanã",
+      "document": "111.222.333.44",
+      "number": "21999998888",
+      "email": "marcospereira@gmail.com",
+      "status": "ativo",
+      "city": "Rio de Janeiro",
+      "state": "RJ"
+    },
+    {
+      "id": 2,
+      "name": "Antonio Carlos Amorim",
+      "address": "Rua Haddock Lobo, 70",
+      "branch": "Centro",
+      "document": "111.777.999.44",
+      "number": "21999991111",
+      "email": "antonioca@hotmail.com",
+      "status": "ativo",
+      "city": "Niteroi",
+      "state": "RJ"
     }
   ]
 }
