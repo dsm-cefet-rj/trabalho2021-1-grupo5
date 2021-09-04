@@ -4,6 +4,7 @@ import Jumbotron from "../components/jumbotron";
 import Carrousel from "../components/carrousel";
 import Chat from "../components/chat";
 import Button from "../components/button";
+import loading from "../images/loading.gif"
 import { useParams, useHistory } from "react-router";
 import {
   deleteBookingServer,
@@ -31,7 +32,7 @@ export default function Booking() {
   const error2 = useSelector((state)=>state.products.error)
   var products = useSelector(selectAllProducts);
   if (status === 'loading'|| status2 === 'loading'){
-    return (<p className="h6 text-center">Carregando a reserva...</p>)
+    return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando a reserva...</p>)
   }else if (status === 'failed' || status2 === 'failed'){
     return(<p className="h6 text-center">Error: {error} Error2 : {error2}</p>)
   }
@@ -54,7 +55,7 @@ export default function Booking() {
   }
   let carregando = '';
   if(status === 'loading2'){
-    carregando = <p>enviando a mensagem...</p>
+    carregando = <p><img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Enviando a mensagem...</p>
   }
 
   let buttonConclude = "";

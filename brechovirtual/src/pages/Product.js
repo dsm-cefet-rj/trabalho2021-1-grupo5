@@ -3,6 +3,7 @@ import Navbar from '../components/navbar'
 import Carrousel from '../components/carrousel'
 import Jumbotron from '../components/jumbotron'
 import heart from '../images/heart.png';
+import loading from "../images/loading.gif"
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
@@ -23,7 +24,7 @@ export default function Product(){
      const bookings = useSelector(selectALLBookings)
      const dispatch = useDispatch();
    if (status === 'loading'){
-    return (<p className="h6 text-center">Carregando o produto...</p>)
+    return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando o produto...</p>)
   }else if (status === 'failed'){
     return(<p className="h6 text-center">Error: {error}</p>)
   }

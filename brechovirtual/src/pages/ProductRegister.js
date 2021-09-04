@@ -201,6 +201,28 @@ export default function ProductRegister(props) {
           </div>
         </div>
       </div>
+      <div class="row">
+                <div class="col-sm">
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">
+                      <b>Vendedor</b>
+                    </label>
+                    <select
+                      class="form-control"
+                      id="exampleFormControlSelect1"
+                      name="category"
+                      defaultValue={productOnLoad.category}
+                      {...register("category")}
+                    >
+                      <option>Escolher...</option>
+                      <option>COLOCAR ARRAY DOS VENDEDORES AQUI</option>
+                    </select>
+                  </div>
+                </div>
+      </div>     
+
+
+
       &nbsp;
       <div class="row">
         <div class="col-4 d-flex justify-content-end">

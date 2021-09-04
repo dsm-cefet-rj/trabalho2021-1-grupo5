@@ -22,11 +22,17 @@ export default function App() {
           <Route exact path='/product/:id'>
             <Product />
           </Route>
-          <Route path="/productForm/novo">
+          <Route path="/productForm/new">
             <ProductRegister title={"Cadastrar produto"} />
           </Route>
           <Route path="/productForm/:id">
             <ProductRegister  title={"Editar produto"}/>
+          </Route>
+          <Route path="/sellerForm/new">
+            <ProductRegister title={"Cadastrar vendedor"} />
+          </Route>
+          <Route path="/sellerForm/:id">
+            <ProductRegister  title={"Atualizar cadastro do vendedor"}/>
           </Route>
           <Route path="/booking/:id">
             <Booking  />
