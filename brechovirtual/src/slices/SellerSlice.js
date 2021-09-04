@@ -3,8 +3,8 @@ import {
     createEntityAdapter,
     createSlice,
   } from "@reduxjs/toolkit";
-  import { httpGet, httpPost, httpDelete, httpPut } from "./utils";
-  import { baseUrl } from "./baseUrl";
+  import { httpGet, httpPost, httpDelete, httpPut } from "../utils";
+  import { baseUrl } from "../baseUrl";
   
   const sellersAdapter = createEntityAdapter();
   
