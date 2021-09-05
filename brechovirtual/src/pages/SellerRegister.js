@@ -5,34 +5,17 @@ import Button from "../components/button";
 import casaco from "../images/casaco.jpg";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addProductsServer,
-  updateProductsServer,
-  selectProductsById,
-} from "../ProductsSlice";
 import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { addSellersServer, selectSellersById, updateSellersServer } from "../slices/SellerSlice";
 
-export default function SellerRegister() {
+export default function SellerRegister(props) {
   
   let { id } = useParams();
   id = parseInt(id);
 
   const sellerFound = useSelector((state) => selectSellersById(state, id));
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(productSchema),
-  });
-
-  const [sellerOnLoad] = useState(
-    id ? sellerFound ?? sellerSchema.cast({}) : sellerSchema.cast({})
-  );
-
   const [actionType] = useState(
     id
       ? sellerFound
@@ -46,7 +29,6 @@ export default function SellerRegister() {
   const history = useHistory();
 
   function onSubmit(newSeller) {
-    console.log(newSeller);
     if (actionType === "sellerForm/addSeller") {
       dispatch(addSellersServer(newSeller));
       alert("Vendedor cadastrado com sucesso!");
@@ -67,40 +49,40 @@ export default function SellerRegister() {
       <Navbar />
       <Jumbotron title={props.title} text={" "} />
       <div class="container">
-            <form>
+            <form onSubmit={onSubmit}>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                     <label for="inputEmail4">Nome</label>
-                    <input type="text" class="form-control" id="inputEmail4" placeholder="Nome do vendedor"/>
+                    <input type="text" name="name" defaultValue={sellerFound.name } class="form-control" id="inputEmail4" placeholder="Nome do vendedor"/>
                     </div>
 
                     <div class="form-group col-md-6">
                     <label for="inputPassword4">E-mail</label>
-                    <input type="email" class="form-control" id="inputPassword4" placeholder="E-mail"/>
+                    <input type="email" name="email" defaultValue={sellerFound.email} class="form-control" id="inputPassword4" placeholder="E-mail"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputAddress">Endereço</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder=""/>
+                    <input type="text" name="address.street" defaultValue={sellerFound.address.street} class="form-control" id="inputAddress" placeholder=""/>
                 </div>
 
                 <div class="form-row">
                     
                     <div class="form-group col-md-6">
                     <label for="inputCPF">CPF</label>
-                    <input type="number" class="form-control" id="inputCPF"/>
+                    <input type="text" defaultValue={sellerFound.document} name="document" class="form-control" id="inputCPF"/>
                     </div>
 
                     <div class="form-group col-md-2">
                     <label for="inputNumberDDD">DDD</label>
-                    <input type="number" class="form-control" id="inputNumberDDD"/>
+                    <input type="number"name="telephone.ddd" defaultValue={sellerFound.telephone.ddd} class="form-control" id="inputNumberDDD"/>
                     </div>
 
                     <div class="form-group col-md-4">
                     <label for="inputNumber">Telefone Celular</label>
-                    <input type="number" class="form-control" id="inputNumber"/>
+                    <input type="number"name="telephone.number" defaultValue={sellerFound.telephone.number} class="form-control" id="inputNumber"/>
                     </div>
 
                 </div>
@@ -109,17 +91,17 @@ export default function SellerRegister() {
 
                     <div class="form-group col-md-5">
                     <label for="inputBairro">Bairro</label>
-                    <input type="text" class="form-control" id="inputBairro"/>
+                    <input type="text" defaultValue={sellerFound.address.district} name="address.district" class="form-control" id="inputBairro"/>
                     </div>
 
                     <div class="form-group col-md-5">
                     <label for="inputCity">Cidade</label>
-                    <input type="text" class="form-control" id="inputCity"/>
+                    <input type="text"name="address.city" defaultValue={sellerFound.address.city} class="form-control" id="inputCity"/>
                     </div>
 
                     <div class="form-group col-md-2">
                     <label for="inputEstado">Estado</label>
-                    <input type="text" class="form-control" id="inputEstado"/>
+                    <input type="text"name="address.state" defaultValue={sellerFound.address.state} class="form-control" id="inputEstado"/>
                     </div>
 
                 </div>

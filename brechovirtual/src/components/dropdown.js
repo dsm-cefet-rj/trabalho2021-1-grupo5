@@ -20,7 +20,8 @@ export default function Dropdown(props){
                             <a className="dropdown-item"><Link to='/'>Perfil</Link></a>
                             <a className="dropdown-item" ><Link to='/productForm/new'>Criar anúncio</Link></a>
                             <a className="dropdown-item" ><Link to='/bookingList'>Lista de Reservas</Link></a>
-                            <a className="dropdown-item" ><Link to='/sellerForm/new'>Cadastrar Vendedor</Link></a>
+                            <a className="dropdown-item" ><Link to='/sellerForm/new'>Criar Perfil Vendedor</Link></a>
+                            <a className="dropdown-item"><Link to='/seller/1'>Perfil Vendedor</Link></a>
                             <a className="dropdown-item" ><Link to='/wishList'>Lista de Desejos</Link></a>
                             <a className="dropdown-item" ><Link to='/'>Sair</Link></a>
                     </div>

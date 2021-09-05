@@ -11,9 +11,10 @@ import {
   fetchBookings,
   selectBookingById,
   updateBookingServer,
-} from "../BookingsSlice";
+} from "../slices/BookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllProducts, updateProductsServer } from "../ProductsSlice";
+import { updateProductsServer, selectProductsById } from "../slices/ProductsSlice";
+import { selectSellersById } from "../slices/SellerSlice";
 
 export default function Booking() {
   //  const bookings = useSelector(selectAll)
@@ -26,17 +27,19 @@ export default function Booking() {
   id = parseInt(id);
   const dispatch = useDispatch();
   var booking = useSelector((state) => selectBookingById(state, id));
+  var product = useSelector(state=>selectProductsById(state,booking.idProduct))
+  var seller = useSelector(state=>selectSellersById(state,product.idSeller))
   const status = useSelector((state)=>state.bookings.status)
   const error = useSelector((state)=>state.bookings.error)
   const status2 = useSelector((state)=>state.products.status)
   const error2 = useSelector((state)=>state.products.error)
-  var products = useSelector(selectAllProducts);
-  if (status === 'loading'|| status2 === 'loading'){
+  const status3 = useSelector((state)=>state.seller.status)
+  const error3 = useSelector((state)=>state.seller.error)
+  if (status === 'loading'|| status2 === 'loading' || status3 === "loading"){
     return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando a reserva...</p>)
-  }else if (status === 'failed' || status2 === 'failed'){
-    return(<p className="h6 text-center">Error: {error} Error2 : {error2}</p>)
+  }else if (status === 'failed' || status2 === 'failed' || status3 === "failed"){
+    return(<p className="h6 text-center">Error: {error} Error2 : {error2} Error3 : {error3}</p>)
   }
-  var product = products.filter((product) => product.name === booking.name)[0];
  
   function handleInputChange(e) {
     setMessage(e.target.value);
@@ -158,7 +161,7 @@ export default function Booking() {
           <div className="col justify-content-center ">
             <div className="row justify-content-center">
               <div className="justify-content-center">
-                <Carrousel images={booking.image} id={booking.id} />
+                <Carrousel images={product.images} id={booking.id} />
               </div>
             </div>
             <div className="row justify-content-md-center">
@@ -170,7 +173,7 @@ export default function Booking() {
               <div className="col-md-7 mb-3">
                 <label for="validationTooltip01">
                   <h2>
-                    <b>{booking.name}</b>
+                    <b>{product.name}</b>
                   </h2>
                 </label>
               </div>
@@ -211,19 +214,19 @@ export default function Booking() {
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Vendedor:</b> {booking.seller}{" "}
+            <b>Vendedor:</b> {seller.name}{" "}
           </p>
         </div>
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Telefone:</b> {booking.telephone}{" "}
+            <b>Telefone:</b> {seller.telephone.ddd + seller.telephone.number}{" "}
           </p>
         </div>
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Email:</b> {booking.email}{" "}
+            <b>Email:</b> {seller.email}{" "}
           </p>
         </div>
       </div>

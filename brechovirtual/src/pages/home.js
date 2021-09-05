@@ -4,7 +4,7 @@ import Card from "../components/card";
 import Navbar from "../components/navbar";
 import logo from "../images/logo2.png";
 import loading from "../images/loading.gif"
-import { fetchProducts, selectAllProducts } from "../ProductsSlice";
+import { fetchProducts, selectAllProducts } from "../slices/ProductsSlice";
 
 export default function Home(props) {
   //const products = useSelector(state=>state.products)

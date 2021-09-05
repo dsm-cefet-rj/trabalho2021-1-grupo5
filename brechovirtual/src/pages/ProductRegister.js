@@ -9,15 +9,18 @@ import {
   addProductsServer,
   updateProductsServer,
   selectProductsById,
-} from "../ProductsSlice";
+} from "../slices/ProductsSlice";
 import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { selectAllSellers } from "../slices/SellerSlice";
 
 export default function ProductRegister(props) {
   const error = "Este campo é obrigatório!";
   let { id } = useParams();
   id = parseInt(id);
+  const sellers = useSelector(selectAllSellers).map((seller)=><option value={seller.id}>{seller.name}</option>)
+
 
   const productFound = useSelector((state) => selectProductsById(state, id));
   const {
@@ -43,7 +46,6 @@ export default function ProductRegister(props) {
   const history = useHistory();
 
   function onSubmit(newProduct) {
-    console.log(newProduct);
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
       dispatch(addProductsServer(newProduct));
@@ -210,12 +212,12 @@ export default function ProductRegister(props) {
                     <select
                       class="form-control"
                       id="exampleFormControlSelect1"
-                      name="category"
+                      name="idSeller"
                       defaultValue={productOnLoad.category}
                       {...register("category")}
                     >
                       <option>Escolher...</option>
-                      <option>COLOCAR ARRAY DOS VENDEDORES AQUI</option>
+                      {sellers}
                     </select>
                   </div>
                 </div>

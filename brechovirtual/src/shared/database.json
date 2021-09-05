@@ -68,9 +68,6 @@
       "idBuyer":1,
       "date": "20/07/2021",
       "status": "em andamento",
-      "image": [
-        
-      ],
       "messages": [
         {
           "date": "13/07/2021",
@@ -98,9 +95,6 @@
       "idBuyer":1,
       "date": "20/07/2021",
       "status": "em andamento",
-      "image": [
-        
-      ],
       "messages": [
         {
           "date": "13/07/2021",
@@ -128,9 +122,6 @@
       "idBuyer":1,
       "date": "01/08/2021 ",
       "status": "fechado",
-      "image": [
-        
-      ],
       "messages": [
         {
           "date": "13/07/2021",
@@ -158,9 +149,6 @@
       "idBuyer":1,
       "date": "31/08/2021 22:20 - ",
       "status": "fechado",
-      "image": [
-        "/static/media/casaco.34608ee8.jpg"
-      ],
       "messages": [
         {
           "userType": "Vendedor",
@@ -193,26 +181,36 @@
     {
       "id": 1,
       "name": "Marcos Pereira Almeida",
-      "address": "Rua General Canabarro, 500",
-      "branch": "Maracanã",
       "document": "111.222.333.44",
-      "number": "21999998888",
+      "telephone": {
+        "ddd": "21",
+        "number": "999998888"
+      },
       "email": "marcospereira@gmail.com",
       "status": "ativo",
+      "address":{
+      "street": "Rua General Canabarro, 500",
+      "district": "Maracanã",
       "city": "Rio de Janeiro",
       "state": "RJ"
+    }
     },
     {
       "id": 2,
       "name": "Antonio Carlos Amorim",
-      "address": "Rua Haddock Lobo, 70",
-      "branch": "Centro",
       "document": "111.777.999.44",
-      "number": "21999991111",
+      "telephone": {
+        "ddd": "21",
+        "number": "999996666"
+      },
       "email": "antonioca@hotmail.com",
       "status": "ativo",
+      "address":{
+      "street": "Rua Haddock Lobo, 70",
+      "district": "Centro",
       "city": "Niteroi",
       "state": "RJ"
+      }
     }
   ]
 }

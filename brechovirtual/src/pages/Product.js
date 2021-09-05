@@ -7,8 +7,9 @@ import loading from "../images/loading.gif"
 import Button from '../components/button';
 import { Link, useHistory , useParams} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux'
-import {  deleteProductsServer, fetchProducts, selectProductsById, updateProductsServer } from '../ProductsSlice';
-import {addBookingServer, selectALLBookings } from '../BookingsSlice';
+import {  deleteProductsServer, fetchProducts, selectProductsById, updateProductsServer } from '../slices/ProductsSlice';
+import {addBookingServer, selectALLBookings } from '../slices/BookingsSlice'
+import { selectSellersById } from '../slices/SellerSlice';
 
 
 
@@ -19,6 +20,7 @@ export default function Product(){
     id = parseInt(id)
      
     const product = useSelector(state=>selectProductsById(state,id))
+    const seller = useSelector(state=>selectSellersById(state,product.idSeller))
      const status = useSelector(state=>state.products.status)
      const error = useSelector(state=>state.products.error)
      const bookings = useSelector(selectALLBookings)
@@ -50,13 +52,10 @@ export default function Product(){
     function handleReserve(e){
         const booking =  {
           "id":bookings.length +1,
-          "name" : product.name,
-          "seller" : product.seller,
-          "price" : product.price,
+          'idBuyer':1,
+          'idProduct':product.id,
           "date": dataAtualFormatada(),
-          "location": product.location,
           "status": "em andamento",
-          "image":product.images,
           "messages":[],
       }
       dispatch(addBookingServer(booking));
@@ -147,16 +146,16 @@ export default function Product(){
             <div class="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-center">
             <div class='container'>
                 <div class="row d-flex justify-content-center">
-                <p><b>Vendedor: </b>{product.seller}</p>
+                <p><b>Vendedor: </b>{seller.name}</p>
                 </div>
                 <div class="row d-flex justify-content-center">
-                <p><b>Bairro: </b>{product.branch}</p>
+                <p><b>Bairro: </b>{seller.district}</p>
                 </div>
                 <div class="row d-flex justify-content-center"> 
-                <p><b>Telefone: </b>{product.telephone}</p>
+                <p><b>Telefone: </b>{seller.telephone.ddd + seller.telephone.number}</p>
                 </div>
                 <div class="row d-flex justify-content-center">  
-                <p><b>E-mail: </b>{product.email}</p>
+                <p><b>E-mail: </b>{seller.email}</p>
                 </div>
             </div>  
             </div>

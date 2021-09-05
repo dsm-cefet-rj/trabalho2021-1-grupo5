@@ -24,7 +24,7 @@ import {
     "database/deleteSellersServer",
     async (idSeller) => {
       await httpDelete(`${baseUrl}/sellers/${idSeller}`);
-      return idSellers;
+      return idSeller;
     }
   );
   

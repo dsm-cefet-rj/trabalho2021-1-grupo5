@@ -7,6 +7,8 @@ import WishList from "./pages/WishList";
 import Booking from "./pages/Booking";
 import BookingList from "./pages/BookingList";
 import "./App.css";
+import SellerRegister from "./pages/SellerRegister";
+import Seller from "./pages/Seller";
 
 
 export default function App() {
@@ -29,10 +31,13 @@ export default function App() {
             <ProductRegister  title={"Editar produto"}/>
           </Route>
           <Route path="/sellerForm/new">
-            <ProductRegister title={"Cadastrar vendedor"} />
+            <SellerRegister title={"Cadastrar vendedor"} />
           </Route>
           <Route path="/sellerForm/:id">
-            <ProductRegister  title={"Atualizar cadastro do vendedor"}/>
+            <SellerRegister  title={"Atualizar cadastro do vendedor"}/>
+          </Route>
+          <Route path="/seller/:id">
+            <Seller/>
           </Route>
           <Route path="/booking/:id">
             <Booking  />
