@@ -12,7 +12,7 @@ export default function BookingList() {
   const error = useSelector(state=>state.bookings.error)
   const status = useSelector(state=>state.bookings.status)
 
-
+  
   let bookingListOpen = ''
   let bookingListClosed = ''
   if(status === 'loaded' || status === 'saved' || status === 'deleted' || status==='updated'){
@@ -42,6 +42,14 @@ export default function BookingList() {
     bookingListClosed =<div>Error : {error}</div>
     bookingListOpen = <div>Error : {error}</div>
   }
+
+  if (bookingListOpen == ''){
+    bookingListOpen = <p className="h6 text-center">Sem reservas em andamento.</p>;
+  }
+  if (bookingListClosed == ''){
+    bookingListClosed = <p className="h6 text-center">Sem reservas concluídas.</p>;
+  }
+
   return (
     <>
       <Navbar />
