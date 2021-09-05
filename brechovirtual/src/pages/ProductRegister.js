@@ -46,7 +46,7 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const sellerForm = ''
+  let sellerForm = ''
   if (actionType === "productForm/addProduct"){
       sellerForm = 
       <div class="col-sm">
