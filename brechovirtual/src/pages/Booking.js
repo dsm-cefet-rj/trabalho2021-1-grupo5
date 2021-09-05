@@ -33,8 +33,9 @@ export default function Booking() {
   const error = useSelector((state)=>state.bookings.error)
   const status2 = useSelector((state)=>state.products.status)
   const error2 = useSelector((state)=>state.products.error)
-  const status3 = useSelector((state)=>state.seller.status)
-  const error3 = useSelector((state)=>state.seller.error)
+  const status3 = useSelector((state)=>state.sellers.status)
+  const error3 = useSelector((state)=>state.sellers.error)
+
   if (status === 'loading'|| status2 === 'loading' || status3 === "loading"){
     return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando a reserva...</p>)
   }else if (status === 'failed' || status2 === 'failed' || status3 === "failed"){
@@ -140,7 +141,7 @@ export default function Booking() {
   function handleClick() {
     const newMessage = {
       userType: "Vendedor",
-      userName: "Marcelo",
+      userName: seller.name,
       date: dataAtualFormatada(),
       message: message,
     };
