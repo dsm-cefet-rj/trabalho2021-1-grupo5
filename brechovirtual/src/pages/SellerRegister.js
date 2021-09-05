@@ -106,24 +106,25 @@ export default function SellerRegister(props) {
 
                 </div>
                 
-              <div class="d-flex justify-content-end">
+                <div class="row">    
+              <div class="col-4 d-flex justify-content-center">
                 <Button color={"purple"} title={"Cadastrar"} type="submit" />
               </div>
+              <div class="col-4 d-flex justify-content-end">
+                <Button
+                  color={"gray"}
+                  title={"Cancelar"}
+                  onClick={(e) => cancelButton(e)}
+                />
+              </div>
+              </div> 
              
             </form>
            
       </div>
       
       &nbsp;
-      <div class="row">
-        <div class="col-4 d-flex justify-content-end">
-          <Button
-            color={"gray"}
-            title={"Cancelar"}
-            onClick={(e) => cancelButton(e)}
-          />
-        </div>
-      </div>
+      
       &nbsp;
     </>
   );

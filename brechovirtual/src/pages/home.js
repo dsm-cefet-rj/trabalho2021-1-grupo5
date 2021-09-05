@@ -38,7 +38,7 @@ export default function Home(props) {
       productList = <p className="h6 text-center">Sem produtos na lista.</p>;
     }
   }else if (status === 'loading'){
-    productList = <p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando lista de produtos...</p>;
+    productList = <p className="h6 text-center"> <img src={loading} width="30" height="30" className="d-inline-block " alt=""/> Carregando lista de produtos...</p>;
   }else if (status === 'failed'){
     productList = <p className="h6 text-center">Error: {error}</p>;
   }

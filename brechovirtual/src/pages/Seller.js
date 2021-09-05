@@ -25,7 +25,7 @@ export default function Seller(){
     return(
         <>
             <Navbar/>
-            <Jumbotron title={seller.name} text={""}/>
+            <Jumbotron title={"Vendedor"} text={seller.name}/>
             <div class="container">
             <div class="row d-flex justify-content-center">
 
@@ -42,35 +42,35 @@ export default function Seller(){
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                    <label for="inputEmail4">Nome</label>
+                    <label for="inputEmail4"><b>Nome</b></label>
                     <p>{seller.name}</p>
                     </div>
 
                     <div class="form-group col-md-6">
-                    <label for="inputPassword4">E-mail</label>
+                    <label for="inputPassword4"><b>E-mail</b></label>
                     <p>{seller.email}</p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputAddress">Endereço</label>
+                    <label for="inputAddress"><b>Endereço</b></label>
                     <p>{seller.address.street}</p>
                 </div>
 
                 <div class="form-row">
                     
                     <div class="form-group col-md-6">
-                    <label for="inputCPF">CPF</label>
+                    <label for="inputCPF"><b>CPF</b></label>
                     <p>{seller.document}</p>
                     </div>
 
                     <div class="form-group col-md-2">
-                    <label for="inputNumberDDD">DDD</label>
+                    <label for="inputNumberDDD"><b>DDD</b></label>
                     <p>{seller.telephone.ddd}</p>
                     </div>
 
                     <div class="form-group col-md-4">
-                    <label for="inputNumber">Telefone Celular</label>
+                    <label for="inputNumber"><b>Telefone Celular</b></label>
                     <p>{seller.telephone.number}</p>
                     </div>
 
@@ -79,17 +79,17 @@ export default function Seller(){
                 <div class="form-row">
 
                     <div class="form-group col-md-5">
-                    <label for="inputBairro">Bairro</label>
+                    <label for="inputBairro"><b>Bairro</b></label>
                     <p>{seller.address.district}</p>
                     </div>
 
                     <div class="form-group col-md-5">
-                    <label for="inputCity">Cidade</label>
+                    <label for="inputCity"><b>Cidade</b></label>
                     <p>{seller.address.city}</p>
                     </div>
 
                     <div class="form-group col-md-2">
-                    <label for="inputEstado">Estado</label>
+                    <label for="inputEstado"><b>Estado</b></label>
                     <p>{seller.address.state}</p>
                     </div>
 

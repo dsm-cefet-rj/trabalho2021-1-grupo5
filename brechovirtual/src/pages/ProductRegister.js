@@ -19,10 +19,11 @@ export default function ProductRegister(props) {
   const error = "Este campo é obrigatório!";
   let { id } = useParams();
   id = parseInt(id);
-  const sellers = useSelector(selectAllSellers).map((seller)=><option value={seller.id}>{seller.name}</option>)
+  
 
 
   const productFound = useSelector((state) => selectProductsById(state, id));
+  const sellers = useSelector(selectAllSellers).map((seller)=><option value={seller.id}>{seller.name}</option>)
   const {
     register,
     handleSubmit,
@@ -45,6 +46,27 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const sellerForm = ''
+  if (actionType === "productForm/addProduct"){
+      sellerForm = 
+      <div class="col-sm">
+        <div class="form-group justify-content-center">
+          <label for="exampleFormControlSelect1 align-middle">
+            <b>Vendedor</b>
+          </label>
+          <select
+          class="form-control"
+          id="exampleFormControlSelect1"
+          name="idSeller"
+          defaultValue={productOnLoad.idSeller}
+          {...register("idSeller")}
+          >
+          <option>Escolher...</option>
+          {sellers}
+          </select>
+        </div>
+      </div>
+  }
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
@@ -138,6 +160,7 @@ export default function ProductRegister(props) {
                       class="form-control"
                       id="validationTooltipUsername"
                       name="price"
+                      placeholder="Preço do Produto"
                       defaultValue={productOnLoad.price}
                       {...register("price")}
                     />
@@ -188,6 +211,7 @@ export default function ProductRegister(props) {
                       id="exampleFormControlTextarea1"
                       rows="3"
                       name="description"
+                      placeholder="Descrição do anúncio"
                       defaultValue={productOnLoad.description}
                       {...register("description")}
                     ></textarea>
@@ -196,46 +220,30 @@ export default function ProductRegister(props) {
                 </div>
               </div>
               <br />
-              <div class="d-flex justify-content-end">
-                <Button color={"purple"} title={"Publicar"} type="submit" />
+              <div class="row justify-content-center">
+                {sellerForm}
+                
               </div>
+      &nbsp;
+                <div class="row">
+                  <div class=" col-6 d-flex">
+                    <Button color={"purple"} title={"Publicar"} type="submit" />
+                  </div>
+                  <div class="col-4 d-flex justify-content-end">
+                    <Button
+                      color={"gray"}
+                      title={"Cancelar"}
+                      onClick={(e) => cancelButton(e)}
+                    />
+                  </div>
+                </div>
+        &nbsp;
             </form>
           </div>
         </div>
       </div>
-      <div class="row">
-                <div class="col-sm">
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">
-                      <b>Vendedor</b>
-                    </label>
-                    <select
-                      class="form-control"
-                      id="exampleFormControlSelect1"
-                      name="idSeller"
-                      defaultValue={productOnLoad.category}
-                      {...register("category")}
-                    >
-                      <option>Escolher...</option>
-                      {sellers}
-                    </select>
-                  </div>
-                </div>
-      </div>     
-
-
-
-      &nbsp;
-      <div class="row">
-        <div class="col-4 d-flex justify-content-end">
-          <Button
-            color={"gray"}
-            title={"Cancelar"}
-            onClick={(e) => cancelButton(e)}
-          />
-        </div>
-      </div>
-      &nbsp;
+           
+        
     </>
   );
 }

@@ -11,7 +11,7 @@
       "price": 56.99,
       "status": "aberto",
       "category": "Calça",
-      "idSeller": 1 
+      "idSeller": 1
     },
     {
       "id": 3,
@@ -59,13 +59,31 @@
       "id": 6,
       "status": "reservado",
       "idSeller": 1
+    },
+    {
+      "category": "1",
+      "description": "FAZENDO TESTEEEEEEEEEEEEEEEEEE",
+      "price": 22,
+      "name": "TESTEEEEEEEEEE",
+      "images": [
+        "/static/media/casaco.34608ee8.jpg"
+      ],
+      "id": 7
+    },
+    {
+      "category": "Cachecol",
+      "description": "aaaaaaaaaaaaaaaaaaaaa",
+      "price": 22,
+      "name": "tenis de correr melhor",
+      "idSeller": "1",
+      "id": 8
     }
   ],
   "bookings": [
     {
       "id": 1,
       "idProduct": 1,
-      "idBuyer":1,
+      "idBuyer": 1,
       "date": "20/07/2021",
       "status": "em andamento",
       "messages": [
@@ -92,7 +110,7 @@
     {
       "id": 2,
       "idProduct": 2,
-      "idBuyer":1,
+      "idBuyer": 1,
       "date": "20/07/2021",
       "status": "em andamento",
       "messages": [
@@ -119,7 +137,7 @@
     {
       "id": 3,
       "idProduct": 4,
-      "idBuyer":1,
+      "idBuyer": 1,
       "date": "01/08/2021 ",
       "status": "fechado",
       "messages": [
@@ -146,7 +164,7 @@
     {
       "id": 4,
       "idProduct": 5,
-      "idBuyer":1,
+      "idBuyer": 1,
       "date": "31/08/2021 22:20 - ",
       "status": "fechado",
       "messages": [
@@ -188,12 +206,12 @@
       },
       "email": "marcospereira@gmail.com",
       "status": "ativo",
-      "address":{
-      "street": "Rua General Canabarro, 500",
-      "district": "Maracanã",
-      "city": "Rio de Janeiro",
-      "state": "RJ"
-    }
+      "address": {
+        "street": "Rua General Canabarro, 500",
+        "district": "Maracanã",
+        "city": "Rio de Janeiro",
+        "state": "RJ"
+      }
     },
     {
       "id": 2,
@@ -205,11 +223,11 @@
       },
       "email": "antonioca@hotmail.com",
       "status": "ativo",
-      "address":{
-      "street": "Rua Haddock Lobo, 70",
-      "district": "Centro",
-      "city": "Niteroi",
-      "state": "RJ"
+      "address": {
+        "street": "Rua Haddock Lobo, 70",
+        "district": "Centro",
+        "city": "Niteroi",
+        "state": "RJ"
       }
     }
   ]

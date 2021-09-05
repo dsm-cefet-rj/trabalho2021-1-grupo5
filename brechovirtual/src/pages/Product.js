@@ -75,7 +75,7 @@ export default function Product(){
     return(
         <>
             <Navbar/>
-            <Jumbotron title={product.name} text={"Anunciante: "+product.seller}/>
+            <Jumbotron title={product.name} text={"Anunciante: " + seller.name}/>
             <div class="container">
             <div class="row d-flex justify-content-center">
 
@@ -149,7 +149,7 @@ export default function Product(){
                 <p><b>Vendedor: </b>{seller.name}</p>
                 </div>
                 <div class="row d-flex justify-content-center">
-                <p><b>Bairro: </b>{seller.district}</p>
+                <p><b>Bairro: </b>{seller.address.district}</p>
                 </div>
                 <div class="row d-flex justify-content-center"> 
                 <p><b>Telefone: </b>{seller.telephone.ddd + seller.telephone.number}</p>
