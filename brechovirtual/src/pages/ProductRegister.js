@@ -70,6 +70,7 @@ export default function ProductRegister(props) {
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
+      newProduct.status = "aberto";
       dispatch(addProductsServer(newProduct));
       alert("Produto cadastrado com sucesso!");
     } else {
