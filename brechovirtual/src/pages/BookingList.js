@@ -5,6 +5,7 @@ import BookingBar from "../components/bookingBar";
 import { useSelector } from "react-redux";
 import { selectALLBookings } from "../slices/BookingsSlice";
 import loading from '../images/loading.gif'
+import Footer from "../components/footer";
 
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
@@ -56,6 +57,8 @@ export default function BookingList() {
           {bookingListClosed}
         </div>
       </div>
+      &nbsp;
+      <Footer></Footer>
     </>
   );
 }

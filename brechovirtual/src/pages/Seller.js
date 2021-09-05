@@ -5,7 +5,7 @@ import loading from "../images/loading.gif"
 import { Link, useParams} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import { selectSellersById } from '../slices/SellerSlice';
-
+import Footer from "../components/footer";
 
 
 
@@ -98,7 +98,8 @@ export default function Seller(){
             </div>
         </div>
         </div>
-
+        &nbsp;
+      <Footer></Footer>
 
         </>
     );

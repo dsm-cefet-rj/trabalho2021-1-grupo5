@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { updateProductsServer, selectProductsById } from "../slices/ProductsSlice";
 import { selectSellersById } from "../slices/SellerSlice";
+import Footer from "../components/footer";
 
 export default function Booking() {
   //  const bookings = useSelector(selectAll)
@@ -254,6 +255,8 @@ export default function Booking() {
       </div>
       &nbsp;
       <div className="row justify-content-center">{buttonAnswer}</div>
+      &nbsp;
+      <Footer></Footer>
     </>
   );
 }

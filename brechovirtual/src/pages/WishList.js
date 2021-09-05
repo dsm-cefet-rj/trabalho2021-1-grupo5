@@ -9,6 +9,7 @@ import casaco2 from '../images/casaco2.jpg';
 import tenis from '../images/tenis.jpeg';
 import tenis2 from '../images/tenis2.jpeg';
 import excluir from '../images/excluir.png';
+import Footer from "../components/footer";
 
 const WishList = () => {
   const wishItems = [
@@ -49,6 +50,8 @@ const WishList = () => {
             )
           }
         </div>
+        &nbsp;
+      <Footer></Footer>
       </React.Fragment>
   );
 };

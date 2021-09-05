@@ -14,6 +14,7 @@ import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { selectAllSellers } from "../slices/SellerSlice";
+import Footer from "../components/footer";
 
 export default function ProductRegister(props) {
   const error = "Este campo é obrigatório!";
@@ -243,7 +244,8 @@ export default function ProductRegister(props) {
           </div>
         </div>
       </div>
-           
+      &nbsp;
+      <Footer></Footer>
         
     </>
   );

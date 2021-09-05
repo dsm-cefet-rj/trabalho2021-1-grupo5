@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {  deleteProductsServer, fetchProducts, selectProductsById, updateProductsServer } from '../slices/ProductsSlice';
 import {addBookingServer, selectALLBookings } from '../slices/BookingsSlice'
 import { selectSellersById } from '../slices/SellerSlice';
-
+import Footer from "../components/footer";
 
 
 
@@ -159,6 +159,8 @@ export default function Product(){
                 </div>
             </div>  
             </div>
+            &nbsp;
+      <Footer></Footer>
         </>
     );
 }

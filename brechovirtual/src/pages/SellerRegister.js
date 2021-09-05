@@ -9,6 +9,7 @@ import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addSellersServer, selectSellersById, updateSellersServer } from "../slices/SellerSlice";
+import Footer from "../components/footer";
 
 export default function SellerRegister(props) {
   
@@ -129,6 +130,7 @@ export default function SellerRegister(props) {
       &nbsp;
       
       &nbsp;
+      <Footer></Footer>
     </>
   );
 }

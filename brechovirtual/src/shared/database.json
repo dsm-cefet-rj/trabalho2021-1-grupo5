@@ -59,17 +59,6 @@
       "id": 6,
       "status": "reservado",
       "idSeller": 1
-    },
-    {
-      "category": "Calçado",
-      "description": "dasdadasdad",
-      "price": 33,
-      "name": "dsdadasdasdada",
-      "idSeller": "1",
-      "images": [
-        "/static/media/casaco.34608ee8.jpg"
-      ],
-      "id": 8
     }
   ],
   "bookings": [

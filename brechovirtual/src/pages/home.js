@@ -5,6 +5,7 @@ import Navbar from "../components/navbar";
 import logo from "../images/logo2.png";
 import loading from "../images/loading.gif"
 import { fetchProducts, selectAllProducts } from "../slices/ProductsSlice";
+import Footer from "../components/footer";
 
 export default function Home(props) {
   //const products = useSelector(state=>state.products)
@@ -31,9 +32,11 @@ export default function Home(props) {
     }*/
   }, [status, dispatch])
 
+  let footerShow = '';
   let productList = '';
   if(status === 'loaded' || status === 'saved' || status==='deleted'){
     productList = products.map(renderProduct);
+    footerShow = <Footer></Footer>;
     if(productList === '' ||  (products.filter((product) => product.status === 'reservado')).length === products.length){
       productList = <p className="h6 text-center">Sem produtos na lista.</p>;
     }
@@ -69,6 +72,8 @@ export default function Home(props) {
       <div class="container">
         <div className="row">{productList}</div>
       </div>
+      &nbsp;
+      {footerShow}
     </>
   );
 }
