@@ -13,16 +13,16 @@ export default function BookingBar({booking}) {
            <div class="d-flex shadow p-3 mb-5 bg-white rounded bd-highlight justify-content-start">
                 <h4>
                     <img src={product.images[0]} width="40" height="40"  alt=""/> 
-                    <Link to={`/booking/${booking.id}`}> <span>{product.name}</span>- R$<span>{product.price}</span></Link>               
+                    <Link to={`/booking/${booking.id}`}> <span>{product.name}</span> - R$<span>{product.price}</span></Link>               
 		            &nbsp;         
 		            <p style={{fontSize:15 +'px'}}>
                          <span><b>Vendedor: </b></span>
                          <span>{seller.name}</span> - <span>{`${seller.address.district}, ${seller.address.city}`}</span>
                     </p>
 		            <p style={{fontSize:15+'px'}}>
-                        <span><b>Data de Reserva:</b></span>
+                        <span><b>Data de Reserva: </b></span>
                         <span>{booking.date}</span> - <span>
-                            <b>Status: </b></span><span>{booking.status}</span>
+                            <b> Status: </b></span><span>{booking.status}</span>
                     </p>
                 </h4>
             </div>
