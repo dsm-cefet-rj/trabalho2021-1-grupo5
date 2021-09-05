@@ -23,7 +23,10 @@ export default function SellerRegister(props) {
         : "sellerForm/addSeller"
       : "sellerForm/addSeller"
   );
-
+    let readonly = ""
+    if (actionType === "sellerForm/updateSeller"){
+      readonly = "readonly"
+    }
   //const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const history = useHistory();
@@ -54,12 +57,12 @@ export default function SellerRegister(props) {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                     <label for="inputEmail4">Nome</label>
-                    <input type="text" name="name" defaultValue={sellerFound.name } class="form-control" id="inputEmail4" placeholder="Nome do vendedor"/>
+                    <input type="text" name="name" defaultValue={sellerFound.name } class="form-control" id="inputEmail4" placeholder="Nome do vendedor" readonly={readonly}/>
                     </div>
 
                     <div class="form-group col-md-6">
                     <label for="inputPassword4">E-mail</label>
-                    <input type="email" name="email" defaultValue={sellerFound.email} class="form-control" id="inputPassword4" placeholder="E-mail"/>
+                    <input type="email" name="email" defaultValue={sellerFound.email} class="form-control" id="inputPassword4" placeholder="E-mail" readonly={readonly}/>
                     </div>
                 </div>
 
@@ -72,7 +75,7 @@ export default function SellerRegister(props) {
                     
                     <div class="form-group col-md-6">
                     <label for="inputCPF">CPF</label>
-                    <input type="text" defaultValue={sellerFound.document} name="document" class="form-control" id="inputCPF"/>
+                    <input type="text" defaultValue={sellerFound.document} name="document" class="form-control" id="inputCPF" readonly={readonly}/>
                     </div>
 
                     <div class="form-group col-md-2">
