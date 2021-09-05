@@ -2,10 +2,8 @@ import { React, useState } from "react";
 import Navbar from "../components/navbar";
 import Jumbotron from "../components/jumbotron";
 import Button from "../components/button";
-import casaco from "../images/casaco.jpg";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addSellersServer, selectSellersById, updateSellersServer } from "../slices/SellerSlice";
@@ -17,22 +15,42 @@ export default function SellerRegister(props) {
   id = parseInt(id);
 
   const sellerFound = useSelector((state) => selectSellersById(state, id));
-  const [actionType] = useState(
+
+  const [newSeller, setNewSeller] = useState(
+    
+    id ? sellerFound ?? {} : {}
+);
+
+  const [actionType,] = useState(
     id
       ? sellerFound
         ? "sellerForm/updateSeller"
         : "sellerForm/addSeller"
       : "sellerForm/addSeller"
   );
-    let readonly = ""
+    let inputName = ''
+    let inputEmail = ''
+    let inputDocument = ''
     if (actionType === "sellerForm/updateSeller"){
-      readonly = "readonly"
+      inputName = <input type="text" name="name" value={newSeller.name } onChange={handleInputChange} class="form-control" id="inputEmail4" placeholder="Nome do vendedor" readonly="readonly"/>
+      inputEmail = <input type="email" name="email" value={newSeller.email} onChange={handleInputChange} class="form-control" id="inputPassword4" placeholder="E-mail" readonly="readonly"/>
+      inputDocument = <input type="text" value={newSeller.document} onChange={handleInputChange} name="document" class="form-control" id="inputCPF" placeholder="Somente números" readonly="readonly"/>
+    }
+    else{
+      inputName = <input type="text" name="name" value={newSeller.name } onChange={handleInputChange} class="form-control" id="inputEmail4" placeholder="Nome do vendedor" />
+      inputEmail = <input type="email" name="email" value={newSeller.email} onChange={handleInputChange} class="form-control" id="inputPassword4" placeholder="E-mail" />
+      inputDocument = <input type="text" value={newSeller.document} onChange={handleInputChange} name="document" class="form-control" id="inputCPF" placeholder="Somente números"/>
     }
   //const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function onSubmit(newSeller) {
+  function handleInputChange(e){
+    setNewSeller({...newSeller, [e.target.name]: e.target.value})
+ }
+
+  function createSeller(e) {
+    e.preventDefault();
     if (actionType === "sellerForm/addSeller") {
       dispatch(addSellersServer(newSeller));
       alert("Vendedor cadastrado com sucesso!");
@@ -53,40 +71,40 @@ export default function SellerRegister(props) {
       <Navbar />
       <Jumbotron title={props.title} text={" "} />
       <div class="container">
-            <form onSubmit={onSubmit}>
+            <form>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                     <label for="inputEmail4">Nome</label>
-                    <input type="text" name="name" defaultValue={sellerFound.name } class="form-control" id="inputEmail4" placeholder="Nome do vendedor" readonly={readonly}/>
+                    {inputName}
                     </div>
 
                     <div class="form-group col-md-6">
                     <label for="inputPassword4">E-mail</label>
-                    <input type="email" name="email" defaultValue={sellerFound.email} class="form-control" id="inputPassword4" placeholder="E-mail" readonly={readonly}/>
+                    {inputEmail}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputAddress">Endereço</label>
-                    <input type="text" name="address.street" defaultValue={sellerFound.address.street} class="form-control" id="inputAddress" placeholder=""/>
+                    <input type="text" name="street" value={newSeller.street}  onChange={handleInputChange} class="form-control" id="inputAddress" placeholder="Rua, avenida..."/>
                 </div>
 
                 <div class="form-row">
                     
                     <div class="form-group col-md-6">
                     <label for="inputCPF">CPF</label>
-                    <input type="text" defaultValue={sellerFound.document} name="document" class="form-control" id="inputCPF" readonly={readonly}/>
+                    {inputDocument}
                     </div>
 
                     <div class="form-group col-md-2">
                     <label for="inputNumberDDD">DDD</label>
-                    <input type="number"name="telephone.ddd" defaultValue={sellerFound.telephone.ddd} class="form-control" id="inputNumberDDD"/>
+                    <input type="number"name="ddd" value={newSeller.ddd} onChange={handleInputChange} class="form-control" id="inputNumberDDD" placeholder="Somente números"/>
                     </div>
 
                     <div class="form-group col-md-4">
                     <label for="inputNumber">Telefone Celular</label>
-                    <input type="number"name="telephone.number" defaultValue={sellerFound.telephone.number} class="form-control" id="inputNumber"/>
+                    <input type="number"name="number" value={newSeller.number}  onChange={handleInputChange} class="form-control" id="inputNumber" placeholder="Somente números"/>
                     </div>
 
                 </div>
@@ -95,24 +113,24 @@ export default function SellerRegister(props) {
 
                     <div class="form-group col-md-5">
                     <label for="inputBairro">Bairro</label>
-                    <input type="text" defaultValue={sellerFound.address.district} name="address.district" class="form-control" id="inputBairro"/>
+                    <input type="text"  onChange={handleInputChange} name="district" value={newSeller.district} class="form-control" id="inputBairro"/>
                     </div>
 
                     <div class="form-group col-md-5">
                     <label for="inputCity">Cidade</label>
-                    <input type="text"name="address.city" defaultValue={sellerFound.address.city} class="form-control" id="inputCity"/>
+                    <input type="text"name="city"  onChange={handleInputChange} value={newSeller.city} class="form-control" id="inputCity"/>
                     </div>
 
                     <div class="form-group col-md-2">
                     <label for="inputEstado">Estado</label>
-                    <input type="text"name="address.state" defaultValue={sellerFound.address.state} class="form-control" id="inputEstado"/>
+                    <input type="text"name="state" value={newSeller.state} onChange={handleInputChange} class="form-control" id="inputEstado" placeholder="Sigla do Estado"/>
                     </div>
 
                 </div>
                 
                 <div class="row">    
               <div class="col-4 d-flex justify-content-center">
-                <Button color={"purple"} title={"Cadastrar"} type="submit" />
+                <Button color={"purple"} title={"Cadastrar"} type="submit" onClick={(e)=>createSeller(e)}/>
               </div>
               <div class="col-4 d-flex justify-content-end">
                 <Button

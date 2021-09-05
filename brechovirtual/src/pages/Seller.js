@@ -54,7 +54,7 @@ export default function Seller(){
 
                 <div class="form-group">
                     <label for="inputAddress"><b>Endereço</b></label>
-                    <p>{seller.address.street}</p>
+                    <p>{seller.street}</p>
                 </div>
 
                 <div class="form-row">
@@ -66,12 +66,12 @@ export default function Seller(){
 
                     <div class="form-group col-md-2">
                     <label for="inputNumberDDD"><b>DDD</b></label>
-                    <p>{seller.telephone.ddd}</p>
+                    <p>{seller.ddd}</p>
                     </div>
 
                     <div class="form-group col-md-4">
                     <label for="inputNumber"><b>Telefone Celular</b></label>
-                    <p>{seller.telephone.number}</p>
+                    <p>{seller.number}</p>
                     </div>
 
                 </div>
@@ -80,17 +80,17 @@ export default function Seller(){
 
                     <div class="form-group col-md-5">
                     <label for="inputBairro"><b>Bairro</b></label>
-                    <p>{seller.address.district}</p>
+                    <p>{seller.district}</p>
                     </div>
 
                     <div class="form-group col-md-5">
                     <label for="inputCity"><b>Cidade</b></label>
-                    <p>{seller.address.city}</p>
+                    <p>{seller.city}</p>
                     </div>
 
                     <div class="form-group col-md-2">
                     <label for="inputEstado"><b>Estado</b></label>
-                    <p>{seller.address.state}</p>
+                    <p>{seller.state}</p>
                     </div>
 
                 </div>

@@ -18,22 +18,28 @@ import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 
 export default function Booking() {
-  //  const bookings = useSelector(selectAll)
+ 
   const [message, setMessage] = useState("");
   const [msgEmpty, setMsgEmpty] = useState(false);
   const [msgMin, setMsgMin] = useState(false);
   const [msgMax, setMsgMax] = useState(false);
+
   const history = useHistory();
   let { id } = useParams();
   id = parseInt(id);
+
   const dispatch = useDispatch();
+
   var booking = useSelector((state) => selectBookingById(state, id));
   var product = useSelector(state=>selectProductsById(state,booking.idProduct))
   var seller = useSelector(state=>selectSellersById(state,product.idSeller))
+
   const status = useSelector((state)=>state.bookings.status)
   const error = useSelector((state)=>state.bookings.error)
+
   const status2 = useSelector((state)=>state.products.status)
   const error2 = useSelector((state)=>state.products.error)
+
   const status3 = useSelector((state)=>state.sellers.status)
   const error3 = useSelector((state)=>state.sellers.error)
 
@@ -222,7 +228,7 @@ export default function Booking() {
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Telefone:</b> {seller.telephone.ddd + seller.telephone.number}{" "}
+            <b>Telefone:</b> {seller.ddd + seller.number}{" "}
           </p>
         </div>
         <div className="row justify-content-center">

@@ -194,35 +194,39 @@
       "id": 1,
       "name": "Marcos Pereira Almeida",
       "document": "111.222.333.44",
-      "telephone": {
-        "ddd": "21",
-        "number": "999998888"
-      },
+      "ddd": "21",
+      "number": "999998888",
       "email": "marcospereira@gmail.com",
       "status": "ativo",
-      "address": {
-        "street": "Rua General Canabarro, 500",
-        "district": "Maracanã",
-        "city": "Rio de Janeiro",
-        "state": "RJ"
-      }
+      "street": "Rua General Canabarro, 200",
+      "district": "Maracanã",
+      "city": "Rio de Janeiro",
+      "state": "RJ"
     },
     {
       "id": 2,
       "name": "Antonio Carlos Amorim",
       "document": "111.777.999.44",
-      "telephone": {
-        "ddd": "21",
-        "number": "999996666"
-      },
+      "ddd": "21",
+      "number": "999996666",
       "email": "antonioca@hotmail.com",
       "status": "ativo",
-      "address": {
-        "street": "Rua Haddock Lobo, 70",
-        "district": "Centro",
-        "city": "Niteroi",
-        "state": "RJ"
-      }
+      "street": "Rua Haddock Lobo, 70",
+      "district": "Centro",
+      "city": "Niteroi",
+      "state": "RJ"
+    },
+    {
+      "name": "Pedro Moraes",
+      "email": "pmr@hotmail.com",
+      "street": "Rua 1, lote A",
+      "document": "22233311133",
+      "ddd": "21",
+      "number": "988887777",
+      "district": "Tijuca",
+      "city": "Rio de Janeiro",
+      "state": "RJ",
+      "id": 3
     }
   ]
 }

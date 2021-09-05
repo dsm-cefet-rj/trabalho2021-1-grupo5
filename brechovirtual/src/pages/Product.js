@@ -21,15 +21,18 @@ export default function Product(){
      
     const product = useSelector(state=>selectProductsById(state,id))
     const seller = useSelector(state=>selectSellersById(state,product.idSeller))
-     const status = useSelector(state=>state.products.status)
-     const error = useSelector(state=>state.products.error)
-     const bookings = useSelector(selectALLBookings)
-     const dispatch = useDispatch();
+
+    const status = useSelector(state=>state.products.status)
+    const error = useSelector(state=>state.products.error)
+    const bookings = useSelector(selectALLBookings)
+
+    const dispatch = useDispatch();
+
    if (status === 'loading'){
-    return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando o produto...</p>)
-  }else if (status === 'failed'){
-    return(<p className="h6 text-center">Error: {error}</p>)
-  }
+        return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando o produto...</p>)
+    }else if (status === 'failed'){
+        return(<p className="h6 text-center">Error: {error}</p>)
+    }
 
 
 
@@ -149,10 +152,10 @@ export default function Product(){
                 <p><b>Vendedor: </b>{seller.name}</p>
                 </div>
                 <div class="row d-flex justify-content-center">
-                <p><b>Bairro: </b>{seller.address.district}</p>
+                <p><b>Bairro: </b>{seller.district}</p>
                 </div>
                 <div class="row d-flex justify-content-center"> 
-                <p><b>Telefone: </b>{seller.telephone.ddd + seller.telephone.number}</p>
+                <p><b>Telefone: </b>{seller.ddd + seller.number}</p>
                 </div>
                 <div class="row d-flex justify-content-center">  
                 <p><b>E-mail: </b>{seller.email}</p>

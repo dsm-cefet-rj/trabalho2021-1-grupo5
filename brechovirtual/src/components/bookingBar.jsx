@@ -17,7 +17,7 @@ export default function BookingBar({booking}) {
 		            &nbsp;         
 		            <p style={{fontSize:15 +'px'}}>
                          <span><b>Vendedor: </b></span>
-                         <span>{seller.name}</span> - <span>{`${seller.address.district}, ${seller.address.city}`}</span>
+                         <span>{seller.name}</span> - <span>{`${seller.district}, ${seller.city}`}</span>
                     </p>
 		            <p style={{fontSize:15+'px'}}>
                         <span><b>Data de Reserva: </b></span>
