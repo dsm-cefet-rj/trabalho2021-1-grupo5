@@ -13,7 +13,8 @@ export default function Card(props) {
                     <Carrousel images={props.product.images} id={props.product.id} />
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title"><Link to={`/product/${props.product.id}`} title={props.product.name} >{(props.product.name).substring(0,22)}</Link> <span className="text-right"> R${props.product.price}</span></h5>
+                    <h5 className="card-title"><Link to={`/product/${props.product.id}`} title={props.product.name} >{(props.product.name).substring(0,22)}</Link></h5>
+                    <h6 className="card-title"><span className="text-right"> R${props.product.price}</span></h6>
                     <p className="card-text">{(props.product.description).substring(0,135)}</p>
                     <div className="row">
                         <div className="col">
