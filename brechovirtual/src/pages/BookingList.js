@@ -35,8 +35,8 @@ export default function BookingList() {
             );
           })
   }else if(status === 'loading'){
-    bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block align-top" alt=""/>Carregando lista de reservas concluidas...</div>
-    bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block align-top" alt=""/>Carregando lista de reservas em aberto...</div>
+    bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas concluidas...</div>
+    bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas em aberto...</div>
   }
   else if (status === 'failed'){
     bookingListClosed =<div>Error : {error}</div>

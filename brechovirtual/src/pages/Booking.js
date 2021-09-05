@@ -44,7 +44,7 @@ export default function Booking() {
   const error3 = useSelector((state)=>state.sellers.error)
 
   if (status === 'loading'|| status2 === 'loading' || status3 === "loading"){
-    return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando a reserva...</p>)
+    return (<p className="h6 text-center"> <img src={loading} width="30" height="30" className="d-inline-block" alt=""/> Carregando a reserva...</p>)
   }else if (status === 'failed' || status2 === 'failed' || status3 === "failed"){
     return(<p className="h6 text-center">Error: {error} Error2 : {error2} Error3 : {error3}</p>)
   }
@@ -62,7 +62,7 @@ export default function Booking() {
       mes = (data.getMonth() + 1).toString().padStart(2, "0"),
       ano = data.getFullYear(),
       hora = [data.getHours(), data.getMinutes()].map(pad).join(":");
-    return `${dia}/${mes}/${ano} ${hora} - `;
+    return ` ${hora}  -  ${dia}/${mes}/${ano}   -  `;
   }
   let carregando = '';
   if(status === 'loading2'){
