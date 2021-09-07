@@ -116,6 +116,7 @@ export default function Booking() {
   let buttonConclude = "";
   let buttonCancel = "";
   let inputTextArea = "";
+  let buttonPost = "";
   if (booking) {
     if (booking.status !== "fechado") {
       buttonConclude = (
@@ -137,6 +138,9 @@ export default function Booking() {
           {...register("response")}
         ></textarea>
       );
+      buttonPost = (<div className="row justify-content-center">
+      <Button color={"purple"} title={"Responder"} type="submit" />
+    </div>);
     }
   }
 
@@ -259,9 +263,7 @@ export default function Booking() {
             </div>
             <p style={{ color: "red" }}>{errors?.response?.message}</p>
             &nbsp;
-            <div className="row justify-content-center">
-              <Button color={"purple"} title={"Responder"} type="submit" />
-            </div>
+            {buttonPost}
           </form>
         </div>
       </div>

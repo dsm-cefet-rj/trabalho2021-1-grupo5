@@ -10,8 +10,7 @@ import Footer from "../components/footer";
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
   const error = useSelector(state=>state.bookings.error)
-  console.log("Bookings");
-  console.log(bookings);
+
   const status = useSelector(state=>state.bookings.status);
   const status2 = useSelector (state => state.sellers.status);
   

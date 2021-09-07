@@ -62,10 +62,34 @@ export default function ProductRegister(props) {
           <option></option>
           {sellers}
           </select>
-          <p style={{ color: "red" }}>{errors?.idSeller ? "Selecione um vendendedor" : ""}</p>
+          <p style={{ color: "red" }}>{errors?.idSeller ? "Selecione um vendedor" : ""}</p>
         </div>
       </div>
   }
+
+  if (actionType === "productForm/updateProduct"){
+    sellerForm = 
+    <div class="col-sm">
+      <div class="form-group justify-content-center">
+        <label for="exampleFormControlSelect1 align-middle">
+          <b>Vendedor</b>
+        </label>
+        <select
+        class="form-control"
+        id="exampleFormControlSelect1"
+        name="idSeller"
+        defaultValue={productOnLoad.idSeller}
+        readonly="readonly"
+        {...register("idSeller")}
+        >
+        <option></option>
+        {sellers}
+        </select>
+        <p style={{ color: "red" }}>{errors?.name ? "Selecione um vendedor" : ""}</p>
+      </div>
+    </div>
+}
+
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
@@ -135,7 +159,7 @@ export default function ProductRegister(props) {
                     {...register("name")}
                   />
                   <p style={{ color: "red" }}>{errors.name?.message}</p>
-                  <div class="valid-tooltip">Tudo certo!</div>
+                  
                 </div>
               </div>
 
@@ -155,8 +179,8 @@ export default function ProductRegister(props) {
                     </div>
                     <input
                       type="number"
-                      step="0.1"
-                      min="5"
+                      step="0.01"
+                      min="1"
                       class="form-control"
                       id="validationTooltipUsername"
                       name="price"
@@ -165,8 +189,7 @@ export default function ProductRegister(props) {
                       {...register("price")}
                     />
                     <p style={{ color: "red" }}>{errors?.price ? "Digite um valor para o preço." : ""}</p>
-                    <div class="invalid-tooltip">BRL</div>
-                    <div class="valid-tooltip">Tudo certo!</div>
+                   
                   </div>
                 </div>
                 <div class="col-sm-6">
