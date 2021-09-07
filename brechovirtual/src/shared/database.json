@@ -183,17 +183,16 @@
   ],
   "sellers": [
     {
-      "id": 1,
-      "name": "Marcos Pereira Almeida",
-      "document": "111.222.333.44",
-      "ddd": "21",
-      "number": "999998888",
-      "email": "marcospereira@gmail.com",
-      "status": "ativo",
-      "street": "Rua General Canabarro, 200",
-      "district": "Maracanã",
+      "state": "RJ",
       "city": "Rio de Janeiro",
-      "state": "RJ"
+      "district": "Maracanã",
+      "number": "999998888",
+      "ddd": 21,
+      "document": "111.222.333.44",
+      "street": "Rua General Canabarro",
+      "email": "marcospereira@gmail.com",
+      "name": "Marcos Pereira Almeida",
+      "id": 1
     },
     {
       "id": 2,
@@ -219,6 +218,18 @@
       "city": "Rio de Janeiro",
       "state": "RJ",
       "id": 3
+    },
+    {
+      "state": "RJ",
+      "city": "Rio de Janeiro",
+      "district": "Maracanã",
+      "number": "34542145",
+      "ddd": 21,
+      "document": "109.109.309-49",
+      "street": "Rua General Canabarro",
+      "email": "luma.fonseca@aluno.cefet-rj.br",
+      "name": "Luma Chen",
+      "id": 4
     }
   ]
 }

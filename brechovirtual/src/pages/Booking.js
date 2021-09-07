@@ -28,25 +28,27 @@ export default function Booking() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful }
+    formState: { errors, isSubmitSuccessful },
   } = useForm({
-    resolver: yupResolver(messageSchema), 
-    defaultValues: {response: ""}
+    resolver: yupResolver(messageSchema),
+    defaultValues: { response: "" },
   });
   const history = useHistory();
   let { id } = useParams();
   id = parseInt(id);
   const dispatch = useDispatch();
-  var booking= useSelector((state) => selectBookingById(state, id));
-  var product= useSelector((state) =>
-  selectProductsById(state, booking.idProduct)
-);
-  var seller= useSelector((state) =>
+  var booking = useSelector((state) => selectBookingById(state, id));
+  var product = useSelector((state) =>
+    selectProductsById(state, booking.idProduct)
+  );
+  var seller = useSelector((state) =>
     selectSellersById(state, product.idSeller)
   );
 
   useEffect(() => {
-    if (isSubmitSuccessful) { reset({ response: '' }); } 
+    if (isSubmitSuccessful) {
+      reset({ response: "" });
+    }
   }, [isSubmitSuccessful, reset]);
 
   const status = useSelector((state) => state.bookings.status);
@@ -250,7 +252,7 @@ export default function Booking() {
       <div className="container">
         <div className="col">
           <Chat messages={booking.messages} />
-          <form onSubmit= {handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               {carregando}
               {inputTextArea}

@@ -10,10 +10,7 @@ import "./App.css";
 import SellerRegister from "./pages/SellerRegister";
 import Seller from "./pages/Seller";
 
-
 export default function App() {
- 
-
   return (
     <>
       <Router>
@@ -21,26 +18,26 @@ export default function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route exact path='/product/:id'>
+          <Route exact path="/product/:id">
             <Product />
           </Route>
           <Route path="/productForm/new">
             <ProductRegister title={"Cadastrar produto"} />
           </Route>
           <Route path="/productForm/:id">
-            <ProductRegister  title={"Editar produto"}/>
+            <ProductRegister title={"Editar produto"} />
           </Route>
           <Route path="/sellerForm/new">
             <SellerRegister title={"Cadastrar vendedor"} />
           </Route>
           <Route path="/sellerForm/:id">
-            <SellerRegister  title={"Atualizar cadastro do vendedor"}/>
+            <SellerRegister title={"Atualizar cadastro do vendedor"} />
           </Route>
           <Route path="/seller/:id">
-            <Seller/>
+            <Seller />
           </Route>
           <Route path="/booking/:id">
-            <Booking  />
+            <Booking />
           </Route>
           <Route path="/bookingList">
             <BookingList />
