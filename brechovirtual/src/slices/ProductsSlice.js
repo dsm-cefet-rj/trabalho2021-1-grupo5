@@ -57,7 +57,7 @@ export const productsSlice = createSlice({
       state.status = "failed";
       state.error = action.error.message;
     },
-    [deleteProductsServer.pending]: (state, action) => {
+    [deleteProductsServer.pending]: (state) => {
       state.status = "loading";
     },
     [addProductsServer.pending]: (state, action) => {

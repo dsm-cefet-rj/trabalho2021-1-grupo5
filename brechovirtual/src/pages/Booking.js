@@ -4,7 +4,7 @@ import Jumbotron from "../components/jumbotron";
 import Carrousel from "../components/carrousel";
 import Chat from "../components/chat";
 import Button from "../components/button";
-import loading from "../images/loading.gif"
+import loading from "../images/loading.gif";
 import { useParams, useHistory } from "react-router";
 import {
   deleteBookingServer,
@@ -13,44 +13,75 @@ import {
   updateBookingServer,
 } from "../slices/BookingsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductsServer, selectProductsById } from "../slices/ProductsSlice";
+import {
+  updateProductsServer,
+  selectProductsById,
+} from "../slices/ProductsSlice";
+import { messageSchema } from "./MessageSellerSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { set, useForm } from "react-hook-form";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 
 export default function Booking() {
- 
-  const [message, setMessage] = useState("");
-  const [msgEmpty, setMsgEmpty] = useState(false);
-  const [msgMin, setMsgMin] = useState(false);
-  const [msgMax, setMsgMax] = useState(false);
-
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitSuccessful }
+  } = useForm({
+    resolver: yupResolver(messageSchema), 
+    defaultValues: {response: ""}
+  });
   const history = useHistory();
   let { id } = useParams();
   id = parseInt(id);
-
   const dispatch = useDispatch();
+  var booking= useSelector((state) => selectBookingById(state, id));
+  var product= useSelector((state) =>
+  selectProductsById(state, booking.idProduct)
+);
+  var seller= useSelector((state) =>
+    selectSellersById(state, product.idSeller)
+  );
 
-  var booking = useSelector((state) => selectBookingById(state, id));
-  var product = useSelector(state=>selectProductsById(state,booking.idProduct))
-  var seller = useSelector(state=>selectSellersById(state,product.idSeller))
+  useEffect(() => {
+    if (isSubmitSuccessful) { reset({ response: '' }); } 
+  }, [isSubmitSuccessful, reset]);
 
-  const status = useSelector((state)=>state.bookings.status)
-  const error = useSelector((state)=>state.bookings.error)
+  const status = useSelector((state) => state.bookings.status);
+  const error = useSelector((state) => state.bookings.error);
 
-  const status2 = useSelector((state)=>state.products.status)
-  const error2 = useSelector((state)=>state.products.error)
+  const status2 = useSelector((state) => state.products.status);
+  const error2 = useSelector((state) => state.products.error);
 
-  const status3 = useSelector((state)=>state.sellers.status)
-  const error3 = useSelector((state)=>state.sellers.error)
+  const status3 = useSelector((state) => state.sellers.status);
+  const error3 = useSelector((state) => state.sellers.error);
 
-  if (status === 'loading'|| status2 === 'loading' || status3 === "loading"){
-    return (<p className="h6 text-center"> <img src={loading} width="30" height="30" className="d-inline-block" alt=""/> Carregando a reserva...</p>)
-  }else if (status === 'failed' || status2 === 'failed' || status3 === "failed"){
-    return(<p className="h6 text-center">Error: {error} Error2 : {error2} Error3 : {error3}</p>)
-  }
- 
-  function handleInputChange(e) {
-    setMessage(e.target.value);
+  if (status === "loading" || status2 === "loading" || status3 === "loading") {
+    return (
+      <p className="h6 text-center">
+        {" "}
+        <img
+          src={loading}
+          width="30"
+          height="30"
+          className="d-inline-block"
+          alt=""
+        />{" "}
+        Carregando a reserva...
+      </p>
+    );
+  } else if (
+    status === "failed" ||
+    status2 === "failed" ||
+    status3 === "failed"
+  ) {
+    return (
+      <p className="h6 text-center">
+        Error: {error} Error2 : {error2} Error3 : {error3}
+      </p>
+    );
   }
 
   function dataAtualFormatada() {
@@ -64,14 +95,24 @@ export default function Booking() {
       hora = [data.getHours(), data.getMinutes()].map(pad).join(":");
     return ` ${hora}  -  ${dia}/${mes}/${ano}   -  `;
   }
-  let carregando = '';
-  if(status === 'loading2'){
-    carregando = <p><img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Enviando a mensagem...</p>
+  let carregando = "";
+  if (status === "loading2") {
+    carregando = (
+      <p>
+        <img
+          src={loading}
+          width="15"
+          height="15"
+          className="d-inline-block align-top"
+          alt=""
+        />{" "}
+        Enviando a mensagem...
+      </p>
+    );
   }
 
   let buttonConclude = "";
   let buttonCancel = "";
-  let buttonAnswer = "";
   let inputTextArea = "";
   if (booking) {
     if (booking.status !== "fechado") {
@@ -85,44 +126,13 @@ export default function Booking() {
       buttonCancel = (
         <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} />
       );
-      buttonAnswer = (
-        <Button
-          color="purple"
-          onClick={() => {
-            if (message === "") {
-              setMsgEmpty(true);
-            } else {
-              setMsgEmpty(false);
-            }
-            if (message.length < 3) {
-              if (message === "") {
-                setMsgEmpty(true);
-              } else {
-                setMsgEmpty(false);
-                setMsgMin(true);
-              }
-            } else {
-              setMsgMin(false);
-            }
-            if (message.length > 150) {
-              setMsgMax(true);
-            } else {
-              setMsgMax(false);
-            }
-            if (message.length >= 3 && message.length <= 150) {
-              handleClick();
-            }
-          }}
-          title={"Responder"}
-        />
-      );
       inputTextArea = (
         <textarea
           className="form-control"
           id="exampleFormControlTextarea1"
-          onChange={handleInputChange}
-          value={message}
+          name="response"
           rows="3"
+          {...register("response")}
         ></textarea>
       );
     }
@@ -145,16 +155,15 @@ export default function Booking() {
     //desabilitar botões disabled
   }
 
-  function handleClick() {
+  function onSubmit(response) {
     const newMessage = {
       userType: "Vendedor",
       userName: seller.name,
       date: dataAtualFormatada(),
-      message: message,
+      message: response.response,
     };
     var newMessagesArray = booking.messages.concat([{ ...newMessage }]);
     dispatch(updateBookingServer({ ...booking, messages: newMessagesArray }));
-    setMessage("");
   }
 
   return (
@@ -241,26 +250,19 @@ export default function Booking() {
       <div className="container">
         <div className="col">
           <Chat messages={booking.messages} />
-          <div>{carregando}{inputTextArea}</div>
-          {msgMin && (
-            <span style={{ color: "red" }}>
-              Mensagem muito curta, escreva mais
-            </span>
-          )}
-          {msgMax && (
-            <span style={{ color: "red" }}>
-              Mensagem muito longa, máximo de 150 caracteres
-            </span>
-          )}
-          {msgEmpty && (
-            <span style={{ color: "red" }}>
-              Não é possível enviar uma resposta vazia
-            </span>
-          )}
+          <form onSubmit= {handleSubmit(onSubmit)}>
+            <div>
+              {carregando}
+              {inputTextArea}
+            </div>
+            <p style={{ color: "red" }}>{errors?.response?.message}</p>
+            &nbsp;
+            <div className="row justify-content-center">
+              <Button color={"purple"} title={"Responder"} type="submit" />
+            </div>
+          </form>
         </div>
       </div>
-      &nbsp;
-      <div className="row justify-content-center">{buttonAnswer}</div>
       &nbsp;
       <Footer></Footer>
     </>

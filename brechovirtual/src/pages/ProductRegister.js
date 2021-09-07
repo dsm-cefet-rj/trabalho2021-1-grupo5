@@ -17,12 +17,9 @@ import { selectAllSellers } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 
 export default function ProductRegister(props) {
-  const error = "Este campo é obrigatório!";
   let { id } = useParams();
   id = parseInt(id);
   
-
-
   const productFound = useSelector((state) => selectProductsById(state, id));
   const sellers = useSelector(selectAllSellers).map((seller)=><option value={seller.id}>{seller.name}</option>)
   const {
@@ -62,9 +59,10 @@ export default function ProductRegister(props) {
           defaultValue={productOnLoad.idSeller}
           {...register("idSeller")}
           >
-          <option>Escolher...</option>
+          <option></option>
           {sellers}
           </select>
+          <p style={{ color: "red" }}>{errors?.idSeller ? "Selecione um vendendedor" : ""}</p>
         </div>
       </div>
   }
@@ -166,7 +164,7 @@ export default function ProductRegister(props) {
                       defaultValue={productOnLoad.price}
                       {...register("price")}
                     />
-                    <p style={{ color: "red" }}>{errors.price?.message}</p>
+                    <p style={{ color: "red" }}>{errors?.price ? "Digite um valor para o preço." : ""}</p>
                     <div class="invalid-tooltip">BRL</div>
                     <div class="valid-tooltip">Tudo certo!</div>
                   </div>
@@ -183,7 +181,7 @@ export default function ProductRegister(props) {
                       defaultValue={productOnLoad.category}
                       {...register("category")}
                     >
-                      <option>Escolher...</option>
+                      <option></option>
                       <option>Camisa</option>
                       <option>Casaco</option>
                       <option>Calça</option>
@@ -197,6 +195,7 @@ export default function ProductRegister(props) {
                       <option>Saia</option>
                       <option>Outros</option>
                     </select>
+                    <p style={{ color: "red" }}>{errors?.category ? "Selecione uma categoria" : ""}</p>
                   </div>
                 </div>
               </div>

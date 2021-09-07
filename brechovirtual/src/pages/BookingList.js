@@ -10,12 +10,14 @@ import Footer from "../components/footer";
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
   const error = useSelector(state=>state.bookings.error)
-  const status = useSelector(state=>state.bookings.status)
-
+  console.log("Bookings");
+  console.log(bookings);
+  const status = useSelector(state=>state.bookings.status);
+  const status2 = useSelector (state => state.sellers.status);
   
-  let bookingListOpen = ''
-  let bookingListClosed = ''
-  if(status === 'loaded' || status === 'saved' || status === 'deleted' || status==='updated'){
+  let bookingListOpen = '';
+  let bookingListClosed = '';
+  if((status === 'loaded' && status2 === 'loaded') || status === 'saved' || status === 'deleted' || status==='updated'){
     bookingListOpen = bookings.map((booking) => {
             return (
               <React.Fragment>
@@ -34,11 +36,11 @@ export default function BookingList() {
               </React.Fragment>
             );
           })
-  }else if(status === 'loading'){
+  }else if(status === 'loading' || status2 === 'loading2'){
     bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas concluidas...</div>
     bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas em aberto...</div>
   }
-  else if (status === 'failed'){
+  else if (status === 'failed' || loading === 'failed'){
     bookingListClosed =<div>Error : {error}</div>
     bookingListOpen = <div>Error : {error}</div>
   }

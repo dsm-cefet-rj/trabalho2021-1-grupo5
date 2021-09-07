@@ -12,31 +12,24 @@ import {addBookingServer, selectALLBookings } from '../slices/BookingsSlice'
 import { selectSellersById } from '../slices/SellerSlice';
 import Footer from "../components/footer";
 
-
-
 export default function Product(){
     const history = useHistory()
     let { id } = useParams()
     id = parseInt(id)
-     
+    
     const product = useSelector(state=>selectProductsById(state,id))
     const seller = useSelector(state=>selectSellersById(state,product.idSeller))
-
     const status = useSelector(state=>state.products.status)
     const error = useSelector(state=>state.products.error)
     const bookings = useSelector(selectALLBookings)
 
     const dispatch = useDispatch();
 
-   if (status === 'loading'){
+   if (status === 'loading' ){
         return (<p className="h6 text-center"> <img src={loading} width="15" height="15" className="d-inline-block align-top" alt=""/> Carregando o produto...</p>)
     }else if (status === 'failed'){
         return(<p className="h6 text-center">Error: {error}</p>)
     }
-
-
-
-
 
      function dataAtualFormatada(){
         function pad(s) {
@@ -49,8 +42,6 @@ export default function Product(){
             hora = [data.getHours(), data.getMinutes()].map(pad).join(':');
         return `${dia}/${mes}/${ano} ${hora} - `;
     }
-
-
 
     function handleReserve(e){
         const booking =  {
