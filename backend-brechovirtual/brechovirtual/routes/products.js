@@ -102,6 +102,12 @@ router.route('/:id')
 	res.statusCode = 200;
 	res.setHeader('Content-Type', 'application/json');
 	res.json(req.params.id)
+}).get((req,res,next)=>{
+  const id =parseInt(req.params.id)
+  res.statusCode = 200;
+	res.setHeader('Content-Type', 'application/json');
+  const product = products.filter((product)=>product.id === id)
+	res.json(product)
 })
 
 /* PUT (update) product. */

@@ -45,10 +45,10 @@ export default function BookingList() {
     bookingListOpen = <div>Error : {error} {error2}</div>
   }
 
-  if (bookingListOpen == ''){
+  if (bookingListOpen === ''){
     bookingListOpen = <p className="h6 text-center">Sem reservas em andamento.</p>;
   }
-  if (bookingListClosed == ''){
+  if (bookingListClosed === ''){
     bookingListClosed = <p className="h6 text-center">Sem reservas concluídas.</p>;
   }
 

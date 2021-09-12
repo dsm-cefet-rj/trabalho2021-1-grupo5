@@ -117,8 +117,16 @@ var bookings = [
     }
   ]
 router.route('/').get((req,res,next)=>{
-    res.json(bookings)
     res.statusCode = 200
     res.setHeader('Content-Type','application/json')
+    res.json(bookings)
+})
+
+router.route('/:id').get((req,res,next)=>{
+    const id =parseInt(req.params.id)
+    const booking = bookings.filter((booking)=>booking.id =id)
+    res.statusCode = 200
+    res.setHeader('Content-Type','application/json')
+    res.json(booking)
 })
 module.exports = router
