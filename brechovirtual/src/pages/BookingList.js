@@ -13,6 +13,7 @@ export default function BookingList() {
 
   const status = useSelector(state=>state.bookings.status);
   const status2 = useSelector (state => state.sellers.status);
+  const error2 = useSelector(state=>state.sellers.error)
   
   let bookingListOpen = '';
   let bookingListClosed = '';
@@ -39,9 +40,9 @@ export default function BookingList() {
     bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas concluidas...</div>
     bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas em aberto...</div>
   }
-  else if (status === 'failed' || loading === 'failed'){
-    bookingListClosed =<div>Error : {error}</div>
-    bookingListOpen = <div>Error : {error}</div>
+  else if (status === 'failed' || status2 === 'failed'){
+    bookingListClosed =<div>Error : {error} {error2}</div>
+    bookingListOpen = <div>Error : {error} {error2}</div>
   }
 
   if (bookingListOpen == ''){
