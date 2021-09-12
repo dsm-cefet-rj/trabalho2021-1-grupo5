@@ -7,7 +7,7 @@ var cors = require('cors')
 var indexRouter = require('./routes/index');
 var productsRouter = require('./routes/products');
 var bookingsRouter = require('./routes/bookings');
-//var sellersRouter = require('./routes/sellers');
+var sellersRouter = require('./routes/sellers');
 
 var app = express();
 
@@ -21,6 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/bookings', bookingsRouter);
-//app.use('/sellers', sellersRouter);
+app.use('/sellers', sellersRouter);
 
 module.exports = app;
