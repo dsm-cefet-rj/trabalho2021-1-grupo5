@@ -122,5 +122,4 @@ router.route('/:id')
 	res.json(req.body)
 })
 
-
 module.exports = router;
