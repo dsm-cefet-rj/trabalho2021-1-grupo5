@@ -129,4 +129,15 @@ router.route('/:id').get((req,res,next)=>{
     res.setHeader('Content-Type','application/json')
     res.json(booking)
 })
+router.route('/:id').delete((req,res,next)=>{
+    const id = parseInt(req.params.id)
+    bookings = bookings.filter((booking)=> booking.id != id)
+    res.setHeader('Content-type','application/json')
+    res.send("success")
+})
+router.route('/:id').put((req,res,next)=>{
+    const id = parseInt(req.params.id)
+    id = bookings.map((booking)=>booking = booking.id).indexOf(id)
+    bookings.splice(id,1,req.body)
+})
 module.exports = router
