@@ -144,5 +144,8 @@ router.route("/").post((req, res, next) => {
   let nextId =
     bookings.map((booking) => booking.id).reduce((x, y) => Math.max(x, y)) + 1;
   bookings.push({ ...req.body, id: nextId });
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.send("success");
 });
 module.exports = router;
