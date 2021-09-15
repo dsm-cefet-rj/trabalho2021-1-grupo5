@@ -134,7 +134,7 @@ router.route("/:id").delete((req, res, next) => {
   bookings = bookings.filter((booking) => booking.id != id);
   res.statusCode = 200;
   res.setHeader("Content-type", "application/json");
-  res.send("success");
+  res.json(id);
 });
 router.route("/:id").put((req, res, next) => {
   let id = parseInt(req.params.id);

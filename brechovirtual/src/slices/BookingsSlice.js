@@ -60,9 +60,9 @@ export const bookingsSlice = createSlice({
       state.status = "deleted";
       bookingsAdapter.removeOne(state, id);
     },
-    [updateBookingServer.fulfilled]: (state, { payload }) => {
+    [updateBookingServer.fulfilled]: (state, { payload: booking }) => {
       state.status = "updated";
-      bookingsAdapter.upsertOne(state, payload);
+      bookingsAdapter.upsertOne(state, booking);
     },
     [deleteBookingServer.pending]: (state) => {
       state.status = "loading";
