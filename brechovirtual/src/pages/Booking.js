@@ -138,9 +138,11 @@ export default function Booking() {
           {...register("response")}
         ></textarea>
       );
-      buttonPost = (<div className="row justify-content-center">
-      <Button color={"purple"} title={"Responder"} type="submit" />
-    </div>);
+      buttonPost = (
+        <div className="row justify-content-center">
+          <Button color={"purple"} title={"Responder"} type="submit" />
+        </div>
+      );
     }
   }
 

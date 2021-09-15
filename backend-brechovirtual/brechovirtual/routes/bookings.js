@@ -142,7 +142,7 @@ router.route("/:id").put((req, res, next) => {
   bookings.splice(id, 1, req.body);
   res.setHeader("Content-Type", "application/json");
   res.statusCode = 200;
-  res.json(id);
+  res.json(req.body);
 });
 router.route("/").post((req, res, next) => {
   let nextId =
