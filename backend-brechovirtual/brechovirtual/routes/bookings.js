@@ -132,6 +132,7 @@ router.route("/:id").get((req, res, next) => {
 router.route("/:id").delete((req, res, next) => {
   let id = parseInt(req.params.id);
   bookings = bookings.filter((booking) => booking.id != id);
+  res.statusCode = 200;
   res.setHeader("Content-type", "application/json");
   res.send("success");
 });
@@ -139,13 +140,17 @@ router.route("/:id").put((req, res, next) => {
   let id = parseInt(req.params.id);
   id = bookings.map((booking) => (booking = booking.id)).indexOf(id);
   bookings.splice(id, 1, req.body);
+  res.setHeader("Content-Type", "application/json");
+  res.statusCode = 200;
+  res.json(id);
 });
 router.route("/").post((req, res, next) => {
   let nextId =
     bookings.map((booking) => booking.id).reduce((x, y) => Math.max(x, y)) + 1;
-  bookings.push({ ...req.body, id: nextId });
+  let booking = { ...req.body, id: nextId };
+  bookings.push(booking);
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.send("success");
+  res.json(booking);
 });
 module.exports = router;
