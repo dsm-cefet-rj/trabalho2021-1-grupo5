@@ -1,12 +1,13 @@
 const { response } = require("express");
 var express = require("express");
+const Booking = require("../models/Booking");
 var router = express.Router();
 const booking = require("../models/Booking");
 
 router.route("/").get(async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
-    const bookings = await booking.find().maxTimeMS(5000);
+    const bookings = await Booking.find().maxTimeMS(5000);
     if (booking != null) {
       res.statusCode = 200;
       res.json(bookings);
@@ -24,7 +25,7 @@ router.route("/:id").get(async (req, res, next) => {
   let id = req.params.id;
   res.setHeader("Content-Type", "application/json");
   try {
-    let booking = await bookings.findById(id);
+    let booking = await booking.findById(id).maxTimeMS(5000);
     if (booking != null) {
       res.statusCode = 200;
       res.json(booking);
@@ -37,36 +38,37 @@ router.route("/:id").get(async (req, res, next) => {
     res.json({});
   }
 });
-router.route("/:id").delete((req, res, next) => {
+router.route("/:id").delete((req, res) => {
   let id = req.params.id;
-  bookings
+  booking
     .findByIdAndRemove(id)
+    .maxTimeMS(5000)
     .then((response) => {
-      res.statusCode = 200;
       res.setHeader("Content-type", "application/json");
-      res.json(response.id);
+      res.json(response.id).status(200);
     })
     .catch((err) => {
-      res.statusCode = 404;
-      res.json();
+      res.status(404).json();
     });
 });
 
-router.route("/:id").put((req, res, next) => {
+router.route("/:id").put((req, res) => {
   let id = parseInt(req.params.id);
-  id = bookings.map((booking) => (booking = booking.id)).indexOf(id);
-  bookings.splice(id, 1, req.body);
+  booking.findByIdAndUpdate(id).then();
   res.setHeader("Content-Type", "application/json");
-  res.statusCode = 200;
-  res.json(req.body);
+  res.json(req.body).status(200);
 });
-router.route("/").post((req, res, next) => {
-  let nextId =
-    bookings.map((booking) => booking.id).reduce((x, y) => Math.max(x, y)) + 1;
-  let booking = { ...req.body, id: nextId };
-  bookings.push(booking);
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.json(booking);
+router.route("/").post((req, res) => {
+  let booking = new booking({ ...req.body });
+  booking
+    .save()
+    .maxTimeMS(5000)
+    .then((booking) => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(200).json(booking);
+    })
+    .catch((err) => {
+      res.status(404).json({});
+    });
 });
 module.exports = router;
