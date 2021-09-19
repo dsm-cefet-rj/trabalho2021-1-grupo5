@@ -29,3 +29,4 @@ const BookingSchema = new schema({
 BookingSchema.plugin(normalize);
 var booking = mongoose.model("Booking", BookingSchema);
 module.exports = booking;
+
