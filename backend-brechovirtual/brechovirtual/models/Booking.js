@@ -10,8 +10,9 @@ const BookingSchema = new schema({
     required: true,
   },
   idBuyer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    //type: mongoose.Schema.Types.ObjectId,
+    //: "User",
+    type: String,
     required: true,
   },
   date: {
@@ -29,4 +30,3 @@ const BookingSchema = new schema({
 BookingSchema.plugin(normalize);
 var booking = mongoose.model("Booking", BookingSchema);
 module.exports = booking;
-

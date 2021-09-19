@@ -9,8 +9,6 @@ import Footer from "../components/footer";
 
 export default function Seller() {
   let { id } = useParams();
-  id = parseInt(id);
-
   const seller = useSelector((state) => selectSellersById(state, id));
   const status = useSelector((state) => state.sellers.status);
   const error = useSelector((state) => state.sellers.error);

@@ -20,7 +20,6 @@ import Footer from "../components/footer";
 export default function Product() {
   const history = useHistory();
   let { id } = useParams();
-  id = parseInt(id);
 
   const product = useSelector((state) => selectProductsById(state, id));
   const status = useSelector((state) => state.products.status);

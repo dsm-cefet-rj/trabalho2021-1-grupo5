@@ -3,7 +3,6 @@ var express = require("express");
 var router = express.Router();
 const seller = require("../models/Seller");
 
-
 router.route("/").get(async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
@@ -41,10 +40,11 @@ router.route("/:id").get(async (req, res, next) => {
 
 /* POST (create) */
 router.route("/").post((req, res, next) => {
-  seller.create(req.body)
+  Seller = new seller({ ...req.body });
+  Seller.save()
     .then(
       (response) => {
-        console.log("Product created", response);
+        console.log("Seller created", response);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(response);
@@ -87,7 +87,3 @@ router.route("/:id").put((req, res, next) => {
 });
 
 module.exports = router;
-
-
-
-

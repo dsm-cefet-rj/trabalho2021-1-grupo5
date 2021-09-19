@@ -33,18 +33,14 @@ const SellerSchema = new schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   document: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 SellerSchema.plugin(normalize);
-var seller = mongoose.model("Seller", Sellerchema);
+var seller = mongoose.model("Seller", SellerSchema);
 module.exports = seller;
-
-
-
-

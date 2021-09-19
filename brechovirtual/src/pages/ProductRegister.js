@@ -18,10 +18,10 @@ import Footer from "../components/footer";
 
 export default function ProductRegister(props) {
   let { id } = useParams();
-  id = parseInt(id);
-  
   const productFound = useSelector((state) => selectProductsById(state, id));
-  const sellers = useSelector(selectAllSellers).map((seller)=><option value={seller.id}>{seller.name}</option>)
+  const sellers = useSelector(selectAllSellers).map((seller) => (
+    <option value={seller.id}>{seller.name}</option>
+  ));
   const {
     register,
     handleSubmit,
@@ -44,51 +44,57 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  let sellerForm = ''
-  if (actionType === "productForm/addProduct"){
-      sellerForm = 
+  let sellerForm = "";
+  if (actionType === "productForm/addProduct") {
+    sellerForm = (
       <div class="col-sm">
         <div class="form-group justify-content-center">
           <label for="exampleFormControlSelect1 align-middle">
             <b>Vendedor</b>
           </label>
           <select
-          class="form-control"
-          id="exampleFormControlSelect1"
-          name="idSeller"
-          defaultValue={productOnLoad.idSeller}
-          {...register("idSeller")}
+            class="form-control"
+            id="exampleFormControlSelect1"
+            name="idSeller"
+            defaultValue={productOnLoad.idSeller}
+            {...register("idSeller")}
           >
-          <option></option>
-          {sellers}
+            <option></option>
+            {sellers}
           </select>
-          <p style={{ color: "red" }}>{errors?.idSeller ? "Selecione um vendedor" : ""}</p>
+          <p style={{ color: "red" }}>
+            {errors?.idSeller ? "Selecione um vendedor" : ""}
+          </p>
         </div>
       </div>
+    );
   }
 
-  if (actionType === "productForm/updateProduct"){
-    sellerForm = 
-    <div class="col-sm">
-      <div class="form-group justify-content-center">
-        <label for="exampleFormControlSelect1 align-middle">
-          <b>Vendedor</b>
-        </label>
-        <select
-        class="form-control"
-        id="exampleFormControlSelect1"
-        name="idSeller"
-        defaultValue={productOnLoad.idSeller}
-        readonly="readonly"
-        {...register("idSeller")}
-        >
-        <option></option>
-        {sellers}
-        </select>
-        <p style={{ color: "red" }}>{errors?.name ? "Selecione um vendedor" : ""}</p>
+  if (actionType === "productForm/updateProduct") {
+    sellerForm = (
+      <div class="col-sm">
+        <div class="form-group justify-content-center">
+          <label for="exampleFormControlSelect1 align-middle">
+            <b>Vendedor</b>
+          </label>
+          <select
+            class="form-control"
+            id="exampleFormControlSelect1"
+            name="idSeller"
+            defaultValue={productOnLoad.idSeller}
+            readonly="readonly"
+            {...register("idSeller")}
+          >
+            <option></option>
+            {sellers}
+          </select>
+          <p style={{ color: "red" }}>
+            {errors?.name ? "Selecione um vendedor" : ""}
+          </p>
+        </div>
       </div>
-    </div>
-}
+    );
+  }
 
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
@@ -159,10 +165,8 @@ export default function ProductRegister(props) {
                     {...register("name")}
                   />
                   <p style={{ color: "red" }}>{errors.name?.message}</p>
-                  
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-sm-6">
                   <label for="validationTooltipUsername">
@@ -188,8 +192,9 @@ export default function ProductRegister(props) {
                       defaultValue={productOnLoad.price}
                       {...register("price")}
                     />
-                    <p style={{ color: "red" }}>{errors?.price ? "Digite um valor para o preço." : ""}</p>
-                   
+                    <p style={{ color: "red" }}>
+                      {errors?.price ? "Digite um valor para o preço." : ""}
+                    </p>
                   </div>
                 </div>
                 <div class="col-sm-6">
@@ -218,11 +223,12 @@ export default function ProductRegister(props) {
                       <option>Saia</option>
                       <option>Outros</option>
                     </select>
-                    <p style={{ color: "red" }}>{errors?.category ? "Selecione uma categoria" : ""}</p>
+                    <p style={{ color: "red" }}>
+                      {errors?.category ? "Selecione uma categoria" : ""}
+                    </p>
                   </div>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-sm">
                   <div class="form-group">
@@ -239,36 +245,34 @@ export default function ProductRegister(props) {
                       defaultValue={productOnLoad.description}
                       {...register("description")}
                     ></textarea>
-                    <p style={{ color: "red" }}>{errors.description?.message}</p>
+                    <p style={{ color: "red" }}>
+                      {errors.description?.message}
+                    </p>
                   </div>
                 </div>
               </div>
               <br />
-              <div class="row justify-content-center">
-                {sellerForm}
-                
-              </div>
-      &nbsp;
-                <div class="row">
-                  <div class=" col-6 d-flex">
-                    <Button color={"purple"} title={"Publicar"} type="submit" />
-                  </div>
-                  <div class="col-4 d-flex justify-content-end">
-                    <Button
-                      color={"gray"}
-                      title={"Cancelar"}
-                      onClick={(e) => cancelButton(e)}
-                    />
-                  </div>
+              <div class="row justify-content-center">{sellerForm}</div>
+              &nbsp;
+              <div class="row">
+                <div class=" col-6 d-flex">
+                  <Button color={"purple"} title={"Publicar"} type="submit" />
                 </div>
-        &nbsp;
+                <div class="col-4 d-flex justify-content-end">
+                  <Button
+                    color={"gray"}
+                    title={"Cancelar"}
+                    onClick={(e) => cancelButton(e)}
+                  />
+                </div>
+              </div>
+              &nbsp;
             </form>
           </div>
         </div>
       </div>
       &nbsp;
       <Footer></Footer>
-        
     </>
   );
 }

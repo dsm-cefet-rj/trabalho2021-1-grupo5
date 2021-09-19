@@ -2,13 +2,12 @@ const { response } = require("express");
 var express = require("express");
 const Booking = require("../models/Booking");
 var router = express.Router();
-const booking = require("../models/Booking");
 
 router.route("/").get(async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
-    const bookings = await Booking.find().maxTimeMS(5000);
-    if (booking != null) {
+    const bookings = await Booking.find();
+    if (bookings != null) {
       res.statusCode = 200;
       res.json(bookings);
     } else {
@@ -25,7 +24,7 @@ router.route("/:id").get(async (req, res, next) => {
   let id = req.params.id;
   res.setHeader("Content-Type", "application/json");
   try {
-    let booking = await booking.findById(id).maxTimeMS(5000);
+    let booking = await Booking.findById(id).maxTimeMS(5000);
     if (booking != null) {
       res.statusCode = 200;
       res.json(booking);
@@ -40,8 +39,7 @@ router.route("/:id").get(async (req, res, next) => {
 });
 router.route("/:id").delete((req, res) => {
   let id = req.params.id;
-  booking
-    .findByIdAndRemove(id)
+  Booking.findByIdAndRemove(id)
     .maxTimeMS(5000)
     .then((response) => {
       res.setHeader("Content-type", "application/json");
@@ -54,15 +52,12 @@ router.route("/:id").delete((req, res) => {
 
 router.route("/:id").put((req, res) => {
   let id = parseInt(req.params.id);
-  booking.findByIdAndUpdate(id).then();
+  Booking.findByIdAndUpdate(id).then();
   res.setHeader("Content-Type", "application/json");
   res.json(req.body).status(200);
 });
 router.route("/").post((req, res) => {
-  let booking = new booking({ ...req.body });
-  booking
-    .save()
-    .maxTimeMS(5000)
+  Booking.create(req.body)
     .then((booking) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(booking);

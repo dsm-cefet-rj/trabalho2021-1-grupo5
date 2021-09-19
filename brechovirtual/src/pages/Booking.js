@@ -35,7 +35,6 @@ export default function Booking() {
   });
   const history = useHistory();
   let { id } = useParams();
-  id = parseInt(id);
   const dispatch = useDispatch();
   var booking = useSelector((state) => selectBookingById(state, id));
   var product = useSelector((state) =>
@@ -178,7 +177,9 @@ export default function Booking() {
     <>
       <Navbar />
       <Jumbotron
-        title={`Reserva nº ${booking.id} - ${booking.status}`}
+        title={`Código Reserva: ${booking.id.substring(16, 24)} - ${
+          booking.status
+        }`}
         text={" "}
       />
       <div className="container justify-content-md-center">

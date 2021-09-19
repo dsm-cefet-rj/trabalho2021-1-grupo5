@@ -16,7 +16,6 @@ import Footer from "../components/footer";
 
 export default function SellerRegister(props) {
   let { id } = useParams();
-  id = parseInt(id);
   const sellerFound = useSelector((state) => selectSellersById(state, id));
   const {
     register,
@@ -183,7 +182,11 @@ export default function SellerRegister(props) {
                 defaultValue={newSeller.ddd}
                 {...register("ddd")}
               />
-              <p style={{ color: "red" }}>{errors?.ddd ? "Este campo é obrigatório e deve ser um número" : ""}</p>
+              <p style={{ color: "red" }}>
+                {errors?.ddd
+                  ? "Este campo é obrigatório e deve ser um número"
+                  : ""}
+              </p>
             </div>
 
             <div class="form-group col-md-4">

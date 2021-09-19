@@ -11,7 +11,7 @@ var sellersRouter = require("./routes/sellers");
 
 var app = express();
 const url =
-  "mongodb+srv://Grupo5:Brecho123@cluster0.iibk2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://Grupo5:Brecho123@cluster0.iibk2.mongodb.net/BrechoVirtual?retryWrites=true&w=majority";
 mongoose
   .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected successfully"))
