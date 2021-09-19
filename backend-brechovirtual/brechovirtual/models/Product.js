@@ -16,7 +16,7 @@ const productSchema = new Schema({
 		required: true,
     },
     price: {
-        type: NumberDecimal,
+        type: Schema.Types.Decimal128,
 		required: true,
     },
     status: {
@@ -39,4 +39,4 @@ productSchema.plugin(normalize);
 
 var Products = mongoose.model('Product', productSchema);
 
-module.exports = productSchema;
+module.exports = Products;

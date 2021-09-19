@@ -20,4 +20,5 @@ const message = new schema({
     required: true,
   },
 });
-export default message;
+
+module.exports = message;

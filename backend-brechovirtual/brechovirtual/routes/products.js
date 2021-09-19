@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const Products = require('../models/product');
+const Products = require('../models/Product');
 
 
 /* GET (read) products listing. */
