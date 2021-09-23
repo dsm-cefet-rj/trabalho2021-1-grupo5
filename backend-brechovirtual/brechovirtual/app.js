@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var dotenv = require("dotenv");
 var cors = require("cors");
 var mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
@@ -10,10 +11,12 @@ var bookingsRouter = require("./routes/bookings");
 var sellersRouter = require("./routes/sellers");
 
 var app = express();
-const url =
-  "mongodb+srv://Grupo5:Brecho123@cluster0.iibk2.mongodb.net/BrechoVirtual?retryWrites=true&w=majority";
+dotenv.config();
 mongoose
-  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB_CONNECT, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connected successfully"))
   .catch((err) => console.log(err));
 app.use(logger("dev"));
