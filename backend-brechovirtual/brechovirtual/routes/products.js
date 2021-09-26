@@ -19,7 +19,7 @@ router.route("/").get(async (req, res, next) => {
 });
 
 /* POST (create) product. */
-router.route("/").post((req, res, next) => {
+router.route("/").post(authenticate.verifyUser,(req, res, next) => {
   Products.create(req.body)
     .then(
       (productDB) => {
@@ -37,7 +37,7 @@ router.route("/").post((req, res, next) => {
 router
   .route("/:id")
 
-  .delete((req, res, next) => {
+  .delete(authenticate.verifyUser, (req, res, next) => {
     Products.findByIdAndRemove(req.params.id)
       .then(
         (resp) => {
@@ -50,7 +50,7 @@ router
       .catch((err) => next(err));
   })
 
-  .get(async (req, res, next) => {
+  .get(authenticate.verifyUser, async (req, res, next) => {
     let err;
     res.setHeader("Content-Type", "application/json");
     try {
@@ -72,7 +72,7 @@ router
 //router.route("/id");
 
 /* PUT (update) product. */
-router.route("/:id").put((req, res, next) => {
+router.route("/:id").put(authenticate.verifyUser, (req, res, next) => {
   Products.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
     .then(
       (product) => {
