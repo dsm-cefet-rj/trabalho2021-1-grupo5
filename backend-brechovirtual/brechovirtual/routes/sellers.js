@@ -2,8 +2,9 @@ const { response } = require("express");
 var express = require("express");
 var router = express.Router();
 const seller = require("../models/Seller");
+const auth = require("../auth");
 
-router.route("/").get(async (req, res, next) => {
+router.route("/").get(auth.verifyUser, async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
     const sellers = await seller.find().maxTimeMS(5000);
@@ -20,7 +21,7 @@ router.route("/").get(async (req, res, next) => {
   }
 });
 
-router.route("/:id").get(async (req, res, next) => {
+router.route("/:id").get(auth.verifyUser, async (req, res, next) => {
   let id = req.params.id;
   res.setHeader("Content-Type", "application/json");
   try {
@@ -39,7 +40,7 @@ router.route("/:id").get(async (req, res, next) => {
 });
 
 /* POST (create) */
-router.route("/").post((req, res, next) => {
+router.route("/").post(auth.verifyUser, (req, res, next) => {
   Seller = new seller({ ...req.body });
   Seller.save()
     .then(
@@ -55,7 +56,7 @@ router.route("/").post((req, res, next) => {
 });
 
 /* DELETE (delete) */
-router.route("/:id").delete((req, res, next) => {
+router.route("/:id").delete(auth.verifyUser, (req, res, next) => {
   let id = req.params.id;
   seller
     .findByIdAndRemove(id)
@@ -71,7 +72,7 @@ router.route("/:id").delete((req, res, next) => {
 });
 
 /* PUT (update) */
-router.route("/:id").put((req, res, next) => {
+router.route("/:id").put(auth.verifyUser, (req, res, next) => {
   let id = req.params.id;
   seller
     .findByIdAndUpdate(id, { $set: req.body }, { new: true })

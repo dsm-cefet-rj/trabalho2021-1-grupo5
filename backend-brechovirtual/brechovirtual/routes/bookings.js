@@ -2,8 +2,11 @@ const { response } = require("express");
 var express = require("express");
 const Booking = require("../models/Booking");
 var router = express.Router();
+var authenticate = require("../auth");
 
-router.route("/").get(async (req, res, next) => {
+//TODO: Verificar as regras de negocio
+
+router.route("/").get(authenticate.verifyUser, async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
     const bookings = await Booking.find();
@@ -37,7 +40,7 @@ router.route("/:id").get(async (req, res, next) => {
     res.json({});
   }
 });
-router.route("/:id").delete((req, res) => {
+router.route("/:id").delete(authenticate.verifyUser, (req, res) => {
   let id = req.params.id;
   Booking.findByIdAndRemove(id)
     .maxTimeMS(5000)
@@ -50,13 +53,13 @@ router.route("/:id").delete((req, res) => {
     });
 });
 
-router.route("/:id").put((req, res) => {
+router.route("/:id").put(authenticate.verifyUser, (req, res) => {
   let id = parseInt(req.params.id);
   Booking.findByIdAndUpdate(id).then();
   res.setHeader("Content-Type", "application/json");
   res.json(req.body).status(200);
 });
-router.route("/").post((req, res) => {
+router.route("/").post(authenticate.verifyUser, (req, res) => {
   Booking.create(req.body)
     .then((booking) => {
       res.setHeader("Content-Type", "application/json");

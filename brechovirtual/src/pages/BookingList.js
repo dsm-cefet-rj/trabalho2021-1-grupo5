@@ -72,4 +72,3 @@ export default function BookingList() {
     </>
   );
 }
-//TODO ? formatar o date()

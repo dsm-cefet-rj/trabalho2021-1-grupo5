@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const Products = require("../models/Product");
-
+var authenticate = require("../auth");
 /* GET (read) products listing. */
 router.route("/").get(async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ router.route("/").get(async (req, res, next) => {
 });
 
 /* POST (create) product. */
-router.route("/").post(authenticate.verifyUser,(req, res, next) => {
+router.route("/").post(authenticate.verifyUser, (req, res, next) => {
   Products.create(req.body)
     .then(
       (productDB) => {
@@ -49,7 +49,6 @@ router
       )
       .catch((err) => next(err));
   })
-
   .get(authenticate.verifyUser, async (req, res, next) => {
     let err;
     res.setHeader("Content-Type", "application/json");
