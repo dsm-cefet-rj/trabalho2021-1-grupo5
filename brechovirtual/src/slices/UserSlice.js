@@ -40,7 +40,7 @@ import {
       },
       [fetchLogin.fulfilled]: (state, action) => {
         state.status = "logged_in";
-        productsAdapter.setAll(state, action.payload);
+        userAdapter.setAll(state, action.payload);
       },
       [fetchLogin.rejected]: (state, action) => {
         state.status = "failed";
@@ -51,7 +51,7 @@ import {
       },
       [addUserServer.fulfilled]: (state, action) => {
         state.status = "saved";
-        loginsAdapter.addOne(state, action.payload);
+        userAdapter.addOne(state, action.payload);
       },
     },
   });

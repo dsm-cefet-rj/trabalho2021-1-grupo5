@@ -9,6 +9,8 @@ import BookingList from "./pages/BookingList";
 import "./App.css";
 import SellerRegister from "./pages/SellerRegister";
 import Seller from "./pages/Seller";
+import Login from "./pages/Login";
+import UserRegister from "./pages/UserRegister";
 
 export default function App() {
   return (
@@ -44,6 +46,12 @@ export default function App() {
           </Route>
           <Route path="/wishList">
             <WishList />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/userRegister">
+            <UserRegister />
           </Route>
         </Switch>
       </Router>
