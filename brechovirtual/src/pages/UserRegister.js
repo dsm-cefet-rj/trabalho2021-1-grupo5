@@ -6,6 +6,8 @@ import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addUserServer } from "../slices/UserSlice";
+import '../styles.css';
+import logo2 from '../images/logo2.png';
 
 export default function UserRegister() {
   const {
@@ -20,13 +22,13 @@ export default function UserRegister() {
   const history = useHistory();
 
   function onSubmit() {
-    if (pass === passCOnfirm) {
-      dispatch(addUserServer(newUser));
+    //if (pass === passCOnfirm) {
+     // dispatch(addUserServer(newUser));
       alert("Cadastrado com sucesso!");
       history.push("/");
-    } else {
+   // } else {
       alert("As senhas não são iguais");
-    }
+   // }
   }
 
   function cancelButton(e) {
@@ -38,7 +40,7 @@ export default function UserRegister() {
     <>
       <title>Cadastro Usuário</title>
 
-      <link rel="stylesheet" type="text/css" href="../styles.css" />
+      <link rel="stylesheet" type="text/css" href={`../styles.css`} />
 
       <link
         rel="stylesheet"
@@ -52,7 +54,7 @@ export default function UserRegister() {
           <img
             id="profile-img"
             className="profile-img-card"
-            src="../images/logo2.png"
+            src={logo2}
           />
           <p id="profile-name" className="profile-name-card">
             Cadastre-se

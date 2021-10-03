@@ -4,11 +4,11 @@
 /*
  * General styles
  */
- body, html {
+ /*body, html {
     height: 100%;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(149, 100, 187),rgb(188, 169, 211));
-}
+} */
 
 .card-container.card {
     width: 350px;

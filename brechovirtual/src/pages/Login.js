@@ -5,9 +5,11 @@ import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { selectAllUsers } from "../slices/UserSlice";
+import '../styles.css'
+import logo2 from '../images/logo2.png'
 
 export default function Login() {
-  const loginFound = useSelector((state) => selectAllUsers(state, id));
+  //const loginFound = useSelector((state) => selectAllUsers(state, id));
 
   const {
     register,
@@ -35,7 +37,7 @@ export default function Login() {
     <>
       <title>Login</title>
 
-      <link rel="stylesheet" type="text/css" href="../styles.css" />
+      <link rel="stylesheet" type="text/css" href={`../styles.css`} />
 
       <link
         rel="stylesheet"
@@ -50,7 +52,7 @@ export default function Login() {
             alt=""
             id="profile-img"
             class="profile-img-card"
-            src="../images/logo2.png"
+            src={logo2}
           />
           <p id="profile-name" class="profile-name-card">
             Login
