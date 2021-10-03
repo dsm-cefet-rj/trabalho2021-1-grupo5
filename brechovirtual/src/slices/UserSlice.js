@@ -1,64 +1,56 @@
 import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-  } from "@reduxjs/toolkit";
-  import { httpGet, httpPost, httpDelete, httpPut } from "../utils";
-  import { baseUrl } from "../baseUrl";
-  
-  const userAdapter = createEntityAdapter();
-  
-  const initialState = userAdapter.getInitialState({
-    status: "not_loaded",
-    error: null,
-  });
-  
-  export const fetchLogin = createAsyncThunk(
-    "database/fetchLogin",
-    async () => {
-      return await httpGet(`${baseUrl}/login`);
-    }
-  );
-  
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { httpGet, httpPost } from "../utils";
+import { baseUrl } from "../baseUrl";
 
-  
-  export const addUserServer = createAsyncThunk(
-    "database/addUserServer",
-    async (login) => {
-      return await httpPost(`${baseUrl}/logins`, login);
-    }
-  );
-  
- 
-  
-  export const usersSlice = createSlice({
-    name: "users",
-    initialState: initialState,
-    extraReducers: {
-      [fetchLogin.pending]: (state, action) => {
-        state.status = "logging_in";
-      },
-      [fetchLogin.fulfilled]: (state, action) => {
-        state.status = "logged_in";
-        userAdapter.setAll(state, action.payload);
-      },
-      [fetchLogin.rejected]: (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      },   
-      [addUserServer.pending]: (state, action) => {
-        state.status = "loading";
-      },
-      [addUserServer.fulfilled]: (state, action) => {
-        state.status = "saved";
-        userAdapter.addOne(state, action.payload);
-      },
+const userAdapter = createEntityAdapter();
+
+const initialState = userAdapter.getInitialState({
+  status: "not_loaded",
+  error: null,
+});
+
+export const fetchLogin = createAsyncThunk("database/fetchLogin", async () => {
+  return await httpGet(`${baseUrl}/login`);
+});
+
+export const addUserServer = createAsyncThunk(
+  "database/addUserServer",
+  async (login) => {
+    return await httpPost(`${baseUrl}/logins`, login);
+  }
+);
+
+export const usersSlice = createSlice({
+  name: "users",
+  initialState: initialState,
+  extraReducers: {
+    [fetchLogin.pending]: (state, action) => {
+      state.status = "logging_in";
     },
-  });
-  
-  export default usersSlice.reducer;
-  
-  export const {
-    selectAll: selectAllUsers,
-  } = userAdapter.getSelectors((state) => state.logins);
-  
+    [fetchLogin.fulfilled]: (state, action) => {
+      state.status = "logged_in";
+      userAdapter.setAll(state, action.payload);
+    },
+    [fetchLogin.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    },
+    [addUserServer.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [addUserServer.fulfilled]: (state, action) => {
+      state.status = "saved";
+      userAdapter.addOne(state, action.payload);
+    },
+  },
+});
+
+export default usersSlice.reducer;
+
+export const { selectAll: selectAllUsers } = userAdapter.getSelectors(
+  (state) => state.logins
+);

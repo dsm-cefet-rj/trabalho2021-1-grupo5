@@ -22,7 +22,7 @@ export default function Dropdown(props) {
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
-              href="#"
+              href=""
               id="navbarDropdownMenuLink"
               role="button"
               data-toggle="dropdown"
@@ -36,6 +36,12 @@ export default function Dropdown(props) {
               style={{ right: "0", left: "auto" }}
               aria-labelledby="navbarDropdownMenuLink"
             >
+              <a className="dropdown-item">
+                <Link to="/login">Login</Link>
+              </a>
+              <a className="dropdown-item">
+                <Link to="/signup">Register</Link>
+              </a>
               <a className="dropdown-item">
                 <Link to="/">Perfil</Link>
               </a>
