@@ -4,38 +4,35 @@ const passport = require("passport");
 var router = express.Router();
 var authenticate = require("../auth");
 var bodyParser = require("body-parser");
+const { corsWithOptions } = require("./cors");
 
 router.use(bodyParser.json());
 
-router.post("/login", passport.authenticate("local"), (req, res, next) => {
-  var token = authenticate.getToken({ _id: req.user._id });
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.json({
-    success: true,
-    token: token,
-    status: "You are successfully logged in!",
-  });
-  res.redirect("/");
-});
+router.post(
+  "/login",
+  corsWithOptions,
+  passport.authenticate("local"),
+  (req, res, next) => {
+    var token = authenticate.getToken({ _id: req.user._id });
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json({
+      success: true,
+      token: token,
+      status: "You are successfully logged in!",
+    });
+    res.redirect("/");
+  }
+);
 
 router.get("/logout", (req, res, next) => {
-  /*if (req.session) {
-    req.session.destroy();
-    res.clearCookie("session-id");
-    res.redirect("/");
-  } else {
-    var err = new Error("You are not logged in!");
-    err.status = 403;
-    next(err);
-  }*/
   res.clearCookie("jwt");
   res.cookie("jwt", "", { maxAge: 1 });
   req.logout();
   res.redirect("/");
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", corsWithOptions, (req, res, next) => {
   console.log(req.body);
   User.register(
     new User({ username: req.body.username }),

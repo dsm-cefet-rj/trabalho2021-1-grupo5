@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 const seller = require("../models/Seller");
 const auth = require("../auth");
+const { corsWithOptions, cors } = require("./cors");
 
 router.route("/").get(auth.verifyUser, async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
@@ -21,26 +22,28 @@ router.route("/").get(auth.verifyUser, async (req, res, next) => {
   }
 });
 
-router.route("/:id").get(auth.verifyUser, async (req, res, next) => {
-  let id = req.params.id;
-  res.setHeader("Content-Type", "application/json");
-  try {
-    let resp = await seller.findById(id);
-    if (resp != null) {
-      res.statusCode = 200;
-      res.json(resp);
-    } else {
+router
+  .route("/:id")
+  .get(corsWithOptions, auth.verifyUser, async (req, res, next) => {
+    let id = req.params.id;
+    res.setHeader("Content-Type", "application/json");
+    try {
+      let resp = await seller.findById(id);
+      if (resp != null) {
+        res.statusCode = 200;
+        res.json(resp);
+      } else {
+        res.statusCode = 404;
+        res.json({});
+      }
+    } catch (error) {
       res.statusCode = 404;
       res.json({});
     }
-  } catch (error) {
-    res.statusCode = 404;
-    res.json({});
-  }
-});
+  });
 
 /* POST (create) */
-router.route("/").post(auth.verifyUser, (req, res, next) => {
+router.route("/").post(corsWithOptions, auth.verifyUser, (req, res, next) => {
   Seller = new seller({ ...req.body });
   Seller.save()
     .then(
@@ -56,23 +59,25 @@ router.route("/").post(auth.verifyUser, (req, res, next) => {
 });
 
 /* DELETE (delete) */
-router.route("/:id").delete(auth.verifyUser, (req, res, next) => {
-  let id = req.params.id;
-  seller
-    .findByIdAndRemove(id)
-    .then((response) => {
-      res.statusCode = 200;
-      res.setHeader("Content-type", "application/json");
-      res.json(response.id);
-    })
-    .catch((err) => {
-      res.statusCode = 404;
-      res.json();
-    });
-});
+router
+  .route("/:id")
+  .delete(corsWithOptions, auth.verifyUser, (req, res, next) => {
+    let id = req.params.id;
+    seller
+      .findByIdAndRemove(id)
+      .then((response) => {
+        res.statusCode = 200;
+        res.setHeader("Content-type", "application/json");
+        res.json(response.id);
+      })
+      .catch((err) => {
+        res.statusCode = 404;
+        res.json();
+      });
+  });
 
 /* PUT (update) */
-router.route("/:id").put(auth.verifyUser, (req, res, next) => {
+router.route("/:id").put(corsWithOptions, auth.verifyUser, (req, res, next) => {
   let id = req.params.id;
   seller
     .findByIdAndUpdate(id, { $set: req.body }, { new: true })
