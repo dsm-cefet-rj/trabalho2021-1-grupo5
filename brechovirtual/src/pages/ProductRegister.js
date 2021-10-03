@@ -82,7 +82,7 @@ export default function ProductRegister(props) {
             id="exampleFormControlSelect1"
             name="idSeller"
             defaultValue={productOnLoad.idSeller}
-            readonly="readonly"
+            disabled
             {...register("idSeller")}
           >
             <option></option>
