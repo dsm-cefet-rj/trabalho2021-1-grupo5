@@ -1,23 +1,20 @@
 import { React } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { productSchema } from "./ProductSchema";
+import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { selectAllUsers } from "../slices/UserSlice";
 
 export default function Login() {
-  const loginFound = useSelector((state) => selectAllUsers(state, id));
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(productSchema),
+    resolver: yupResolver(loginSchema),
   });
 
-  //const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -63,10 +60,13 @@ export default function Login() {
               class="form-control"
               placeholder="E-mail"
               autoComplete="true"
-              name="username"
+              name="userName"
+              {...register("userName")}
               required
               autofocus
             />
+            <p style={{ color: "red" }}>{errors.userName?.message}</p>
+
             <input
               type="password"
               id="senha"
@@ -74,8 +74,10 @@ export default function Login() {
               placeholder="Senha"
               autoComplete="false"
               name="password"
+              {...register("password")}
               required
             />
+            <p style={{ color: "red" }}>{errors.password?.message}</p>
             <div id="remember" class="checkbox">
               <label>
                 <input type="checkbox" value="remember-me" /> Lembrar

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { React } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { productSchema } from "./ProductSchema";
+import { userRegisterSchema } from "./UserRegisterSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addUserServer } from "../slices/UserSlice";
@@ -13,20 +13,15 @@ export default function UserRegister() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(productSchema),
+    resolver: yupResolver(userRegisterSchema),
   });
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   function onSubmit() {
-    if (pass === passCOnfirm) {
-      dispatch(addUserServer(newUser));
-      alert("Cadastrado com sucesso!");
-      history.push("/");
-    } else {
-      alert("As senhas não são iguais");
-    }
+    alert("Cadastrado com sucesso!");
+    history.push("/");
   }
 
   function cancelButton(e) {
@@ -64,11 +59,12 @@ export default function UserRegister() {
               id="nome"
               className="form-control"
               placeholder="Nome"
-              name="username"
-              {...register("username")}
+              name="userName"
+              {...register("userName")}
               required
               autofocus
             />
+            <p style={{ color: "red" }}>{errors.userName?.message}</p>
             <input
               type="text"
               id="nome"
@@ -79,6 +75,7 @@ export default function UserRegister() {
               required
               autofocus
             />
+            <p style={{ color: "red" }}>{errors.email?.message}</p>
             <input
               type="password"
               id="senha"
@@ -89,13 +86,17 @@ export default function UserRegister() {
               required
               autofocus
             />
+            <p style={{ color: "red" }}>{errors.password?.message}</p>
             <input
               type="password"
               id="senhaConfirmar"
               className="form-control"
               placeholder="Confirmar Senha"
+              name="confirmPassword"
+              {...register("confirmPassword")}
               required
             />
+            <p style={{ color: "red" }}>{errors.confirmPassword ? "As senhas devem ser iguais e com pelo menos 6 caracteres." : ""}</p>
             <a>
               <Link to="/login">Já possuo login.</Link>
             </a>
