@@ -28,7 +28,7 @@ const productSchema = new Schema({
     required: true,
   },
   idSeller: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Seller",
     required: true,
   },

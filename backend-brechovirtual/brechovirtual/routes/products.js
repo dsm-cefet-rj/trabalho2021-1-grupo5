@@ -12,7 +12,9 @@ router
   })
   .get(corsWithOptions, async (req, res, next) => {
     try {
-      const productDB = await Products.find({}).maxTime(5000); //TIRAR maxtime
+      const productDB = await Products.find({})
+        .populate("idSeller")
+        .maxTime(5000); //TIRAR maxtime
       console.log(productDB);
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -58,11 +60,11 @@ router
       )
       .catch((err) => next(err));
   })
-  .get(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+  .get(corsWithOptions, async (req, res, next) => {
     let err;
     res.setHeader("Content-Type", "application/json");
     try {
-      const resp = await Products.findById(req.params.id);
+      const resp = await Products.findById(req.params.id).populate("idSeller");
       if (resp != null) {
         res.statusCode = 200;
         res.json(resp);
