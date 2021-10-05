@@ -6,8 +6,8 @@ import { userRegisterSchema } from "./UserRegisterSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addUserServer } from "../slices/UserSlice";
-import '../styles.css';
-import logo2 from '../images/logo2.png';
+import "../styles.css";
+import logo2 from "../images/logo2.png";
 
 export default function UserRegister() {
   const {
@@ -21,9 +21,16 @@ export default function UserRegister() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function onSubmit() {
+  function onSubmit(user) {
+    dispatch(
+      addUserServer({
+        userName: user.userName,
+        password: user.password,
+        email: user.email
+      })
+    );
     alert("Cadastrado com sucesso!");
-    history.push("/");
+    history.push("/login");
   }
 
   function cancelButton(e) {
@@ -50,6 +57,7 @@ export default function UserRegister() {
             id="profile-img"
             className="profile-img-card"
             src={logo2}
+            alt=""
           />
           <p id="profile-name" className="profile-name-card">
             Cadastre-se
@@ -98,7 +106,11 @@ export default function UserRegister() {
               {...register("confirmPassword")}
               required
             />
-            <p style={{ color: "red" }}>{errors.confirmPassword ? "As senhas devem ser iguais e com pelo menos 6 caracteres." : ""}</p>
+            <p style={{ color: "red" }}>
+              {errors.confirmPassword
+                ? "As senhas devem ser iguais e com pelo menos 6 caracteres."
+                : ""}
+            </p>
             <a>
               <Link to="/login">Já possuo login.</Link>
             </a>

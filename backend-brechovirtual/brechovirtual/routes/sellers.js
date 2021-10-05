@@ -5,7 +5,7 @@ const seller = require("../models/Seller");
 const auth = require("../auth");
 const { corsWithOptions, cors } = require("./cors");
 
-router.route("/").get(auth.verifyUser, async (req, res, next) => {
+router.route("/").get(async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
     const sellers = await seller.find().maxTimeMS(5000);
@@ -22,25 +22,23 @@ router.route("/").get(auth.verifyUser, async (req, res, next) => {
   }
 });
 
-router
-  .route("/:id")
-  .get(corsWithOptions, auth.verifyUser, async (req, res, next) => {
-    let id = req.params.id;
-    res.setHeader("Content-Type", "application/json");
-    try {
-      let resp = await seller.findById(id);
-      if (resp != null) {
-        res.statusCode = 200;
-        res.json(resp);
-      } else {
-        res.statusCode = 404;
-        res.json({});
-      }
-    } catch (error) {
+router.route("/:id").get(corsWithOptions, async (req, res, next) => {
+  let id = req.params.id;
+  res.setHeader("Content-Type", "application/json");
+  try {
+    let resp = await seller.findById(id);
+    if (resp != null) {
+      res.statusCode = 200;
+      res.json(resp);
+    } else {
       res.statusCode = 404;
       res.json({});
     }
-  });
+  } catch (error) {
+    res.statusCode = 404;
+    res.json({});
+  }
+});
 
 /* POST (create) */
 router.route("/").post(corsWithOptions, auth.verifyUser, (req, res, next) => {

@@ -1,5 +1,5 @@
 async function client(endpoint, { body, ...customConfig } = {}) {
-    const headers = { 'Content-Type': 'application/json' }
+    const headers = { 'Content-Type': 'application/json;charset=utf-8' }
   
     const config = {
       method: body ? 'POST' : 'GET',

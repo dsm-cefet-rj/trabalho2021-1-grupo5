@@ -14,13 +14,13 @@ const initialState = userAdapter.getInitialState({
 });
 
 export const fetchLogin = createAsyncThunk("database/fetchLogin", async () => {
-  return await httpGet(`${baseUrl}/login`);
+  return await httpGet(`${baseUrl}/users/login`);
 });
 
 export const addUserServer = createAsyncThunk(
   "database/addUserServer",
   async (login) => {
-    return await httpPost(`${baseUrl}/logins`, login);
+    return await httpPost(`${baseUrl}/users/signup`, login);
   }
 );
 

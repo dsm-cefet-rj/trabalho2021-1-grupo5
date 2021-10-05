@@ -35,7 +35,7 @@ router.get("/logout", (req, res, next) => {
 router.post("/signup", corsWithOptions, (req, res, next) => {
   console.log(req.body);
   User.register(
-    new User({ username: req.body.username }),
+    new User({ username: req.body.userName, email: req.body.email }),
     req.body.password,
     (err, user) => {
       if (err) {

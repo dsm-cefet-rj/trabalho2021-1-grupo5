@@ -14,9 +14,9 @@ router
   .get(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
     res.setHeader("Content-Type", "application/json");
     try {
-      const bookings = await Booking.find()
-        .populate("idBuyer")
-        .populate("idProduct");
+      const bookings = await Booking.find();
+      //   .populate("idBuyer")
+      //  .populate("idProduct");
       if (bookings != null) {
         res.statusCode = 200;
         res.json(bookings);
@@ -35,8 +35,8 @@ router.route("/:id").get(corsWithOptions, async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
     let booking = await Booking.findById(id)
-      .populate("idBuyer")
-      .populate("idProduct")
+      //  .populate("idBuyer")
+      //  .populate("idProduct")
       .maxTimeMS(5000);
     if (booking != null) {
       res.statusCode = 200;

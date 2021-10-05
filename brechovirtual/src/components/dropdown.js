@@ -40,7 +40,7 @@ export default function Dropdown(props) {
                 <Link to="/login">Login</Link>
               </a>
               <a className="dropdown-item">
-                <Link to="/signup">Register</Link>
+                <Link to="/userRegister">Cadastrar</Link>
               </a>
               <a className="dropdown-item">
                 <Link to="/">Perfil</Link>

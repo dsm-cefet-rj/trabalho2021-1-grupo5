@@ -16,7 +16,9 @@ const initialState = productsAdapter.getInitialState({
 export const fetchProducts = createAsyncThunk(
   "database/fetchProducts",
   async () => {
-    return await httpGet(`${baseUrl}/products`);
+    const result = await httpGet(`${baseUrl}/products`);
+    console.log(result);
+    return result;
   }
 );
 
