@@ -23,7 +23,7 @@ exports.jwtPassport = passport.use(
         return done(err, false);
       }
       if (user) {
-        return done(null, true);
+        return done(null, user);
       } else {
         return done(null, true);
       }

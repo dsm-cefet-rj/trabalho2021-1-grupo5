@@ -3,10 +3,7 @@ const express = require("express");
 const passport = require("passport");
 var router = express.Router();
 var authenticate = require("../auth");
-var bodyParser = require("body-parser");
 const { corsWithOptions } = require("./cors");
-
-router.use(bodyParser.json());
 
 router.post(
   "/login",
@@ -17,9 +14,8 @@ router.post(
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json({
-      success: true,
-      token: token,
-      status: "You are successfully logged in!",
+      id: req.user._id,
+      token: token
     });
     res.redirect("/");
   }
@@ -33,22 +29,19 @@ router.get("/logout", (req, res, next) => {
 });
 
 router.post("/signup", corsWithOptions, (req, res, next) => {
-  console.log(req.body);
   User.register(
-    new User({ username: req.body.userName, email: req.body.email }),
+    new User({ username: req.body.userName, name: req.body.name }),
     req.body.password,
     (err, user) => {
       if (err) {
+        print(err)
         res.statusCode = 500;
         res.setHeader("Content-Type", "application/json");
         res.json({ err: err });
       } else {
-        passport.authenticate("local")(req, res, () => {
           res.statusCode = 200;
           res.setHeader("Content-Type", "application/json");
           res.json({ success: true, status: "Registration Successful!" });
-          res.redirect("/"); //redireciona para a página principal
-        });
       }
     }
   );

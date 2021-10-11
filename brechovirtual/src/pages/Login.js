@@ -1,10 +1,9 @@
 import { React } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { selectAllUsers } from "../slices/UserSlice";
 import '../styles.css'
 import logo2 from '../images/logo2.png'
 
