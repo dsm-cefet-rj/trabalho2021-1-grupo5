@@ -69,23 +69,23 @@ export default function UserRegister() {
               id="nome"
               className="form-control"
               placeholder="Nome"
+              name="name"
+              {...register("name")}
+              required
+              autofocus
+            />
+            <p style={{ color: "red" }}>{errors.name?.message}</p>
+            <input
+              type="text"
+              id="nome"
+              className="form-control"
+              placeholder="E-mail"
               name="userName"
               {...register("userName")}
               required
               autofocus
             />
             <p style={{ color: "red" }}>{errors.userName?.message}</p>
-            <input
-              type="text"
-              id="nome"
-              className="form-control"
-              placeholder="E-mail"
-              name="email"
-              {...register("email")}
-              required
-              autofocus
-            />
-            <p style={{ color: "red" }}>{errors.email?.message}</p>
             <input
               type="password"
               id="senha"
