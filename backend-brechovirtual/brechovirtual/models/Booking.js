@@ -10,10 +10,14 @@ const BookingSchema = new schema({
     required: true,
   },
   idBuyer: {
-    //type: mongoose.Schema.Types.ObjectId,
-    //: "User",
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
+  },
+  idSeller:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref: "Seller",
+    required:true,
   },
   date: {
     type: String,

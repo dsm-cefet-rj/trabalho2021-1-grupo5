@@ -13,9 +13,8 @@ router
   .get(corsWithOptions, async (req, res, next) => {
     try {
       const productDB = await Products.find({})
-        //.populate("idSeller")
+        .populate("idSeller")
         .maxTime(5000); //TIRAR maxtime
-      console.log(productDB);
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.json(productDB);
@@ -64,7 +63,7 @@ router
     let err;
     res.setHeader("Content-Type", "application/json");
     try {
-      const resp = await Products.findById(req.params.id); //.populate("idSeller");
+      const resp = await Products.findById(req.params.id).populate("idSeller");
       if (resp != null) {
         res.statusCode = 200;
         res.json(resp);

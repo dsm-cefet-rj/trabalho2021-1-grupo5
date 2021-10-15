@@ -27,13 +27,14 @@ const SellerSchema = new schema({
     type: String,
     required: true,
   },
-  name: {
-    type: String,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"User",
     required: true,
   },
-  email: {
+  name : {
     type: String,
-    required: true,
+    required:true,
   },
   document: {
     type: String,
