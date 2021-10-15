@@ -17,30 +17,31 @@ export const fetchProducts = createAsyncThunk(
   "database/fetchProducts",
   async () => {
     const result = await httpGet(`${baseUrl}/products`);
-    console.log(result);
     return result;
   }
 );
 
 export const deleteProductsServer = createAsyncThunk(
   "database/deleteProductsServer",
-  async (idProduct) => {
-    await httpDelete(`${baseUrl}/products/${idProduct}`);
+  async (idProduct,{getState}) => {
+    await httpDelete(`${baseUrl}/products/${idProduct}`,{headers:{Authorization: 'Bearer ' + getState().users.token}});
     return idProduct;
   }
 );
 
 export const addProductsServer = createAsyncThunk(
   "database/addProductsServer",
-  async (product) => {
-    return await httpPost(`${baseUrl}/products`, product);
+  async (product,{getState}) => {
+    console.log(getState().users.token)
+    return await httpPost(`${baseUrl}/products`, product,{headers:{Authorization: 'Bearer ' + getState().users.token}});
   }
 );
 
 export const updateProductsServer = createAsyncThunk(
   "database/updateProductsServer",
-  async (product) => {
-    return await httpPut(`${baseUrl}/products/${product.id}`, product);
+  async (product,{getState}) => {
+    console.log(getState().users.token)
+    return await httpPut(`${baseUrl}/products/${product.id}`, product,{headers:{Authorization: 'Bearer ' + getState().users.token}});
   }
 );
 

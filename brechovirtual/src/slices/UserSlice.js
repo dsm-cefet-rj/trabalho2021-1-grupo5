@@ -6,15 +6,20 @@ import {
 import { httpGet, httpPost } from "../utils";
 import { baseUrl } from "../baseUrl";
 
-const userAdapter = createEntityAdapter();
+const userAdapter = createEntityAdapter({
+  selectId: (user)=>user.id,
+}
+);
 
 const initialState = userAdapter.getInitialState({
-  status: "not_loaded",
+  status: "not_loggedIn",
   error: null,
+  token: null
 });
 
-export const fetchLogin = createAsyncThunk("database/fetchLogin", async () => {
-  return await httpGet(`${baseUrl}/users/login`);
+export const fetchLogin = createAsyncThunk("database/fetchLogin", async (login) => {
+  const response = await httpPost(`${baseUrl}/users/login`,login);
+  return response;
 });
 
 export const addUserServer = createAsyncThunk(
@@ -23,7 +28,9 @@ export const addUserServer = createAsyncThunk(
     return await httpPost(`${baseUrl}/users/signup`, login);
   }
 );
-
+export const logout = createAsyncThunk("database/logout", async ()=>{
+    return await httpGet(`${baseUrl}/users/logout`,)
+})
 export const usersSlice = createSlice({
   name: "users",
   initialState: initialState,
@@ -33,7 +40,8 @@ export const usersSlice = createSlice({
     },
     [fetchLogin.fulfilled]: (state, action) => {
       state.status = "logged_in";
-      userAdapter.setAll(state, action.payload);
+      userAdapter.addOne(state, action.payload);
+      state.token = action.payload.token;
     },
     [fetchLogin.rejected]: (state, action) => {
       state.status = "failed";
@@ -42,9 +50,12 @@ export const usersSlice = createSlice({
     [addUserServer.pending]: (state, action) => {
       state.status = "loading";
     },
+    [logout.fulfilled]:(state)=>{
+      userAdapter.removeAll(state);
+      state.token = null;
+    },
     [addUserServer.fulfilled]: (state, action) => {
       state.status = "saved";
-      userAdapter.addOne(state, action.payload);
     },
   },
 });

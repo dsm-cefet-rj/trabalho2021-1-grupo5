@@ -15,30 +15,30 @@ import {
   
   export const fetchSellers = createAsyncThunk(
     "database/fetchSellers",
-    async () => {
-      return await httpGet(`${baseUrl}/sellers`);
+    async (_,{getState}) => {
+      return await httpGet(`${baseUrl}/sellers`,{Headers:{Authorization: 'Bearer' + getState().users.token}});
     }
   );
   
   export const deleteSellersServer = createAsyncThunk(
     "database/deleteSellersServer",
-    async (idSeller) => {
-      await httpDelete(`${baseUrl}/sellers/${idSeller}`);
+    async (idSeller,{getState}) => {
+      await httpDelete(`${baseUrl}/sellers/${idSeller}`,{Headers:{Authorization: 'Bearer' + getState().users.token}});
       return idSeller;
     }
   );
   
   export const addSellersServer = createAsyncThunk(
     "database/addSellersServer",
-    async (seller) => {
-      return await httpPost(`${baseUrl}/sellers`, seller);
+    async (seller,{getState}) => {
+      return await httpPost(`${baseUrl}/sellers`, seller,{Headers:{Authorization: 'Bearer' + getState().users.token}});
     }
   );
   
   export const updateSellersServer = createAsyncThunk(
     "database/updateSellersServer",
-    async (seller) => {
-      return await httpPut(`${baseUrl}/sellers/${seller.id}`, seller);
+    async (seller,{getState}) => {
+      return await httpPut(`${baseUrl}/sellers/${seller.id}`, seller),{Headers:{Authorization: 'Bearer' + getState().users.token}};
     }
   );
   
