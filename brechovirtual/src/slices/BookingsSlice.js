@@ -11,7 +11,8 @@ const initialBookings = bookingsAdapter.getInitialState({
   status: "not_loaded",
   error: null,
 });
-
+//TODO get only the reserves of a particular user
+//TODO get also the reserves of his products
 export const fetchBookings = createAsyncThunk(
   "database/fetchBookings",
   async (_,{getState}) => {

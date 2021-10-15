@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 
+
+//TODO tornar para uma perfil so accesivel para vendedores
+//TODO quando tentar accesa redereciona para cadastro de perfil vendedor
 export default function Seller() {
   let { id } = useParams();
   const seller = useSelector((state) => selectSellersById(state, id));

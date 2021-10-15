@@ -29,6 +29,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
+//TODO Verificar dados no backend se for possivel
+
 app.use("/", indexRouter);
 app.use("/products", productsRouter);
 app.use("/users", userRouter);
