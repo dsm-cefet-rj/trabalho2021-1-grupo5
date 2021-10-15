@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Carrousel from "../components/carrousel";
 import Jumbotron from "../components/jumbotron";
@@ -9,13 +9,12 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   deleteProductsServer,
-  fetchProducts,
   selectProductsById,
   updateProductsServer,
 } from "../slices/ProductsSlice";
-import { addBookingServer, selectALLBookings } from "../slices/BookingsSlice";
-import { selectSellersById } from "../slices/SellerSlice";
+import { addBookingServer } from "../slices/BookingsSlice";
 import Footer from "../components/footer";
+import { selectAllUsers } from "../slices/UserSlice";
 
 export default function Product() {
   const history = useHistory();
@@ -24,11 +23,7 @@ export default function Product() {
   const product = useSelector((state) => selectProductsById(state, id));
   const status = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
-  const bookings = useSelector(selectALLBookings);
-  const seller = useSelector((state) =>
-    selectSellersById(state, product.idSeller)
-  );
-
+ const login = useSelector(state=>state.users.status)
   const dispatch = useDispatch();
 
   if (status === "loading") {
@@ -48,7 +43,6 @@ export default function Product() {
   } else if (status === "failed") {
     return <p className="h6 text-center">Error: {error}</p>;
   }
-
   function dataAtualFormatada() {
     function pad(s) {
       return s < 10 ? "0" + s : s;
@@ -62,19 +56,24 @@ export default function Product() {
   }
 
   function handleReserve(e) {
+    if(!(login ==="logged_in")){
+      history.push("/login")
+    }
+    else{
     const booking = {
-      id: bookings.length + 1,
-      idBuyer: 1,
       idProduct: product.id,
+      idSeller:product.idSeller.id,
       date: dataAtualFormatada(),
       status: "em andamento",
       messages: [],
     };
+    console.log(booking)
     dispatch(addBookingServer(booking));
-    dispatch(updateProductsServer({ ...product, status: "reservado" }));
+    dispatch(updateProductsServer({ ...product, status: "reservado",idSeller:product.idSeller.id }));
     e.preventDefault();
     alert("Produto adicionado à lista de reserva.");
     history.push("/bookingList");
+  }
   }
 
   function handleDelete(e) {
@@ -87,7 +86,7 @@ export default function Product() {
   return (
     <>
       <Navbar />
-      <Jumbotron title={product.name} text={"Anunciante: " + seller.name} />
+      <Jumbotron title={product.name} text={"Anunciante: " + product.idSeller.name} />
       <div class="container">
         <div class="row d-flex justify-content-center">
           <div class="col-sm-6">
@@ -184,25 +183,25 @@ export default function Product() {
           <div class="row d-flex justify-content-center">
             <p>
               <b>Vendedor: </b>
-              {seller.name}
+              {product.idSeller.name}
             </p>
           </div>
           <div class="row d-flex justify-content-center">
             <p>
               <b>Bairro: </b>
-              {seller.district}
+              {product.idSeller.district}
             </p>
           </div>
           <div class="row d-flex justify-content-center">
             <p>
               <b>Telefone: </b>
-              {seller.ddd + seller.number}
+              {product.idSeller.ddd + product.idSeller.number}
             </p>
           </div>
           <div class="row d-flex justify-content-center">
             <p>
               <b>E-mail: </b>
-              {seller.email}
+              {product.idSeller.email}
             </p>
           </div>
         </div>

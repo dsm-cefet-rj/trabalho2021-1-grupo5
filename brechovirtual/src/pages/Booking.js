@@ -36,30 +36,27 @@ export default function Booking() {
   const history = useHistory();
   let { id } = useParams();
   const dispatch = useDispatch();
-  var booking = useSelector((state) => selectBookingById(state, id));
-  var product = useSelector((state) =>
-    selectProductsById(state, booking.idProduct)
-  );
+  var [booking] = useState(useSelector((state) => selectBookingById(state, id)));
   var seller = useSelector((state) =>
-    selectSellersById(state, product.idSeller)
+    selectSellersById(state, booking.idProduct.idSeller)
   );
 
   useEffect(() => {
+    async function  getData(){
+       return await dispatch(fetchBookings)
+    }
+    getData()
     if (isSubmitSuccessful) {
       reset({ response: "" });
     }
-  }, [isSubmitSuccessful, reset]);
+  }, [isSubmitSuccessful, reset,dispatch]);
 
   const status = useSelector((state) => state.bookings.status);
   const error = useSelector((state) => state.bookings.error);
-
-  const status2 = useSelector((state) => state.products.status);
-  const error2 = useSelector((state) => state.products.error);
-
   const status3 = useSelector((state) => state.sellers.status);
   const error3 = useSelector((state) => state.sellers.error);
 
-  if (status === "loading" || status2 === "loading" || status3 === "loading") {
+  if (status === "loading"|| status3 === "loading") {
     return (
       <p className="h6 text-center">
         {" "}
@@ -75,12 +72,11 @@ export default function Booking() {
     );
   } else if (
     status === "failed" ||
-    status2 === "failed" ||
     status3 === "failed"
   ) {
     return (
       <p className="h6 text-center">
-        Error: {error} Error2 : {error2} Error3 : {error3}
+        Error: {error} Error3 : {error3}
       </p>
     );
   }
@@ -150,7 +146,7 @@ export default function Booking() {
     //setProduct([...bookings])
     e.preventDefault();
     dispatch(deleteBookingServer(id));
-    dispatch(updateProductsServer({ ...product, status: "aberto" }));
+    dispatch(updateProductsServer({ ...booking.idProduct, status: "aberto" }));
     alert("Reserva excluida.");
     history.push("/bookingList");
   }
@@ -187,7 +183,7 @@ export default function Booking() {
           <div className="col justify-content-center ">
             <div className="row justify-content-center">
               <div className="justify-content-center">
-                <Carrousel images={product.images} id={booking.id} />
+                <Carrousel images={booking.idProduct.images} id={booking.id} />
               </div>
             </div>
             <div className="row justify-content-md-center">
@@ -199,7 +195,7 @@ export default function Booking() {
               <div className="col-md-7 mb-3">
                 <label for="validationTooltip01">
                   <h2>
-                    <b>{product.name}</b>
+                    <b>{booking.idProduct.name}</b>
                   </h2>
                 </label>
               </div>
@@ -210,7 +206,7 @@ export default function Booking() {
                 <label>
                   <b>Preço: </b>
                 </label>
-                <label> R${product.price}</label>
+                <label> R${booking.idProduct.price}</label>
               </div>
             </div>
             <div className="form-row">
@@ -218,7 +214,7 @@ export default function Booking() {
                 <label>
                   <b>Categoria: </b>
                 </label>
-                <label>{product.category}</label>
+                <label>{booking.idProduct.category}</label>
               </div>
             </div>
             <div className="form-row">
@@ -226,7 +222,7 @@ export default function Booking() {
                 <label>
                   <b>Descrição: </b>
                 </label>
-                <label>{product.description}</label>
+                <label>{booking.idProduct.description}</label>
               </div>
             </div>
             <div className="form-row">

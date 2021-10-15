@@ -1,11 +1,12 @@
-import { React } from "react";
+import { React, useState } from "react";
 import { useHistory } from "react-router-dom";
-import {  useDispatch } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import '../styles.css'
 import logo2 from '../images/logo2.png'
+import { fetchLogin } from "../slices/UserSlice";
 
 export default function Login() {
   const {
@@ -15,13 +16,20 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
+  const [status] = useState(useSelector(State=>State.users.status))
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  function onSubmit() {
-    alert("Autenticado com sucesso!");
-    history.push("/");
+  const save = async (login)=>{
+    dispatch(fetchLogin(login))
+  } 
+
+  async function onSubmit(login) {
+    save(login).then(()=>{
+        alert("Autenticado com sucesso!");
+        history.push("/");
+      })
   }
 
   function cancelButton(e) {
@@ -61,12 +69,12 @@ export default function Login() {
               class="form-control"
               placeholder="E-mail"
               autoComplete="true"
-              name="userName"
-              {...register("userName")}
+              name="username"
+              {...register("username")}
               required
               autofocus
             />
-            <p style={{ color: "red" }}>{errors.userName?.message}</p>
+            <p style={{ color: "red" }}>{errors.username?.message}</p>
 
             <input
               type="password"

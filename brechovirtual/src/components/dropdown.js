@@ -1,8 +1,17 @@
 import { React } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/UserSlice";
+import { useHistory } from "react-router";
 
 export default function Dropdown(props) {
-  let { path, url } = useRouteMatch();
+  const dispatch = useDispatch()
+  const history = useHistory()
+  function handleLogOut(e){
+    alert("logging out")
+    dispatch(logout())
+    history.push("/")
+  }
   return (
     <>
       <div
@@ -62,9 +71,9 @@ export default function Dropdown(props) {
               <a className="dropdown-item">
                 <Link to="/wishList">Lista de Desejos</Link>
               </a>
-              <a className="dropdown-item">
+              <button className="dropdown-item" onClick={handleLogOut}>
                 <Link to="/">Sair</Link>
-              </a>
+              </button>
             </div>
           </li>
         </ul>

@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/navbar";
 import Jumbotron from "../components/jumbotron";
 import BookingBar from "../components/bookingBar";
-import { useSelector } from "react-redux";
-import { selectALLBookings } from "../slices/BookingsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectALLBookings, fetchBookings } from "../slices/BookingsSlice";
 import loading from '../images/loading.gif'
 import Footer from "../components/footer";
+import { useHistory } from "react-router";
 
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
   const error = useSelector(state=>state.bookings.error)
-
+  const dispatch = useDispatch()
+  //dispatch(fetchBookings())
   const status = useSelector(state=>state.bookings.status);
   const status2 = useSelector (state => state.sellers.status);
   const error2 = useSelector(state=>state.sellers.error)
-  
+  const login = useSelector(state=>state.users.status)
+  const history = useHistory()
   let bookingListOpen = '';
   let bookingListClosed = '';
-  if((status === 'loaded' && status2 === 'loaded') || status === 'saved' || status === 'deleted' || status==='updated'){
+  useEffect(()=>{
+    dispatch(fetchBookings())
+  },[dispatch]);
+  if(!(login === "logged_in")){
+        history.push("/login")
+  }
+  else if((status === 'loaded' && status2 === 'loaded') || status === 'saved' || status === 'deleted' || status==='updated'){
     bookingListOpen = bookings.map((booking) => {
             return (
               <React.Fragment>
