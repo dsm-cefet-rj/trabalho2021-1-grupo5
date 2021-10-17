@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Carrousel from "../components/carrousel";
 import Jumbotron from "../components/jumbotron";
@@ -14,7 +13,6 @@ import {
 } from "../slices/ProductsSlice";
 import { addBookingServer } from "../slices/BookingsSlice";
 import Footer from "../components/footer";
-import { selectAllUsers } from "../slices/UserSlice";
 
 export default function Product() {
   const history = useHistory();
@@ -23,7 +21,7 @@ export default function Product() {
   const product = useSelector((state) => selectProductsById(state, id));
   const status = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
- const login = useSelector(state=>state.users.status)
+  const login = useSelector(state => state.users.status)
   const dispatch = useDispatch();
 
   if (status === "loading") {
@@ -56,24 +54,23 @@ export default function Product() {
   }
 
   function handleReserve(e) {
-    if(!(login ==="logged_in")){
+    if (!(login === "logged_in")) {
       history.push("/login")
     }
-    else{
-    const booking = {
-      idProduct: product.id,
-      idSeller:product.idSeller.id,
-      date: dataAtualFormatada(),
-      status: "em andamento",
-      messages: [],
-    };
-    console.log(booking)
-    dispatch(addBookingServer(booking));
-    dispatch(updateProductsServer({ ...product, status: "reservado",idSeller:product.idSeller.id }));
-    e.preventDefault();
-    alert("Produto adicionado à lista de reserva.");
-    history.push("/bookingList");
-  }
+    else {
+      const booking = {
+        idProduct: product.id,
+        idSeller: product.idSeller.id,
+        date: dataAtualFormatada(),
+        status: "em andamento",
+        messages: [],
+      };
+      dispatch(addBookingServer(booking));
+      dispatch(updateProductsServer({ ...product, status: "reservado", idSeller: product.idSeller.id }));
+      e.preventDefault();
+      alert("Produto adicionado à lista de reserva.");
+      history.push("/bookingList");
+    }
   }
 
   function handleDelete(e) {

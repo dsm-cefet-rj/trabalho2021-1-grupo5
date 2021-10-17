@@ -52,6 +52,7 @@ export const usersSlice = createSlice({
     },
     [logout.fulfilled]:(state)=>{
       userAdapter.removeAll(state);
+      state.status = "logged_out";
       state.token = null;
     },
     [addUserServer.fulfilled]: (state, action) => {
