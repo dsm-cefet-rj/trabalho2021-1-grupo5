@@ -15,6 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { selectAllSellers } from "../slices/SellerSlice";
 import Footer from "../components/footer";
+import Modal from "../components/modal";
 
 export default function ProductRegister(props) {
   let { id } = useParams();
@@ -44,68 +45,17 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  let sellerForm = "";
-  if (actionType === "productForm/addProduct") {
-    sellerForm = (
-      <div class="col-sm">
-        <div class="form-group justify-content-center">
-          <label for="exampleFormControlSelect1 align-middle">
-            <b>Vendedor</b>
-          </label>
-          <select
-            class="form-control"
-            id="exampleFormControlSelect1"
-            name="idSeller"
-            defaultValue={productOnLoad.idSeller}
-            {...register("idSeller")}
-          >
-            <option></option>
-            {sellers}
-          </select>
-          <p style={{ color: "red" }}>
-            {errors?.idSeller ? "Selecione um vendedor" : ""}
-          </p>
-        </div>
-      </div>
-    );
-  }
 
-  if (actionType === "productForm/updateProduct") {
-    sellerForm = (
-      <div class="col-sm">
-        <div class="form-group justify-content-center">
-          <label for="exampleFormControlSelect1 align-middle">
-            <b>Vendedor</b>
-          </label>
-          <select
-            class="form-control"
-            id="exampleFormControlSelect1"
-            name="idSeller"
-            defaultValue={productOnLoad.idSeller}
-            disabled
-            {...register("idSeller")}
-          >
-            <option></option>
-            {sellers}
-          </select>
-          <p style={{ color: "red" }}>
-            {errors?.name ? "Selecione um vendedor" : ""}
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
       newProduct.status = "aberto";
       dispatch(addProductsServer(newProduct));
-      alert("Produto cadastrado com sucesso!");
     } else {
       dispatch(updateProductsServer({ ...newProduct, id: productFound.id }));
-      alert("Produto atualizado com sucesso!");
     }
+    $('#modal').modal('show')
     history.push("/");
   }
 
@@ -252,11 +202,12 @@ export default function ProductRegister(props) {
                 </div>
               </div>
               <br />
-              <div class="row justify-content-center">{sellerForm}</div>
+
               &nbsp;
               <div class="row">
                 <div class=" col-6 d-flex">
-                  <Button color={"purple"} title={"Publicar"} type="submit" />
+                  <Button color={"purple"} title={"Publicar"} type="submit"/>
+                  <Modal warning = "Produto cadastrado/atualizado com sucesso!" id="modal"/>
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                   <Button

@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import '../styles.css'
 import logo2 from '../images/logo2.png'
 import { fetchLogin } from "../slices/UserSlice";
+import { Link } from "react-router-dom";
+import Modal from "../components/modal";
+
 
 export default function Login() {
   const {
@@ -27,7 +30,7 @@ export default function Login() {
 
   async function onSubmit(login) {
     save(login).then(()=>{
-        alert("Autenticado com sucesso!");
+       $("#login").modal("show");
         history.push("/");
       })
   }
@@ -87,11 +90,11 @@ export default function Login() {
               required
             />
             <p style={{ color: "red" }}>{errors.password?.message}</p>
-            <div id="remember" class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me" /> Lembrar
-              </label>
-            </div>
+            <div>
+              <a className="">
+                <Link to="/userRegister">Cadastre-se</Link>
+              </a>
+            </div>  
             <button class="btn btn-primary btn-signin" type="submit">
               Entrar
             </button>
@@ -102,6 +105,7 @@ export default function Login() {
             >
               Cancelar
             </button>
+            <Modal warning = "Logado com sucesso!" id="login"/>
           </form>
         </div>
       </div>
