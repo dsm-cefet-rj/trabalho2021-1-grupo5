@@ -112,9 +112,9 @@ export default function UserRegister() {
                 ? "As senhas devem ser iguais e com pelo menos 6 caracteres."
                 : ""}
             </p>
-            <a>
+            <button type="button" className="btn btn-link">
               <Link to="/login">Já possuo login.</Link>
-            </a>
+            </button>
             <button className="btn  btn-primary btn-signin" type="submit">
               Cadastrar
             </button>

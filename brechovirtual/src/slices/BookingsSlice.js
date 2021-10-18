@@ -15,30 +15,30 @@ const initialBookings = bookingsAdapter.getInitialState({
 //TODO get also the reserves of his products
 export const fetchBookings = createAsyncThunk(
   "database/fetchBookings",
-  async (_,{getState}) => {
-    return await httpGet(`${baseUrl}/bookings`,{headers: {Authorization: 'Bearer ' + getState().users.token}});
+  async (_, { getState }) => {
+    return await httpGet(`${baseUrl}/bookings`, { userId: getState().users.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 export const addBookingServer = createAsyncThunk(
   "database/addBookingServer",
-  async (booking,{getState}) => {
-    console.log({...booking,idBuyer:(getState().users.ids[0])})
+  async (booking, { getState }) => {
+    console.log({ ...booking, idBuyer: (getState().users.ids[0]) })
     console.log(getState().users.ids[0])
-    return await httpPost(`${baseUrl}/bookings`, {...booking,idBuyer:(getState().users.ids[0])},{headers:{Authorization: 'Bearer ' + getState().users.token}});
+    return await httpPost(`${baseUrl}/bookings`, { ...booking, idBuyer: (getState().users.ids[0]) }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 export const deleteBookingServer = createAsyncThunk(
   "database/deleteBooking",
-  async (id,{getState}) => {
-    await httpDelete(`${baseUrl}/bookings/${id}`,{headers:{Authorization: 'Bearer ' + getState().users.token}});
+  async (id, { getState }) => {
+    await httpDelete(`${baseUrl}/bookings/${id}`, { headers: { Authorization: 'Bearer ' + getState().users.token } });
     return id;
   }
 );
 export const updateBookingServer = createAsyncThunk(
   "database/updateBookingServer",
-  async (booking,{getState}) => {
+  async (booking, { getState }) => {
     console.log(getState().users.token)
-    return await httpPut(`${baseUrl}/bookings/${booking.id}`, booking,{headers: {Authorization: 'Bearer ' + getState().users.token}});
+    return await httpPut(`${baseUrl}/bookings/${booking.id}`, booking, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 export const bookingsSlice = createSlice({
@@ -74,7 +74,7 @@ export const bookingsSlice = createSlice({
     [addBookingServer.pending]: (state) => {
       state.status = "loading";
     },
-    [addBookingServer.rejected]:(state,action)=>{
+    [addBookingServer.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
     },

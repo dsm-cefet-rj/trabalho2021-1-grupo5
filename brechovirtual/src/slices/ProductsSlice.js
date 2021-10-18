@@ -16,32 +16,36 @@ const initialState = productsAdapter.getInitialState({
 export const fetchProducts = createAsyncThunk(
   "database/fetchProducts",
   async () => {
+    console.log("database/fetchProducts");
     const result = await httpGet(`${baseUrl}/products`);
     return result;
   }
 );
 
+export const fetchMyproducts = createAsyncThunk("database/fetchMyProducts", async (_, { getState }) => {
+  return await httpGet(`${baseUrl}/products/user`, { userId: getState().users?.ids[0] })
+})
+
 export const deleteProductsServer = createAsyncThunk(
   "database/deleteProductsServer",
-  async (idProduct,{getState}) => {
-    await httpDelete(`${baseUrl}/products/${idProduct}`,{headers:{Authorization: 'Bearer ' + getState().users.token}});
+  async (idProduct, { getState }) => {
+    await httpDelete(`${baseUrl}/products/${idProduct}`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
     return idProduct;
   }
 );
 
 export const addProductsServer = createAsyncThunk(
   "database/addProductsServer",
-  async (product,{getState}) => {
-    console.log(getState().users.token)
-    return await httpPost(`${baseUrl}/products`, product,{headers:{Authorization: 'Bearer ' + getState().users.token}});
+  async (product, { getState }) => {
+    return await httpPost(`${baseUrl}/products`, { product: product, userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 
 export const updateProductsServer = createAsyncThunk(
   "database/updateProductsServer",
-  async (product,{getState}) => {
+  async (product, { getState }) => {
     console.log(getState().users.token)
-    return await httpPut(`${baseUrl}/products/${product.id}`, product,{headers:{Authorization: 'Bearer ' + getState().users.token}});
+    return await httpPut(`${baseUrl}/products/${product.id}`, { product: product, userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 
@@ -89,5 +93,4 @@ export default productsSlice.reducer;
 export const {
   selectAll: selectAllProducts,
   selectById: selectProductsById,
-  selectIds: selectProductsIds,
 } = productsAdapter.getSelectors((state) => state.products);

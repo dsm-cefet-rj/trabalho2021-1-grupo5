@@ -2,13 +2,18 @@ const { response } = require("express");
 var express = require("express");
 var router = express.Router();
 const seller = require("../models/Seller");
+const users = require('../models/User')
 const auth = require("../auth");
 const { corsWithOptions, cors } = require("./cors");
 
+
+/**
+ * gets a seller by it's user id
+ */
 router.route("/").get(async (req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   try {
-    const sellers = await seller.find().maxTimeMS(5000);
+    const sellers = await seller.findOne({ userId: req.body.userId }).maxTimeMS(5000);
     if (seller != null) {
       res.statusCode = 200;
       res.json(sellers);
@@ -46,7 +51,7 @@ router.route("/").post(corsWithOptions, auth.verifyUser, (req, res, next) => {
   Seller.save()
     .then(
       (response) => {
-        console.log("Seller created", response);
+        users.findByIdAndUpdate(req.body.userId, { $set: { "isSeller": true } }, { new: true })
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(response);

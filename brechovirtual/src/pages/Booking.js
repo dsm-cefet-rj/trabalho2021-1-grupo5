@@ -15,11 +15,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProductsServer,
-  selectProductsById,
 } from "../slices/ProductsSlice";
 import { messageSchema } from "./MessageSellerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 import Modal from "../components/modal";
@@ -45,21 +44,21 @@ export default function Booking() {
   );
 
   useEffect(() => {
-    async function  getData(){
-       return await dispatch(fetchBookings)
+    async function getData() {
+      return await dispatch(fetchBookings)
     }
     getData()
     if (isSubmitSuccessful) {
       reset({ response: "" });
     }
-  }, [isSubmitSuccessful, reset,dispatch]);
+  }, [isSubmitSuccessful, reset, dispatch]);
 
   const status = useSelector((state) => state.bookings.status);
   const error = useSelector((state) => state.bookings.error);
   const status3 = useSelector((state) => state.sellers.status);
   const error3 = useSelector((state) => state.sellers.error);
 
-  if (status === "loading"|| status3 === "loading") {
+  if (status === "loading" || status3 === "loading") {
     return (
       <p className="h6 text-center">
         {" "}
@@ -127,7 +126,7 @@ export default function Booking() {
         />
       );
       buttonCancel = (
-        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} data-toggle="modal" data-target="#cancelar"/>
+        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} data-toggle="modal" data-target="#cancelar" />
       );
       inputTextArea = (
         <textarea
@@ -157,7 +156,6 @@ export default function Booking() {
   function handleConclude(event) {
     event.preventDefault();
     dispatch(updateBookingServer({ ...booking, status: "fechado" }));
-    $('#concluir').modal('show')
     history.push("/bookingList");
     //desabilitar botões disabled
   }
@@ -177,9 +175,8 @@ export default function Booking() {
     <>
       <Navbar />
       <Jumbotron
-        title={`Código Reserva: ${booking.id.substring(16, 24)} - ${
-          booking.status
-        }`}
+        title={`Código Reserva: ${booking.id.substring(16, 24)} - ${booking.status
+          }`}
         text={" "}
       />
       <div className="container justify-content-md-center">
@@ -232,9 +229,9 @@ export default function Booking() {
             <div className="form-row">
               <div className="col-md-7  mb-3">
                 {buttonConclude}
-                <Modal warning = "Reserva concluída com sucesso!" id="concluir" />
+                <Modal warning="Reserva concluída com sucesso!" id="concluir" />
                 {buttonCancel}
-                <Modal warning = "Reserva cancelada." id="cancelar" />
+                <Modal warning="Reserva cancelada." id="cancelar" />
               </div>
             </div>
           </div>

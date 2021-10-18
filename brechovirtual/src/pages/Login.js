@@ -1,10 +1,11 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useHistory } from "react-router-dom";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import '../styles.css'
+//import * as $ from 'jquery'
 import logo2 from '../images/logo2.png'
 import { fetchLogin } from "../slices/UserSlice";
 import { Link } from "react-router-dom";
@@ -19,20 +20,19 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const [status] = useState(useSelector(State=>State.users.status))
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const save = async (login)=>{
+  const save = async (login) => {
     dispatch(fetchLogin(login))
-  } 
+  }
 
   async function onSubmit(login) {
-    save(login).then(()=>{
-       $("#login").modal("show");
-        history.push("/");
-      })
+    save(login).then(() => {
+      //$("#login").modal("show")
+      history.push("/");
+    })
   }
 
   function cancelButton(e) {
@@ -91,10 +91,10 @@ export default function Login() {
             />
             <p style={{ color: "red" }}>{errors.password?.message}</p>
             <div>
-              <a className="">
+              <button className="btn btn-link">
                 <Link to="/userRegister">Cadastre-se</Link>
-              </a>
-            </div>  
+              </button>
+            </div>
             <button class="btn btn-primary btn-signin" type="submit">
               Entrar
             </button>
@@ -104,8 +104,8 @@ export default function Login() {
               onClick={(e) => cancelButton(e)}
             >
               Cancelar
-            </button>
-            <Modal warning = "Logado com sucesso!" id="login"/>
+            </button >
+            <Modal warning="Logado com sucesso!" id="login" />
           </form>
         </div>
       </div>

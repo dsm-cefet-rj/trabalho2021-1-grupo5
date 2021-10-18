@@ -6,10 +6,7 @@ import {
 import { httpGet, httpPost } from "../utils";
 import { baseUrl } from "../baseUrl";
 
-const userAdapter = createEntityAdapter({
-  selectId: (user)=>user.id,
-}
-);
+const userAdapter = createEntityAdapter({});
 
 const initialState = userAdapter.getInitialState({
   status: "not_loggedIn",
@@ -18,7 +15,7 @@ const initialState = userAdapter.getInitialState({
 });
 
 export const fetchLogin = createAsyncThunk("database/fetchLogin", async (login) => {
-  const response = await httpPost(`${baseUrl}/users/login`,login);
+  const response = await httpPost(`${baseUrl}/users/login`, login);
   return response;
 });
 
@@ -28,8 +25,8 @@ export const addUserServer = createAsyncThunk(
     return await httpPost(`${baseUrl}/users/signup`, login);
   }
 );
-export const logout = createAsyncThunk("database/logout", async ()=>{
-    return await httpGet(`${baseUrl}/users/logout`,)
+export const logout = createAsyncThunk("database/logout", async () => {
+  return await httpGet(`${baseUrl}/users/logout`,)
 })
 export const usersSlice = createSlice({
   name: "users",
@@ -50,8 +47,9 @@ export const usersSlice = createSlice({
     [addUserServer.pending]: (state, action) => {
       state.status = "loading";
     },
-    [logout.fulfilled]:(state)=>{
+    [logout.fulfilled]: (state) => {
       userAdapter.removeAll(state);
+      state.status = "logged_out";
       state.token = null;
     },
     [addUserServer.fulfilled]: (state, action) => {
@@ -63,5 +61,5 @@ export const usersSlice = createSlice({
 export default usersSlice.reducer;
 
 export const { selectAll: selectAllUsers } = userAdapter.getSelectors(
-  (state) => state.logins
+  (state) => state.users
 );
