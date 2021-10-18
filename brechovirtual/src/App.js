@@ -11,6 +11,8 @@ import SellerRegister from "./pages/SellerRegister";
 import Seller from "./pages/Seller";
 import Login from "./pages/Login";
 import UserRegister from "./pages/UserRegister";
+import BeASeller from "./pages/BeASeller";
+import MyProducts from "./pages/MyProducts";
 
 export default function App() {
   return (
@@ -35,7 +37,7 @@ export default function App() {
           <Route path="/sellerForm/:id">
             <SellerRegister title={"Atualizar cadastro do vendedor"} />
           </Route>
-          <Route path="/seller/:id">
+          <Route path="/seller">
             <Seller />
           </Route>
           <Route path="/booking/:id">
@@ -52,6 +54,12 @@ export default function App() {
           </Route>
           <Route path="/userRegister">
             <UserRegister />
+          </Route>
+          <Route path="/sellerProfile">
+            <BeASeller />
+          </Route>
+          <Route path="/myProducts">
+            <MyProducts />
           </Route>
         </Switch>
       </Router>

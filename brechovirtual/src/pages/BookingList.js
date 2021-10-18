@@ -8,6 +8,9 @@ import loading from '../images/loading.gif'
 import Footer from "../components/footer";
 import { useHistory } from "react-router";
 
+
+//FILTRAR LISTA POR STATUS E COMPRADOR/VENDEDOR
+
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
   const error = useSelector(state=>state.bookings.error)

@@ -21,6 +21,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
+import Modal from "../components/modal";
+
+
 
 export default function Booking() {
   const {
@@ -91,6 +94,7 @@ export default function Booking() {
       hora = [data.getHours(), data.getMinutes()].map(pad).join(":");
     return ` ${hora}  -  ${dia}/${mes}/${ano}   -  `;
   }
+
   let carregando = "";
   if (status === "loading2") {
     carregando = (
@@ -111,6 +115,7 @@ export default function Booking() {
   let buttonCancel = "";
   let inputTextArea = "";
   let buttonPost = "";
+
   if (booking) {
     if (booking.status !== "fechado") {
       buttonConclude = (
@@ -121,7 +126,7 @@ export default function Booking() {
         />
       );
       buttonCancel = (
-        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} />
+        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} data-toggle="modal" data-target="#cancelar"/>
       );
       inputTextArea = (
         <textarea
@@ -146,13 +151,12 @@ export default function Booking() {
     e.preventDefault();
     dispatch(deleteBookingServer(id));
     dispatch(updateProductsServer({ ...booking.idProduct, status: "aberto" }));
-    alert("Reserva excluida.");
     history.push("/bookingList");
   }
   function handleConclude(event) {
     event.preventDefault();
     dispatch(updateBookingServer({ ...booking, status: "fechado" }));
-    alert("Reserva concluida. ");
+    $('#concluir').modal('show')
     history.push("/bookingList");
     //desabilitar botões disabled
   }
@@ -226,7 +230,9 @@ export default function Booking() {
             <div className="form-row">
               <div className="col-md-7  mb-3">
                 {buttonConclude}
+                <Modal warning = "Reserva concluída com sucesso!" id="concluir" />
                 {buttonCancel}
+                <Modal warning = "Reserva cancelada." id="cancelar" />
               </div>
             </div>
           </div>
