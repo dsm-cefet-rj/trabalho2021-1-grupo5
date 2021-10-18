@@ -1,10 +1,14 @@
 var express = require("express");
 var router = express.Router();
+const multer = require('multer');
+const upload = multer({ dest: 'brechovirtual/public' });
+
 const Products = require("../models/Product");
 var authenticate = require("../auth");
 const { corsWithOptions } = require("./cors");
-/* GET (read) products listing. */
+const maxFotos = 2
 
+/* GET (read) products listing. */
 router
   .route("/")
   .options(corsWithOptions, (req, res) => {
@@ -29,7 +33,7 @@ router
 /* POST (create) product. */
 router
   .route("/")
-  .post(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
+  .post(corsWithOptions, authenticate.verifyUser, upload.array('images', maxFotos), (req, res, next) => {
     Products.create(req.body)
       .then(
         (productDB) => {

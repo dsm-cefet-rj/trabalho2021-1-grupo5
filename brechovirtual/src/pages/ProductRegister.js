@@ -81,7 +81,7 @@ export default function ProductRegister(props) {
               />
             </div>
             &nbsp;
-            <p>
+            <form method="post" enctype="multipart/form-data">
               <div class="row justify-content-md-center">
                 <div class="col-md-6 custom-file">
                   <input
@@ -89,13 +89,15 @@ export default function ProductRegister(props) {
                     type="file"
                     class="custom-file-input"
                     name="images"
+                    accept=".jpg"
+                    multiple 
                   />
                   <label class="custom-file-label" for="customFile">
                     Escolher arquivo
                   </label>
                 </div>
               </div>
-            </p>
+            </form>
           </div>
 
           <div class="col-sm-6">
