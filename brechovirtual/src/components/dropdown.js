@@ -11,16 +11,16 @@ export default function Dropdown(props) {
   const history = useHistory()
 
   function handleLogOut(e) {
-    ('#logout').modal('show')
     dispatch(logout())
     history.push("/")
   }
 
-  const user = useSelector((selectAllUsers))[0];
+  const user = useSelector(selectAllUsers)[0];
   var logoutDisabled = {};
   var beASellerDisabled = {};
   var anunciosDisabled = { display: "none" }
   let avatar = {}
+  const redirect = () => history.push("/login");
   if (user) {
     avatar = <div>  {user.name} </div>
     if (user.isSeller) {
@@ -29,7 +29,7 @@ export default function Dropdown(props) {
     }
   }
   else {
-    avatar = <Button color={"purple"} title={"Login"} > <Link to="/login"></Link> </Button>
+    avatar = <Button color={"purple"} title={"Login"} onClick={redirect} />
     logoutDisabled = { display: "none" }
   }
 

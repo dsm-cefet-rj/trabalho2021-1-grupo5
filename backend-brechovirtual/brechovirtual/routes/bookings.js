@@ -22,6 +22,7 @@ router
         .populate("idBuyer")
         .populate("idSeller")
         .populate("idProduct");
+      console.log([bookingBuyer, bookingSeller]);
       const bookings = bookingBuyer.concat(bookingSeller);
       if (bookings != null) {
         res.statusCode = 200;

@@ -16,7 +16,7 @@ const initialState = sellersAdapter.getInitialState({
 export const fetchSellers = createAsyncThunk(
   "database/fetchSellers",
   async (_, { getState }) => {
-    return await httpGet(`${baseUrl}/sellers`, { userId: getState().users.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    return await httpGet(`${baseUrl}/sellers`, { userId: getState().users?.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
   }
 );
 
@@ -31,7 +31,7 @@ export const deleteSellersServer = createAsyncThunk(
 export const addSellersServer = createAsyncThunk(
   "database/addSellersServer",
   async (seller, { getState }) => {
-    return await httpPost(`${baseUrl}/sellers`, { ...seller, userId: getState().users.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    return await httpPost(`${baseUrl}/sellers`, { ...seller, userId: getState().users?.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
   }
 );
 
@@ -88,5 +88,4 @@ export default sellersSlice.reducer;
 export const {
   selectAll: selectAllSellers,
   selectById: selectSellersById,
-  selectIds: selectSellersIds,
 } = sellersAdapter.getSelectors((state) => state.sellers);

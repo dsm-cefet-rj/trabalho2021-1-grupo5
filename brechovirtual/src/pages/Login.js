@@ -5,6 +5,7 @@ import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import '../styles.css'
+//import * as $ from 'jquery'
 import logo2 from '../images/logo2.png'
 import { fetchLogin } from "../slices/UserSlice";
 import { Link } from "react-router-dom";
@@ -29,7 +30,7 @@ export default function Login() {
 
   async function onSubmit(login) {
     save(login).then(() => {
-      ("#login").modal("show");
+      //$("#login").modal("show")
       history.push("/");
     })
   }
@@ -103,7 +104,7 @@ export default function Login() {
               onClick={(e) => cancelButton(e)}
             >
               Cancelar
-            </button>
+            </button >
             <Modal warning="Logado com sucesso!" id="login" />
           </form>
         </div>

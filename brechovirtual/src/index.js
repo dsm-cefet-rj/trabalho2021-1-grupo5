@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux'
-import {store} from './store'
+import { Provider } from 'react-redux'
+import { store } from './store'
 import { fetchProducts } from './slices/ProductsSlice';
-import { fetchBookings } from './slices/BookingsSlice';
-import { fetchSellers } from './slices/SellerSlice';
 
 store.dispatch(fetchProducts());
-store.dispatch(fetchBookings());
-store.dispatch(fetchSellers());
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

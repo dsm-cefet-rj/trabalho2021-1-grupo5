@@ -126,7 +126,7 @@ export default function Booking() {
         />
       );
       buttonCancel = (
-        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} data-toggle="modal" data-target="#cancelar"/>
+        <Button color="red" title={"Cancelar Reserva"} onClick={handleDelete} data-toggle="modal" data-target="#cancelar" />
       );
       inputTextArea = (
         <textarea
@@ -156,7 +156,6 @@ export default function Booking() {
   function handleConclude(event) {
     event.preventDefault();
     dispatch(updateBookingServer({ ...booking, status: "fechado" }));
-    $('#concluir').modal('show')
     history.push("/bookingList");
     //desabilitar botões disabled
   }
@@ -230,9 +229,9 @@ export default function Booking() {
             <div className="form-row">
               <div className="col-md-7  mb-3">
                 {buttonConclude}
-                <Modal warning = "Reserva concluída com sucesso!" id="concluir" />
+                <Modal warning="Reserva concluída com sucesso!" id="concluir" />
                 {buttonCancel}
-                <Modal warning = "Reserva cancelada." id="cancelar" />
+                <Modal warning="Reserva cancelada." id="cancelar" />
               </div>
             </div>
           </div>

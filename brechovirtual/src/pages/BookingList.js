@@ -13,54 +13,54 @@ import { useHistory } from "react-router";
 
 export default function BookingList() {
   const bookings = useSelector(selectALLBookings);
-  const error = useSelector(state=>state.bookings.error)
+  const error = useSelector(state => state.bookings.error)
   const dispatch = useDispatch()
   //dispatch(fetchBookings())
-  const status = useSelector(state=>state.bookings.status);
-  const status2 = useSelector (state => state.sellers.status);
-  const error2 = useSelector(state=>state.sellers.error)
-  const login = useSelector(state=>state.users.status)
+  const status = useSelector(state => state.bookings.status);
+  const status2 = useSelector(state => state.sellers.status);
+  const error2 = useSelector(state => state.sellers.error)
+  const login = useSelector(state => state.users.status)
   const history = useHistory()
   let bookingListOpen = '';
   let bookingListClosed = '';
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchBookings())
-  },[dispatch]);
-  if(!(login === "logged_in")){
-        history.push("/login")
+  }, [dispatch]);
+  if (!(login === "logged_in")) {
+    history.push("/login")
   }
-  else if((status === 'loaded' && status2 === 'loaded') || status === 'saved' || status === 'deleted' || status==='updated'){
+  else if ((status === 'loaded' && status2 === 'loaded') || status === 'saved' || status === 'deleted' || status === 'updated') {
     bookingListOpen = bookings.map((booking) => {
-            return (
-              <React.Fragment>
-                {booking.status === "em andamento" && (
-                  <BookingBar key={booking.id} booking={booking} />
-                )}
-              </React.Fragment>
-            );
-          })
+      return (
+        <React.Fragment>
+          {booking.status === "em andamento" && (
+            <BookingBar key={booking.id} booking={booking} />
+          )}
+        </React.Fragment>
+      );
+    })
     bookingListClosed = bookings.map((booking) => {
-            return (
-              <React.Fragment>
-                {booking.status === "fechado" && (
-                  <BookingBar key={booking.id} booking={booking} />
-                )}
-              </React.Fragment>
-            );
-          })
-  }else if(status === 'loading' || status2 === 'loading2'){
-    bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas concluidas...</div>
-    bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block" alt=""/>Carregando lista de reservas em aberto...</div>
+      return (
+        <React.Fragment>
+          {booking.status === "fechado" && (
+            <BookingBar key={booking.id} booking={booking} />
+          )}
+        </React.Fragment>
+      );
+    })
+  } else if (status === 'loading' || status2 === 'loading2') {
+    bookingListClosed = <div><img src={loading} width="30" height="30" className="d-inline-block" alt="" />Carregando lista de reservas concluidas...</div>
+    bookingListOpen = <div><img src={loading} width="30" height="30" className="d-inline-block" alt="" />Carregando lista de reservas em aberto...</div>
   }
-  else if (status === 'failed' || status2 === 'failed'){
-    bookingListClosed =<div>Error : {error} {error2}</div>
+  else if (status === 'failed' || status2 === 'failed') {
+    bookingListClosed = <div>Error : {error} {error2}</div>
     bookingListOpen = <div>Error : {error} {error2}</div>
   }
 
-  if (bookingListOpen === ''){
+  if (bookingListOpen === '') {
     bookingListOpen = <p className="h6 text-center">Sem reservas em andamento.</p>;
   }
-  if (bookingListClosed === ''){
+  if (bookingListClosed === '') {
     bookingListClosed = <p className="h6 text-center">Sem reservas concluídas.</p>;
   }
 

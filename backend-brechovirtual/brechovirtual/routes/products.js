@@ -110,22 +110,16 @@ router
 router
   .route("/:id")
   .put(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    const idSeller = Products.findById(req.params.id).idSeller;
-    if (req.body.userId === (Sellers.findById(idSeller).userId)) {
-      Products.findByIdAndUpdate(req.params.id, { $set: req.body.product }, { new: true })
-        .then(
-          (product) => {
-            res.statusCode = 200;
-            res.setHeader("Content-Type", "application/json");
-            res.json(product);
-          },
-          (err) => next(err)
-        )
-        .catch((err) => next(err));
-    }
-    else {
-      res.status(401).setHeader("Content-Type", "application/json").json({})
-    }
+    Products.findByIdAndUpdate(req.params.id, { $set: req.body.product }, { new: true })
+      .then(
+        (product) => {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json(product);
+        },
+        (err) => next(err)
+      )
+      .catch((err) => next(err));
   });
 
 module.exports = router;

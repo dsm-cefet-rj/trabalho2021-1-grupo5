@@ -55,7 +55,6 @@ export default function ProductRegister(props) {
     } else {
       dispatch(updateProductsServer({ ...newProduct, id: productFound.id }));
     }
-    $('#modal').modal('show')
     history.push("/");
   }
 
@@ -206,8 +205,8 @@ export default function ProductRegister(props) {
               &nbsp;
               <div class="row">
                 <div class=" col-6 d-flex">
-                  <Button color={"purple"} title={"Publicar"} type="submit"/>
-                  <Modal warning = "Produto cadastrado/atualizado com sucesso!" id="modal"/>
+                  <Button color={"purple"} title={"Publicar"} type="submit" data-toggle="modal" data-target="#modal" />
+                  <Modal warning="Produto cadastrado/atualizado com sucesso!" id="modal" />
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                   <Button
