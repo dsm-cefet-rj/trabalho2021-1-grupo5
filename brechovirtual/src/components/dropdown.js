@@ -1,5 +1,5 @@
 import { React } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/UserSlice";
 import { useHistory } from "react-router";
@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 export default function Dropdown(props) {
   const dispatch = useDispatch()
   const history = useHistory()
-  function handleLogOut(e){
+  function handleLogOut(e) {
     alert("logging out")
     dispatch(logout())
     history.push("/")

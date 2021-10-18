@@ -1,6 +1,6 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useHistory } from "react-router-dom";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSchema } from "./LoginSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -16,20 +16,19 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
   });
-  const [status] = useState(useSelector(State=>State.users.status))
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const save = async (login)=>{
+  const save = async (login) => {
     dispatch(fetchLogin(login))
-  } 
+  }
 
   async function onSubmit(login) {
-    save(login).then(()=>{
-        alert("Autenticado com sucesso!");
-        history.push("/");
-      })
+    save(login).then(() => {
+      alert("Autenticado com sucesso!");
+      history.push("/");
+    })
   }
 
   function cancelButton(e) {

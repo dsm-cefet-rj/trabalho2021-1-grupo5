@@ -14,20 +14,25 @@ router
   .get(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
     res.setHeader("Content-Type", "application/json");
     try {
-      const bookings = await Booking.find()
-      .populate("idBuyer")
-      .populate("idSeller")
-      .populate("idProduct");
+      const bookingBuyer = await Booking.find({ idBuyer: req.body.userId })
+        .populate("idBuyer")
+        .populate("idSeller")
+        .populate("idProduct");
+      const bookingSeller = await Booking.find({ idSeller: req.body.userId })
+        .populate("idBuyer")
+        .populate("idSeller")
+        .populate("idProduct");
+      const bookings = bookingBuyer.concat(bookingSeller);
       if (bookings != null) {
         res.statusCode = 200;
         res.json(bookings);
       } else {
         res.statusCode = 404;
-        res.json({err});
+        res.json({ err });
       }
     } catch (err) {
       res.statusCode = 404;
-      res.json({err});
+      res.json({ err });
     }
   });
 

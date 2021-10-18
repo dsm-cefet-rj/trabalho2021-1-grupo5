@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const Products = require("../models/Product");
+const Sellers = require("../models/Seller")
 var authenticate = require("../auth");
 const { corsWithOptions } = require("./cors");
 /* GET (read) products listing. */
@@ -26,21 +27,41 @@ router
     }
   });
 
+
+/**
+ * gets the products of a particular seller
+ */
+router.route("/user").get(corsWithOptions, async (req, res, next) => {
+  try {
+    const { _id } = Sellers.findOne({ userId: req.body.userId })
+    const products = Products.find({ idSeller: _id })
+    res.status(200).setHeader("Content-type", "application/json").json(products)
+  } catch (err) {
+    res.status(400).setHeader("Content-type", "application/json").json({})
+  }
+});
+
 /* POST (create) product. */
 router
   .route("/")
   .post(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Products.create(req.body)
-      .then(
-        (productDB) => {
-          console.log("Product created", productDB);
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.json(productDB);
-        },
-        (err) => next(err)
-      )
-      .catch((err) => next(err));
+    const seller = Sellers.findOne({ userId: req.body.userId })
+    if (seller) {
+      Products.create({ ...req.body.product, idSeller: seller._id })
+        .then(
+          (productDB) => {
+            console.log("Product created", productDB);
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.json(productDB);
+          },
+          (err) => next(err)
+        )
+        .catch((err) => next(err));
+    }
+    else {
+      res.status(401).setHeader("Content-Type", "application/json").json({ message: unauthorized });
+    }
   });
 
 /* DELETE (delete) product. */
@@ -48,16 +69,21 @@ router
   .route("/:id")
 
   .delete(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Products.findByIdAndRemove(req.params.id)
-      .then(
-        (resp) => {
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.json(resp.id);
-        },
-        (err) => next(err)
-      )
-      .catch((err) => next(err));
+    const idSeller = Products.findById(req.params.id).idSeller;
+    if (req.body.userId === (Sellers.findById(idSeller).userId)) {
+      Products.findByIdAndRemove(req.params.id)
+        .then(
+          (resp) => {
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.json(resp.id);
+          },
+          (err) => next(err)
+        )
+        .catch((err) => next(err));
+    } else {
+      res.status(401).setHeader("Content-Type", "application/json").json({})
+    }
   })
   .get(corsWithOptions, async (req, res, next) => {
     let err;
@@ -84,16 +110,22 @@ router
 router
   .route("/:id")
   .put(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Products.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
-      .then(
-        (product) => {
-          res.statusCode = 200;
-          res.setHeader("Content-Type", "application/json");
-          res.json(product);
-        },
-        (err) => next(err)
-      )
-      .catch((err) => next(err));
+    const idSeller = Products.findById(req.params.id).idSeller;
+    if (req.body.userId === (Sellers.findById(idSeller).userId)) {
+      Products.findByIdAndUpdate(req.params.id, { $set: req.body.product }, { new: true })
+        .then(
+          (product) => {
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.json(product);
+          },
+          (err) => next(err)
+        )
+        .catch((err) => next(err));
+    }
+    else {
+      res.status(401).setHeader("Content-Type", "application/json").json({})
+    }
   });
 
 module.exports = router;

@@ -15,11 +15,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProductsServer,
-  selectProductsById,
 } from "../slices/ProductsSlice";
 import { messageSchema } from "./MessageSellerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 
@@ -42,21 +41,21 @@ export default function Booking() {
   );
 
   useEffect(() => {
-    async function  getData(){
-       return await dispatch(fetchBookings)
+    async function getData() {
+      return await dispatch(fetchBookings)
     }
     getData()
     if (isSubmitSuccessful) {
       reset({ response: "" });
     }
-  }, [isSubmitSuccessful, reset,dispatch]);
+  }, [isSubmitSuccessful, reset, dispatch]);
 
   const status = useSelector((state) => state.bookings.status);
   const error = useSelector((state) => state.bookings.error);
   const status3 = useSelector((state) => state.sellers.status);
   const error3 = useSelector((state) => state.sellers.error);
 
-  if (status === "loading"|| status3 === "loading") {
+  if (status === "loading" || status3 === "loading") {
     return (
       <p className="h6 text-center">
         {" "}
@@ -173,9 +172,8 @@ export default function Booking() {
     <>
       <Navbar />
       <Jumbotron
-        title={`Código Reserva: ${booking.id.substring(16, 24)} - ${
-          booking.status
-        }`}
+        title={`Código Reserva: ${booking.id.substring(16, 24)} - ${booking.status
+          }`}
         text={" "}
       />
       <div className="container justify-content-md-center">
