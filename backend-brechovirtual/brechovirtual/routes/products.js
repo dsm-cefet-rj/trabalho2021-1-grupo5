@@ -1,13 +1,10 @@
 var express = require("express");
 var router = express.Router();
-//const multer = require('multer');
-//const upload = multer({ dest: 'brechovirtual/public' });
 
 const Products = require("../models/Product");
 const Sellers = require("../models/Seller")
 var authenticate = require("../auth");
 const { corsWithOptions } = require("./cors");
-//const maxFotos = 2;
 
 /* GET (read) products listing. */
 router
