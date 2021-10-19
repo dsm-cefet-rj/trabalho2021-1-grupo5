@@ -45,8 +45,6 @@ export default function ProductRegister(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
-
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
@@ -80,7 +78,7 @@ export default function ProductRegister(props) {
               />
             </div>
             &nbsp;
-            <form method="post" enctype="multipart/form-data">
+            <p>
               <div class="row justify-content-md-center">
                 <div class="col-md-6 custom-file">
                   <input
@@ -88,15 +86,13 @@ export default function ProductRegister(props) {
                     type="file"
                     class="custom-file-input"
                     name="images"
-                    accept=".jpg"
-                    multiple 
                   />
                   <label class="custom-file-label" for="customFile">
                     Escolher arquivo
                   </label>
                 </div>
               </div>
-            </form>
+            </p>
           </div>
 
           <div class="col-sm-6">
@@ -203,12 +199,20 @@ export default function ProductRegister(props) {
                 </div>
               </div>
               <br />
-
               &nbsp;
               <div class="row">
                 <div class=" col-6 d-flex">
-                  <Button color={"purple"} title={"Publicar"} type="submit" data-toggle="modal" data-target="#modal" />
-                  <Modal warning="Produto cadastrado/atualizado com sucesso!" id="modal" />
+                  <Button
+                    color={"purple"}
+                    title={"Publicar"}
+                    type="submit"
+                    data-toggle="modal"
+                    data-target="#modal"
+                  />
+                  <Modal
+                    warning="Produto cadastrado/atualizado com sucesso!"
+                    id="modal"
+                  />
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                   <Button
