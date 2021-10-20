@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import Navbar from "../components/navbar";
 import Jumbotron from "../components/jumbotron";
 import Button from "../components/button";
@@ -8,17 +8,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import {
   addSellersServer,
-  selectSellersById,
   updateSellersServer,
 } from "../slices/SellerSlice";
 import { sellerSchema } from "./MessageSellerSchema";
 import Footer from "../components/footer";
+import { selectAllUsers } from "../slices/UserSlice";
 
 export default function BeASeller(props) {
 
   let { id } = useParams();
-  const sellerFound = useSelector((state) => selectSellersById(state, id));
-
+  const userFound = useSelector(selectAllUsers)[0];
+  console.log(userFound.name)
   const {
     register,
     handleSubmit,
@@ -28,12 +28,13 @@ export default function BeASeller(props) {
   });
 
   const [newSeller] = useState(
-    id ? sellerFound ?? sellerSchema.cast({}) : sellerSchema.cast({})
+    userFound ? sellerSchema.cast({}) : sellerSchema.cast({})
   );
-
+  console.log(newSeller)
+  console.log(newSeller.name)
   const [actionType] = useState(
     id
-      ? sellerFound
+      ? userFound
         ? "sellerForm/updateSeller"
         : "sellerForm/addSeller"
       : "sellerForm/addSeller"
@@ -62,7 +63,7 @@ export default function BeASeller(props) {
         id="inputPassword4"
         placeholder="E-mail"
         readonly="readonly"
-        defaultValue={newSeller.email}
+        defaultValue={userFound.email}
         {...register("email")}
       />
     );
@@ -74,7 +75,7 @@ export default function BeASeller(props) {
         id="inputCPF"
         placeholder="Digite seu CPF com pontos e traços"
         readonly="readonly"
-        defaultValue={newSeller.document}
+        defaultValue={userFound.document}
         {...register("document")}
       />
     );
@@ -86,7 +87,7 @@ export default function BeASeller(props) {
         class="form-control"
         id="inputEmail4"
         placeholder="Nome do vendedor"
-        defaultValue={newSeller.name}
+        defaultValue={userFound.name}
         {...register("name")}
       />
     );
@@ -97,7 +98,7 @@ export default function BeASeller(props) {
         class="form-control"
         id="inputPassword4"
         placeholder="E-mail"
-        defaultValue={newSeller.email}
+        defaultValue={userFound.email}
         {...register("email")}
       />
     );
@@ -122,7 +123,7 @@ export default function BeASeller(props) {
       dispatch(addSellersServer(newSeller));
       alert("Vendedor cadastrado com sucesso!");
     } else {
-      dispatch(updateSellersServer({ ...newSeller, id: sellerFound.id }));
+      dispatch(updateSellersServer({ ...newSeller, id: userFound.id }));
       alert("Vendedor atualizado com sucesso!");
     }
     history.push("/");

@@ -26,7 +26,7 @@ router.post('/login', corsWithOptions, (req, res, next) => {
       var token = authenticate.getToken({ _id: req.user._id });
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json({ id: req.user._id, name: req.user.name, isSeller: req.user.isSeller, token: token });
+      res.json({ id: req.user._id, email: req.user.username, name: req.user.name, isSeller: req.user.isSeller, token: token });
     });
   })(req, res, next);
 
