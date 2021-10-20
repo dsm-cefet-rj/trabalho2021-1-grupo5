@@ -4,7 +4,7 @@ import Card from "../components/card";
 import Navbar from "../components/navbar";
 import logo from "../images/logo2.png";
 import loading from "../images/loading.gif"
-import { fetchProducts, selectAllProducts } from "../slices/ProductsSlice";
+import { fetchMyproducts, fetchProducts, selectAllProducts } from "../slices/ProductsSlice";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default function Home(props) {
   const dispatch = useDispatch();
 
 
-//PEGAR TODOS OS PRODUTOS DO VENDEDOR LOGADO
+  //PEGAR TODOS OS PRODUTOS DO VENDEDOR LOGADO
 
   const renderProduct = (product) => {
     return (
@@ -29,8 +29,8 @@ export default function Home(props) {
   };
 
   useEffect(() => {
-    if(status === 'not loaded'){
-      dispatch(fetchProducts());
+    if (status === 'saved') {
+      dispatch(fetchMyproducts());
     }/*else if(status === 'not loaded'){
       setTimeout(() => dispatch(fetchProducts()), 5000)
     }*/
@@ -38,19 +38,19 @@ export default function Home(props) {
 
   let footerShow = '';
   let productList = '';
-  if(status === 'loaded' || status === 'saved' || status==='deleted'){
+  if (status === 'loaded' || status === 'saved' || status === 'deleted') {
     productList = products.map(renderProduct);
     footerShow = <Footer></Footer>;
-    if(productList === '' ||  (products.filter((product) => product.status === 'reservado')).length === products.length){
+    if (productList === '' || (products.filter((product) => product.status === 'reservado')).length === products.length) {
       productList = <p className="h6 text-center">Sem produtos na lista.</p>;
     }
-  }else if (status === 'loading'){
-    productList = <p className="h6 text-center"> <img src={loading} width="30" height="30" className="d-inline-block " alt=""/> Carregando lista de produtos...</p>;
-  }else if (status === 'failed'){
+  } else if (status === 'loading') {
+    productList = <p className="h6 text-center"> <img src={loading} width="30" height="30" className="d-inline-block " alt="" /> Carregando lista de produtos...</p>;
+  } else if (status === 'failed') {
     productList = <p className="h6 text-center">Error: {error}</p>;
   }
 
-  
+
 
   return (
     <>
@@ -73,11 +73,11 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-        <div>
-            <a className="">
-                <Link to="/productForm/new">Criar anúncio</Link>
-              </a>
-        </div>      
+      <div>
+        <a className="">
+          <Link to="/productForm/new">Criar anúncio</Link>
+        </a>
+      </div>
       <div class="container">
         <div className="row">{productList}</div>
       </div>

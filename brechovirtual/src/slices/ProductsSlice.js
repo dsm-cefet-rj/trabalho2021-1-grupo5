@@ -23,9 +23,8 @@ export const fetchProducts = createAsyncThunk(
 );
 
 export const fetchMyproducts = createAsyncThunk("database/fetchMyProducts", async (_, { getState }) => {
-  return await httpGet(`${baseUrl}/products/user`, { userId: getState().users?.ids[0] })
+  return await httpGet(`${baseUrl}/products/user`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } })
 })
-
 export const deleteProductsServer = createAsyncThunk(
   "database/deleteProductsServer",
   async (idProduct, { getState }) => {
@@ -63,6 +62,17 @@ export const productsSlice = createSlice({
     [fetchProducts.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
+    },
+    [fetchMyproducts.fulfilled]: (state, { payload }) => {
+      state.status = "saved2";
+      productsAdapter.setAll(payload);
+    },
+    [fetchMyproducts.rejected]: (state, { error }) => {
+      state.error = error.message;
+      state.status = "failed";
+    },
+    [fetchMyproducts.pending]: (state) => {
+      state.status = "loading";
     },
     [deleteProductsServer.pending]: (state) => {
       state.status = "loading";

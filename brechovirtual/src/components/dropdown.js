@@ -25,14 +25,15 @@ export default function Dropdown(props) {
     avatar = <div>  {user.name} </div>
     if (user.isSeller) {
       beASellerDisabled = { display: "none" }
-      anunciosDisabled = "";
+      anunciosDisabled = {};
     }
   }
   else {
     avatar = <Button color={"purple"} title={"Login"} onClick={redirect} />
     logoutDisabled = { display: "none" }
+    beASellerDisabled = { display: "none" }
   }
-
+  console.log({ beASellerDisabled, anunciosDisabled, logoutDisabled })
 
   //DESABILITAR LOGIN E CADASTRAR-SE QUANDO LOGADO
   //DESABILITAR LOGOUT QUANDO NAO LOGADO

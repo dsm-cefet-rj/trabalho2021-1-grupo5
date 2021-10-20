@@ -8,22 +8,21 @@ const { corsWithOptions } = require("./cors");
 
 router
   .route("/")
-  .options(corsWithOptions, (req, res) => {
-    res.sendStatus(200);
-  })
   .get(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
-    res.setHeader("Content-Type", "application/json");
+    console.log(req);
     try {
       const bookingBuyer = await Booking.find({ idBuyer: req.body.userId })
         .populate("idBuyer")
         .populate("idSeller")
         .populate("idProduct");
-      const bookingSeller = await Booking.find({ idSeller: req.body.userId })
+      const seller = await Sellers.findOne({ userId: req.body.userId })._id
+      const bookingSeller = await Booking.find({ idSeller: seller })
         .populate("idBuyer")
         .populate("idSeller")
         .populate("idProduct");
       console.log([bookingBuyer, bookingSeller]);
       const bookings = bookingBuyer.concat(bookingSeller);
+      res.setHeader("Content-Type", "application/json");
       if (bookings != null) {
         res.statusCode = 200;
         res.json(bookings);

@@ -16,21 +16,22 @@ const initialBookings = bookingsAdapter.getInitialState({
 export const fetchBookings = createAsyncThunk(
   "database/fetchBookings",
   async (_, { getState }) => {
-    return await httpGet(`${baseUrl}/bookings`, { userId: getState().users.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
+    console.log(getState()?.users?.ids[0])
+    return await httpGet(`${baseUrl}/bookings`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 export const addBookingServer = createAsyncThunk(
   "database/addBookingServer",
   async (booking, { getState }) => {
     console.log({ ...booking, idBuyer: (getState().users.ids[0]) })
-    console.log(getState().users.ids[0])
-    return await httpPost(`${baseUrl}/bookings`, { ...booking, idBuyer: (getState().users.ids[0]) }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
+    console.log(getState()?.users?.ids[0])
+    return await httpPost(`${baseUrl}/bookings`, { ...booking, idBuyer: (getState().users?.ids[0]) }, { headers: { Authorization: 'Bearer ' + getState().users?.token } });
   }
 );
 export const deleteBookingServer = createAsyncThunk(
   "database/deleteBooking",
   async (id, { getState }) => {
-    await httpDelete(`${baseUrl}/bookings/${id}`, { headers: { Authorization: 'Bearer ' + getState().users.token } });
+    await httpDelete(`${baseUrl}/bookings/${id}`, { headers: { Authorization: 'Bearer ' + getState().users?.token } });
     return id;
   }
 );
@@ -38,7 +39,7 @@ export const updateBookingServer = createAsyncThunk(
   "database/updateBookingServer",
   async (booking, { getState }) => {
     console.log(getState().users.token)
-    return await httpPut(`${baseUrl}/bookings/${booking.id}`, booking, { headers: { Authorization: 'Bearer ' + getState().users.token } });
+    return await httpPut(`${baseUrl}/bookings/${booking.id}`, booking, { headers: { Authorization: 'Bearer ' + getState().users?.token } });
   }
 );
 export const bookingsSlice = createSlice({

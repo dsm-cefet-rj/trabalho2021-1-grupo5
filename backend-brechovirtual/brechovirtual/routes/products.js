@@ -33,8 +33,8 @@ router
  */
 router.route("/user").get(corsWithOptions, async (req, res, next) => {
   try {
-    const { _id } = Sellers.findOne({ userId: req.body.userId })
-    const products = Products.find({ idSeller: _id })
+    const { _id } = await Sellers.findOne({ userId: req.body.userId })
+    const products = await Products.find({ idSeller: _id })
     res.status(200).setHeader("Content-type", "application/json").json(products)
   } catch (err) {
     res.status(400).setHeader("Content-type", "application/json").json({})
@@ -44,9 +44,12 @@ router.route("/user").get(corsWithOptions, async (req, res, next) => {
 /* POST (create) product. */
 router
   .route("/")
-  .post(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    const seller = Sellers.findOne({ userId: req.body.userId })
+  .post(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+    console.log(req.body)
+    const seller = await Sellers.findOne({ userId: req.body.userId })
+    console.log(seller);
     if (seller) {
+      console.log({ objeto: { ...req.body.product, idSeller: seller._id } })
       Products.create({ ...req.body.product, idSeller: seller._id })
         .then(
           (productDB) => {
@@ -68,9 +71,10 @@ router
 router
   .route("/:id")
 
-  .delete(corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    const idSeller = Products.findById(req.params.id).idSeller;
-    if (req.body.userId === (Sellers.findById(idSeller).userId)) {
+  .delete(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
+    const idSeller = await Products.findById(req.params.id).idSeller;
+    let seller = await Sellers.find({ idSeller: idSeller }).userId
+    if (req.body.userId === seller) {
       Products.findByIdAndRemove(req.params.id)
         .then(
           (resp) => {

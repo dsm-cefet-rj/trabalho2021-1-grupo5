@@ -23,9 +23,11 @@ export default function BookingList() {
   const history = useHistory()
   let bookingListOpen = '';
   let bookingListClosed = '';
+
   useEffect(() => {
     dispatch(fetchBookings())
   }, [dispatch]);
+
   if (!(login === "logged_in")) {
     history.push("/login")
   }

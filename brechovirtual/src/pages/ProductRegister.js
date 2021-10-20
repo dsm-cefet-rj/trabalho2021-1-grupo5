@@ -13,16 +13,13 @@ import {
 import { productSchema } from "./ProductSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { selectAllSellers } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 import Modal from "../components/modal";
+import { selectAllUsers } from "../slices/UserSlice";
 
 export default function ProductRegister(props) {
   let { id } = useParams();
   const productFound = useSelector((state) => selectProductsById(state, id));
-  const sellers = useSelector(selectAllSellers).map((seller) => (
-    <option value={seller.id}>{seller.name}</option>
-  ));
   const {
     register,
     handleSubmit,
@@ -30,6 +27,14 @@ export default function ProductRegister(props) {
   } = useForm({
     resolver: yupResolver(productSchema),
   });
+  const user = useSelector(selectAllUsers)[0]
+  const dispatch = useDispatch();
+  const history = useHistory();
+  if (!user.isSeller) {
+    history.push("/sellerProfile");
+  }
+
+
   const [productOnLoad] = useState(
     id ? productFound ?? productSchema.cast({}) : productSchema.cast({})
   );
@@ -42,9 +47,6 @@ export default function ProductRegister(props) {
   );
 
   //const products = useSelector(state => state.products)
-  const dispatch = useDispatch();
-  const history = useHistory();
-
 
 
   function onSubmit(newProduct) {
