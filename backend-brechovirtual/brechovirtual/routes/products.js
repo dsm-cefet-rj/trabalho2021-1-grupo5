@@ -1,11 +1,12 @@
 var express = require("express");
 var router = express.Router();
+
 const Products = require("../models/Product");
 const Sellers = require("../models/Seller")
 var authenticate = require("../auth");
 const { corsWithOptions } = require("./cors");
-/* GET (read) products listing. */
 
+/* GET (read) products listing. */
 router
   .route("/")
   .options(corsWithOptions, (req, res) => {

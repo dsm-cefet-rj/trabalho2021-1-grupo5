@@ -48,7 +48,6 @@ export default function ProductRegister(props) {
 
   //const products = useSelector(state => state.products)
 
-
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
       newProduct.images = [casaco];
@@ -72,31 +71,20 @@ export default function ProductRegister(props) {
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
+            <label for="validationTooltip01">
+              <b>URL da imagem</b>
+            </label>
             <div class="row d-flex justify-content-center">
-              <img
-                id="preview"
-                class="border border-dark"
-                width="300"
-                height="300"
-                alt="Arquivo de Imagem - Em construção"
-              />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="URL"
+                name="img"
+                defaultValue={productOnLoad.img}
+                {...register("img")}
+              ></input>
+              <div style={{ color: "red" }}>{errors.img?.message}</div>
             </div>
-            &nbsp;
-            <p>
-              <div class="row justify-content-md-center">
-                <div class="col-md-6 custom-file">
-                  <input
-                    id="img-input"
-                    type="file"
-                    class="custom-file-input"
-                    name="images"
-                  />
-                  <label class="custom-file-label" for="customFile">
-                    Escolher arquivo
-                  </label>
-                </div>
-              </div>
-            </p>
           </div>
 
           <div class="col-sm-6">
@@ -203,12 +191,20 @@ export default function ProductRegister(props) {
                 </div>
               </div>
               <br />
-
               &nbsp;
               <div class="row">
                 <div class=" col-6 d-flex">
-                  <Button color={"purple"} title={"Publicar"} type="submit" data-toggle="modal" data-target="#modal" />
-                  <Modal warning="Produto cadastrado/atualizado com sucesso!" id="modal" />
+                  <Button
+                    color={"purple"}
+                    title={"Publicar"}
+                    type="submit"
+                    data-toggle="modal"
+                    data-target="#modal"
+                  />
+                  <Modal
+                    warning="Produto cadastrado/atualizado com sucesso!"
+                    id="modal"
+                  />
                 </div>
                 <div class="col-4 d-flex justify-content-end">
                   <Button
