@@ -34,7 +34,7 @@ router
  */
 router.route("/user").get(corsWithOptions, async (req, res, next) => {
   try {
-    const { _id } = await Sellers.findOne({ userId: req.body.userId })
+    const { _id } = await Sellers.findOne({ userId: req.user._id })
     const products = await Products.find({ idSeller: _id })
     res.status(200).setHeader("Content-type", "application/json").json(products)
   } catch (err) {
@@ -47,7 +47,7 @@ router
   .route("/")
   .post(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
     console.log(req.body)
-    const seller = await Sellers.findOne({ userId: req.body.userId })
+    const seller = await Sellers.findOne({ userId: req.user._id })
     console.log(seller);
     if (seller) {
       console.log({ objeto: { ...req.body.product, idSeller: seller._id } })

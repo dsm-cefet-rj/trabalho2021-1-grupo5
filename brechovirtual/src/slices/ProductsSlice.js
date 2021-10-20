@@ -23,7 +23,7 @@ export const fetchProducts = createAsyncThunk(
 );
 
 export const fetchMyproducts = createAsyncThunk("database/fetchMyProducts", async (_, { getState }) => {
-  return await httpGet(`${baseUrl}/products/user`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } })
+  return await httpGet(`${baseUrl}/products/user`, { headers: { Authorization: 'Bearer ' + getState().users.token } })
 })
 export const deleteProductsServer = createAsyncThunk(
   "database/deleteProductsServer",

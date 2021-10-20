@@ -51,7 +51,6 @@ router.route("/").post(corsWithOptions, auth.verifyUser, (req, res, next) => {
   Seller.save()
     .then(
       (response) => {
-        users.findByIdAndUpdate(req.body.userId, { $set: { "isSeller": true } }, { new: true })
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
         res.json(response);

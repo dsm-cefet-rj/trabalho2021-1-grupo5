@@ -7,9 +7,6 @@ const { corsWithOptions } = require("./cors");
 
 
 router.post('/login', corsWithOptions, (req, res, next) => {
-  console.log(req.body)
-
-
   passport.authenticate('local', (err, user, info) => {
     if (!user) {
       res.statusCode = 401;
@@ -54,5 +51,9 @@ router.post("/signup", corsWithOptions, (req, res, next) => {
     }
   );
 });
+router.post("/:id", corsWithOptions, authenticate.verifyUser, async (req, res) => {
+  const novo = await User.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
+  res.status(200).setHeader("Content-Type", "application/json").json(novo);
+})
 
 module.exports = router;

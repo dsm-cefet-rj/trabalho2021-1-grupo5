@@ -9,26 +9,20 @@ const { corsWithOptions } = require("./cors");
 router
   .route("/")
   .get(corsWithOptions, authenticate.verifyUser, async (req, res, next) => {
-    console.log(req);
     try {
-      const bookingBuyer = await Booking.find({ idBuyer: req.body.userId })
+      console.log("oi")
+      const bookingBuyer = await Booking.find({ idBuyer: req.user._id })
         .populate("idBuyer")
         .populate("idSeller")
         .populate("idProduct");
-      const seller = await Sellers.findOne({ userId: req.body.userId })._id
-      const bookingSeller = await Booking.find({ idSeller: seller })
-        .populate("idBuyer")
-        .populate("idSeller")
-        .populate("idProduct");
-      console.log([bookingBuyer, bookingSeller]);
-      const bookings = bookingBuyer.concat(bookingSeller);
+      console.log({ user: req.user, bookingBuyer })
       res.setHeader("Content-Type", "application/json");
-      if (bookings != null) {
+      if (bookingBuyer != null) {
         res.statusCode = 200;
-        res.json(bookings);
+        res.json(bookingBuyer);
       } else {
-        res.statusCode = 404;
-        res.json({ err });
+        res.statusCode = 200;
+        res.json({});
       }
     } catch (err) {
       res.statusCode = 404;
@@ -74,9 +68,10 @@ router
 
 router
   .route("/:id")
-  .put(corsWithOptions, authenticate.verifyUser, (req, res) => {
+  .put(corsWithOptions, authenticate.verifyUser, async (req, res) => {
     let id = parseInt(req.params.id);
-    Booking.findByIdAndUpdate(id).then();
+    await Booking.findByIdAndUpdate(id, { $set: { messages: req.body.messages } }, { new: true });
+    const booking = await Booking.findOne({ _id: req.params.id }).populate("idSeller").populate("idProduct").populate("idBuyer")
     res.setHeader("Content-Type", "application/json");
     res.json(req.body).status(200);
   });

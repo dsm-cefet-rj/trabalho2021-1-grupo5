@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { selectSellersById } from "../slices/SellerSlice";
 import Footer from "../components/footer";
 import Modal from "../components/modal";
+import { selectAllUsers } from "../slices/UserSlice";
 
 
 
@@ -52,13 +53,17 @@ export default function Booking() {
       reset({ response: "" });
     }
   }, [isSubmitSuccessful, reset, dispatch]);
-
+  const user = useSelector(selectAllUsers)[0].id
   const status = useSelector((state) => state.bookings.status);
   const error = useSelector((state) => state.bookings.error);
-  const status3 = useSelector((state) => state.sellers.status);
-  const error3 = useSelector((state) => state.sellers.error);
-
-  if (status === "loading" || status3 === "loading") {
+  const isBuyer = (booking.idBuyer._id === user)
+  let userType;
+  if (isBuyer) {
+    userType = "Comprador";
+  } else {
+    userType = "Vendedor"
+  }
+  if (status === "loading") {
     return (
       <p className="h6 text-center">
         {" "}
@@ -72,13 +77,10 @@ export default function Booking() {
         Carregando a reserva...
       </p>
     );
-  } else if (
-    status === "failed" ||
-    status3 === "failed"
-  ) {
+  } else if (status === "failed") {
     return (
       <p className="h6 text-center">
-        Error: {error} Error3 : {error3}
+        Error: {error}
       </p>
     );
   }
@@ -162,13 +164,13 @@ export default function Booking() {
 
   function onSubmit(response) {
     const newMessage = {
-      userType: "Vendedor",
-      userName: seller.name,
+      userType: userType,
+      userName: booking.idSeller.name,
       date: dataAtualFormatada(),
       message: response.response,
     };
     var newMessagesArray = booking.messages.concat([{ ...newMessage }]);
-    dispatch(updateBookingServer({ ...booking, messages: newMessagesArray }));
+    dispatch(updateBookingServer({ ...booking, messages: newMessagesArray, idBuyer: booking.idBuyer_id, idSeller: booking.idSeller.id, idProduct: booking.idProduct.id }));
   }
 
   return (
@@ -239,19 +241,19 @@ export default function Booking() {
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Vendedor:</b> {seller.name}{" "}
+            <b>Vendedor:</b> {booking.idSeller.name}{" "}
           </p>
         </div>
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Telefone:</b> {seller.ddd + seller.number}{" "}
+            <b>Telefone:</b> {booking.idSeller.ddd + booking.idSeller.number}{" "}
           </p>
         </div>
         <div className="row justify-content-center">
           <p style={{ fontSize: 15 }}>
             {" "}
-            <b>Email:</b> {seller.email}{" "}
+            <b>Email:</b> {booking.idSeller.email}{" "}
           </p>
         </div>
       </div>

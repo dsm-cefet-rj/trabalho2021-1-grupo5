@@ -25,6 +25,12 @@ export const addUserServer = createAsyncThunk(
     return await httpPost(`${baseUrl}/users/signup`, login);
   }
 );
+export const updateUserServer = createAsyncThunk(
+  "database/updateUserServer",
+  async (User, { getState }) => {
+    return await httpPost(`${baseUrl}/users/${User.id}`, User, { headers: { Authorization: 'Bearer ' + getState().users?.token } });
+  }
+);
 export const logout = createAsyncThunk("database/logout", async () => {
   return await httpGet(`${baseUrl}/users/logout`,)
 })
@@ -51,6 +57,10 @@ export const usersSlice = createSlice({
       userAdapter.removeAll(state);
       state.status = "logged_out";
       state.token = null;
+    },
+    [updateUserServer.fulfilled]: (state, { payload }) => {
+      state.status = "saved";
+      userAdapter.upsertOne(state, payload);
     },
     [addUserServer.fulfilled]: (state, action) => {
       state.status = "saved";

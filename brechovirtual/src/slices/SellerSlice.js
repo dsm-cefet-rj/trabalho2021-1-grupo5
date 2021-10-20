@@ -16,14 +16,14 @@ const initialState = sellersAdapter.getInitialState({
 export const fetchSellers = createAsyncThunk(
   "database/fetchSellers",
   async (_, { getState }) => {
-    return await httpGet(`${baseUrl}/sellers`, { userId: getState().users?.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    return await httpGet(`${baseUrl}/sellers`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer' + getState().users.token } });
   }
 );
 
 export const deleteSellersServer = createAsyncThunk(
   "database/deleteSellersServer",
   async (idSeller, { getState }) => {
-    await httpDelete(`${baseUrl}/sellers/${idSeller}`, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    await httpDelete(`${baseUrl}/sellers/${idSeller}`, { headers: { Authorization: 'Bearer ' + getState().users.token } });
     return idSeller;
   }
 );
@@ -31,14 +31,15 @@ export const deleteSellersServer = createAsyncThunk(
 export const addSellersServer = createAsyncThunk(
   "database/addSellersServer",
   async (seller, { getState }) => {
-    return await httpPost(`${baseUrl}/sellers`, { ...seller, userId: getState().users?.ids[0] }, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    seller = { ...seller, userId: getState().users.ids[0] }
+    return await httpPost(`${baseUrl}/sellers`, seller, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 
 export const updateSellersServer = createAsyncThunk(
   "database/updateSellersServer",
   async (seller, { getState }) => {
-    return await httpPut(`${baseUrl}/sellers/${seller.id}`, seller, { Headers: { Authorization: 'Bearer' + getState().users.token } });
+    return await httpPut(`${baseUrl}/sellers/${seller.id}`, seller, { headers: { Authorization: 'Bearer ' + getState().users.token } });
   }
 );
 
@@ -88,4 +89,5 @@ export default sellersSlice.reducer;
 export const {
   selectAll: selectAllSellers,
   selectById: selectSellersById,
+
 } = sellersAdapter.getSelectors((state) => state.sellers);

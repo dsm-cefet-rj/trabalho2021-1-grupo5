@@ -12,7 +12,7 @@ import {
 } from "../slices/SellerSlice";
 import { sellerSchema } from "./MessageSellerSchema";
 import Footer from "../components/footer";
-import { selectAllUsers } from "../slices/UserSlice";
+import { selectAllUsers, updateUserServer } from "../slices/UserSlice";
 
 export default function BeASeller(props) {
 
@@ -85,6 +85,7 @@ export default function BeASeller(props) {
   function onSubmit(newSeller) {
     if (actionType === "sellerForm/addSeller") {
       dispatch(addSellersServer(newSeller));
+      dispatch(updateUserServer({ ...userFound, isSeller: true }))
       alert("Vendedor cadastrado com sucesso!");
     } else {
       dispatch(updateSellersServer({ ...newSeller, id: userFound.id }));

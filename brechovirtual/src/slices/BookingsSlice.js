@@ -16,8 +16,8 @@ const initialBookings = bookingsAdapter.getInitialState({
 export const fetchBookings = createAsyncThunk(
   "database/fetchBookings",
   async (_, { getState }) => {
-    console.log(getState()?.users?.ids[0])
-    return await httpGet(`${baseUrl}/bookings`, { userId: getState().users?.ids[0] }, { headers: { Authorization: 'Bearer ' + getState().users.token } });
+    const obj = { userId: getState().users?.ids[0] }
+    return await httpGet(`${baseUrl}/bookings`, { headers: { Authorization: 'Bearer ' + getState().users?.token } });
   }
 );
 export const addBookingServer = createAsyncThunk(
