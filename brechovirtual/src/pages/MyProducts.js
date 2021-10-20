@@ -7,6 +7,7 @@ import loading from "../images/loading.gif"
 import { fetchMyproducts, fetchProducts, selectAllProducts } from "../slices/ProductsSlice";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
+import Jumbotron from "../components/jumbotron";
 
 export default function Home(props) {
   //const products = useSelector(state=>state.products)
@@ -55,25 +56,8 @@ export default function Home(props) {
   return (
     <>
       <Navbar />
-      <div class="jumbotron jumbotron-fluid bg-transparent">
-        <div class="container">
-          <div class="row justify-content-center">
-            <img
-              src={logo}
-              width="300"
-              height="150"
-              class="d-inline-block align-top"
-              alt=""
-            />
-          </div>
-          <div class="row justify-content-center">
-            <p class="lead">
-              Seu site para vendas e trocas de peças de roupas.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div>
+      <Jumbotron title={"Meus produtos à venda"} text={""} />
+      <div className='row justify-content-center'>
         <a className="">
           <Link to="/productForm/new">Criar anúncio</Link>
         </a>

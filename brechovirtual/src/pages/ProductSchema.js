@@ -7,5 +7,5 @@ export let productSchema = object().shape({
   price: number().required(),
   description: string().min(5).required(),
   category: string().required(),
-  img: string().max(200).required(),
+  images: string().max(300).required(),
 });

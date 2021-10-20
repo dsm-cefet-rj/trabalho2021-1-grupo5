@@ -19,10 +19,12 @@ export default function Dropdown(props) {
   var logoutDisabled = {};
   var beASellerDisabled = {};
   var anunciosDisabled = { display: "none" }
+  var cadastrarDisabled = {}
   let avatar = {}
   const redirect = () => history.push("/login");
   if (user) {
     avatar = <div>  {user.name} </div>
+    cadastrarDisabled = { display: "none" }
     if (user.isSeller) {
       beASellerDisabled = { display: "none" }
       anunciosDisabled = {};
@@ -69,6 +71,9 @@ export default function Dropdown(props) {
             >
               <button className="dropdown-item btn btn-link" type="button" style={logoutDisabled}>
                 <Link to="/bookingList">Lista de Reservas</Link>
+              </button>
+              <button className="dropdown-item btn btn-link" type="button" style={cadastrarDisabled}>
+                <Link to="/userRegister">Cadastrar-se</Link>
               </button>
               <button className="dropdown-item btn btn-link" type="button" style={anunciosDisabled}>
                 <Link to="/productForm/new">Criar anúncio</Link>

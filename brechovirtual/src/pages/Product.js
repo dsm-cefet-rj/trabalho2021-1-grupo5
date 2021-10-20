@@ -13,6 +13,7 @@ import {
 } from "../slices/ProductsSlice";
 import { addBookingServer } from "../slices/BookingsSlice";
 import Footer from "../components/footer";
+import {selectAllUsers } from "../slices/UserSlice";
 
 export default function Product() {
   const history = useHistory();
@@ -22,7 +23,24 @@ export default function Product() {
   const status = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
   const login = useSelector(state => state.users.status)
+  const user = useSelector(selectAllUsers)[0];
   const dispatch = useDispatch();
+
+  let editButton = ""
+  let cancelButton = ""
+  if(user){
+    editButton = (<div class="col-sm">
+                    <Link to={`/productForm/${product.id}`}>
+                      <p>Editar</p>
+                    </Link>
+                  </div>)
+    cancelButton = (<Button
+                   color={"Red"}
+                   title={"Excluir"}
+                   onClick={handleDelete}
+                 />)
+
+  }
 
   if (status === "loading") {
     return (
@@ -95,11 +113,7 @@ export default function Product() {
           <div class="col-sm-6">
             <form class="needs-validation" novalidate>
               <div class="row">
-                <div class="col-sm">
-                  <Link to={`/productForm/${product.id}`}>
-                    <p>Editar</p>
-                  </Link>
-                </div>
+                {editButton}
               </div>
 
               <div class="row">
@@ -163,11 +177,7 @@ export default function Product() {
                     title={"Reservar"}
                     onClick={handleReserve}
                   />
-                  <Button
-                    color={"Red"}
-                    title={"Excluir"}
-                    onClick={handleDelete}
-                  />
+                  {cancelButton}
                 </div>
               </div>
             </form>

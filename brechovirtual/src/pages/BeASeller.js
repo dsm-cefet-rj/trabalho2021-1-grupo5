@@ -42,44 +42,7 @@ export default function BeASeller(props) {
   let inputName = "";
   let inputEmail = "";
   let inputDocument = "";
-  if (actionType === "sellerForm/updateSeller") {
-    inputName = (
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        id="inputEmail4"
-        placeholder="Nome do vendedor"
-        readonly="readonly"
-        defaultValue={newSeller.name}
-        {...register("name")}
-      />
-    );
-    inputEmail = (
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        id="inputPassword4"
-        placeholder="E-mail"
-        readonly="readonly"
-        defaultValue={userFound.email}
-        {...register("email")}
-      />
-    );
-    inputDocument = (
-      <input
-        type="text"
-        name="document"
-        class="form-control"
-        id="inputCPF"
-        placeholder="Digite seu CPF com pontos e traços"
-        readonly="readonly"
-        defaultValue={userFound.document}
-        {...register("document")}
-      />
-    );
-  } else {
+  if (actionType === "sellerForm/addSeller") {
     inputName = (
       <input
         type="text"
@@ -98,6 +61,7 @@ export default function BeASeller(props) {
         class="form-control"
         id="inputPassword4"
         placeholder="E-mail"
+        readonly="readonly"
         defaultValue={userFound.email}
         {...register("email")}
       />
@@ -112,8 +76,8 @@ export default function BeASeller(props) {
         defaultValue={newSeller.document}
         {...register("document")}
       />
-    );
-  }
+    )
+  };
   //const products = useSelector(state => state.products)
   const dispatch = useDispatch();
   const history = useHistory();

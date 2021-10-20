@@ -34,7 +34,6 @@ export default function ProductRegister(props) {
     history.push("/sellerProfile");
   }
 
-
   const [productOnLoad] = useState(
     id ? productFound ?? productSchema.cast({}) : productSchema.cast({})
   );
@@ -50,11 +49,13 @@ export default function ProductRegister(props) {
 
   function onSubmit(newProduct) {
     if (actionType === "productForm/addProduct") {
-      newProduct.images = [casaco];
+
       newProduct.status = "aberto";
       dispatch(addProductsServer(newProduct));
+      alert("Produto cadastrado com sucesso!");
     } else {
       dispatch(updateProductsServer({ ...newProduct, id: productFound.id }));
+      alert("Produto atualizado com sucesso!");
     }
     history.push("/");
   }
@@ -79,11 +80,11 @@ export default function ProductRegister(props) {
                 type="text"
                 class="form-control"
                 placeholder="URL"
-                name="img"
-                defaultValue={productOnLoad.img}
-                {...register("img")}
+                name="images"
+                defaultValue={productOnLoad.images}
+                {...register("images")}
               ></input>
-              <div style={{ color: "red" }}>{errors.img?.message}</div>
+              <div style={{ color: "red" }}>{errors.images?.message}</div>
             </div>
           </div>
 
